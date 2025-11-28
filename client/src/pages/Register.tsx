@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { USC_SCHOOLS, DEGREE_OPTIONS, PROJECT_TYPES, GRADUATION_YEARS, getMajorsForSchool } from "@/lib/uscData";
 import { SchoolCombobox } from "@/components/SchoolCombobox";
 import { ModeBadge } from "@/components/ModeBadge";
-import { CheckCircle2, Mail, Briefcase, Graduation, Target } from "lucide-react";
+import { CheckCircle2, Mail, Briefcase, GraduationCap, Target } from "lucide-react";
 
 export default function Register() {
   const [_, setLocation] = useLocation();
