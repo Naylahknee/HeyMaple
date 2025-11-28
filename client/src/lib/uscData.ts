@@ -5,9 +5,22 @@ export interface USCSchool {
   majors: string[];
 }
 
+export interface UniversityData {
+  id: string;
+  name: string;
+  emailDomain: string;
+  colors: {
+    primary: string;
+    secondary: string;
+    accent: string;
+  };
+  schools: USCSchool[];
+}
+
+// USC SCHOOLS AND MAJORS
 export const USC_SCHOOLS: USCSchool[] = [
   {
-    id: "viterbi",
+    id: "usc-viterbi",
     name: "Viterbi School of Engineering",
     abbreviation: "Viterbi",
     majors: [
@@ -29,7 +42,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "marshall",
+    id: "usc-marshall",
     name: "Marshall School of Business",
     abbreviation: "Marshall",
     majors: [
@@ -48,7 +61,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "annenberg",
+    id: "usc-annenberg",
     name: "Annenberg School for Communication and Journalism",
     abbreviation: "Annenberg",
     majors: [
@@ -64,7 +77,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "dornsife",
+    id: "usc-dornsife",
     name: "USC Dornsife College of Letters, Arts and Sciences",
     abbreviation: "Dornsife",
     majors: [
@@ -111,7 +124,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "sca",
+    id: "usc-sca",
     name: "School of Cinematic Arts",
     abbreviation: "SCA",
     majors: [
@@ -129,7 +142,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "socialwork",
+    id: "usc-socialwork",
     name: "School of Social Work",
     abbreviation: "Social Work",
     majors: [
@@ -141,7 +154,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "pharmacy",
+    id: "usc-pharmacy",
     name: "School of Pharmacy",
     abbreviation: "Pharmacy",
     majors: [
@@ -152,7 +165,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "occupational",
+    id: "usc-occupational",
     name: "Chan Division of Occupational Science and Occupational Therapy",
     abbreviation: "OT",
     majors: [
@@ -161,7 +174,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "roski",
+    id: "usc-roski",
     name: "Roski School of Art and Design",
     abbreviation: "Roski",
     majors: [
@@ -177,7 +190,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "rossier",
+    id: "usc-rossier",
     name: "Rossier School of Education",
     abbreviation: "Rossier",
     majors: [
@@ -191,7 +204,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "gerontology",
+    id: "usc-gerontology",
     name: "Leonard Davis School of Gerontology",
     abbreviation: "Gerontology",
     majors: [
@@ -201,7 +214,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "keck",
+    id: "usc-keck",
     name: "Keck School of Medicine",
     abbreviation: "Keck Medicine",
     majors: [
@@ -213,7 +226,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "law",
+    id: "usc-law",
     name: "Gould School of Law",
     abbreviation: "Law",
     majors: [
@@ -226,7 +239,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "dentistry",
+    id: "usc-dentistry",
     name: "School of Dentistry",
     abbreviation: "Dentistry",
     majors: [
@@ -239,7 +252,7 @@ export const USC_SCHOOLS: USCSchool[] = [
     ]
   },
   {
-    id: "policy",
+    id: "usc-price",
     name: "Sol Price School of Public Policy",
     abbreviation: "Price",
     majors: [
@@ -250,6 +263,219 @@ export const USC_SCHOOLS: USCSchool[] = [
       "Policy Analysis",
       "Environmental Policy",
     ]
+  },
+];
+
+// UCLA SCHOOLS AND MAJORS
+export const UCLA_SCHOOLS: USCSchool[] = [
+  {
+    id: "ucla-engineering",
+    name: "Henry Samueli School of Engineering and Applied Science",
+    abbreviation: "Engineering",
+    majors: [
+      "Aerospace Engineering",
+      "Bioengineering",
+      "Chemical Engineering",
+      "Civil Engineering",
+      "Computer Engineering",
+      "Computer Science",
+      "Electrical Engineering",
+      "Environmental Engineering",
+      "Materials Engineering",
+      "Mechanical Engineering",
+      "Data Science",
+    ]
+  },
+  {
+    id: "ucla-anderson",
+    name: "Anderson School of Management",
+    abbreviation: "Anderson",
+    majors: [
+      "Business Administration",
+      "Accounting",
+      "Finance",
+      "Marketing",
+      "Management",
+      "International Business",
+      "Entrepreneurship",
+      "Management Information Systems",
+    ]
+  },
+  {
+    id: "ucla-communications",
+    name: "School of the Arts and Architecture",
+    abbreviation: "Arts & Architecture",
+    majors: [
+      "Architecture",
+      "Film & Television",
+      "Theater",
+      "Dance",
+      "Interactive Media & Games",
+      "Art",
+      "Design Media Arts",
+      "Urban Design",
+    ]
+  },
+  {
+    id: "ucla-college",
+    name: "UCLA College of Letters and Science",
+    abbreviation: "College L&S",
+    majors: [
+      "African American Studies",
+      "American Studies",
+      "Anthropology",
+      "Applied Mathematics",
+      "Art History",
+      "Astronomy",
+      "Astrophysics",
+      "Atmospheric Sciences",
+      "Biochemistry",
+      "Biology",
+      "Chemistry",
+      "Chicana & Chicano Studies",
+      "Classical Civilization",
+      "Classics",
+      "Cognitive Science",
+      "Dance",
+      "East Asian Studies",
+      "Ecology & Evolutionary Biology",
+      "Economics",
+      "English",
+      "Environmental Science",
+      "European Studies",
+      "Ethnomusicology",
+      "French",
+      "Geography",
+      "Geology",
+      "German",
+      "Global Studies",
+      "Greek",
+      "History",
+      "History of Science",
+      "Italian",
+      "Japanese",
+      "Linguistics",
+      "Mathematics",
+      "Microbiology, Immunology & Molecular Genetics",
+      "Middle Eastern Studies",
+      "Molecular, Cell & Developmental Biology",
+      "Music",
+      "Music History",
+      "Neuroscience",
+      "Philosophy",
+      "Physics",
+      "Planetary Sciences",
+      "Political Science",
+      "Portuguese",
+      "Psychology",
+      "Religious Studies",
+      "Russian",
+      "Scandinavian Studies",
+      "Sociology",
+      "Spanish",
+      "Statistics",
+      "Theater",
+      "Women's Studies",
+    ]
+  },
+  {
+    id: "ucla-education",
+    name: "Graduate School of Education and Information Studies",
+    abbreviation: "Education",
+    majors: [
+      "Education",
+      "Teaching & Learning",
+      "Educational Leadership",
+      "Library & Information Science",
+      "Information Systems Management",
+      "Learning Analytics",
+    ]
+  },
+  {
+    id: "ucla-law",
+    name: "School of Law",
+    abbreviation: "Law",
+    majors: [
+      "Juris Doctor",
+      "Entertainment Law",
+      "Environmental Law",
+      "International Law",
+      "Public Interest Law",
+      "Tax Law",
+    ]
+  },
+  {
+    id: "ucla-medicine",
+    name: "David Geffen School of Medicine",
+    abbreviation: "Medicine",
+    majors: [
+      "Medicine",
+      "Biomedical Sciences",
+      "Molecular & Medical Pharmacology",
+      "Pathology & Laboratory Medicine",
+      "Neurobiology",
+    ]
+  },
+  {
+    id: "ucla-nursing",
+    name: "School of Nursing",
+    abbreviation: "Nursing",
+    majors: [
+      "Nursing",
+      "Registered Nursing (RN)",
+      "Nursing Science",
+      "Clinical Nursing Leadership",
+    ]
+  },
+  {
+    id: "ucla-publicaffairs",
+    name: "Luskin School of Public Affairs",
+    abbreviation: "Public Affairs",
+    majors: [
+      "Public Policy & Management",
+      "Urban Planning",
+      "Public Administration",
+      "Social Welfare",
+      "Community Development",
+    ]
+  },
+  {
+    id: "ucla-dentistry",
+    name: "School of Dentistry",
+    abbreviation: "Dentistry",
+    majors: [
+      "Doctor of Dental Medicine",
+      "Dental Hygiene",
+      "Advanced General Dentistry",
+      "Orthodontics",
+      "Periodontics",
+    ]
+  },
+];
+
+// UNIVERSITY CONFIGURATIONS WITH BRANDING
+export const UNIVERSITIES: UniversityData[] = [
+  {
+    id: "usc",
+    name: "University of Southern California",
+    emailDomain: "@usc.edu",
+    colors: {
+      primary: "#cc0000", // USC Cardinal Red
+      secondary: "#ffb81c", // USC Gold
+      accent: "#ffffff", // White
+    },
+    schools: USC_SCHOOLS,
+  },
+  {
+    id: "ucla",
+    name: "University of California, Los Angeles",
+    emailDomain: "@ucla.edu",
+    colors: {
+      primary: "#2e5090", // UCLA Blue
+      secondary: "#ffc52f", // UCLA Gold
+      accent: "#ffffff", // White
+    },
+    schools: UCLA_SCHOOLS,
   },
 ];
 
@@ -320,19 +546,32 @@ export const GRADUATION_YEARS = Array.from({ length: 8 }, (_, i) => {
   return year;
 });
 
-// Helper function for school search
-export const searchSchools = (query: string): USCSchool[] => {
-  if (!query.trim()) return USC_SCHOOLS;
+// Helper functions
+export const getUniversityFromEmail = (email: string): UniversityData | null => {
+  return UNIVERSITIES.find(uni => email.includes(uni.emailDomain)) || null;
+};
+
+export const searchSchools = (query: string, universityId: string): USCSchool[] => {
+  const university = UNIVERSITIES.find(u => u.id === universityId);
+  if (!university) return [];
+  
+  if (!query.trim()) return university.schools;
   
   const lowerQuery = query.toLowerCase();
-  return USC_SCHOOLS.filter(school =>
+  return university.schools.filter(school =>
     school.name.toLowerCase().includes(lowerQuery) ||
     school.abbreviation.toLowerCase().includes(lowerQuery)
   );
 };
 
-// Helper function to get majors for a school
-export const getMajorsForSchool = (schoolId: string): string[] => {
-  const school = USC_SCHOOLS.find(s => s.id === schoolId);
+export const getMajorsForSchool = (schoolId: string, universityId: string): string[] => {
+  const university = UNIVERSITIES.find(u => u.id === universityId);
+  if (!university) return [];
+  
+  const school = university.schools.find(s => s.id === schoolId);
   return school?.majors || [];
+};
+
+export const getUniversityById = (universityId: string): UniversityData | null => {
+  return UNIVERSITIES.find(u => u.id === universityId) || null;
 };

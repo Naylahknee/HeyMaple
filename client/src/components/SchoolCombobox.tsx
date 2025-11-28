@@ -4,23 +4,25 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { USC_SCHOOLS, searchSchools } from "@/lib/uscData";
+import { UNIVERSITIES, searchSchools } from "@/lib/uscData";
 
 interface SchoolComboboxProps {
   value: string;
+  universityId: string;
   onChange: (schoolId: string) => void;
   onOpenChange?: (open: boolean) => void;
   error?: string;
 }
 
-export function SchoolCombobox({ value, onChange, onOpenChange, error }: SchoolComboboxProps) {
+export function SchoolCombobox({ value, universityId, onChange, onOpenChange, error }: SchoolComboboxProps) {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const selectedSchool = USC_SCHOOLS.find(s => s.id === value);
+  const selectedUniversity = UNIVERSITIES.find(u => u.id === universityId);
+  const selectedSchool = selectedUniversity?.schools.find(s => s.id === value);
   const filteredSchools = useMemo(
-    () => searchSchools(searchQuery),
-    [searchQuery]
+    () => searchSchools(searchQuery, universityId),
+    [searchQuery, universityId]
   );
 
   const handleSelect = (schoolId: string) => {
@@ -39,12 +41,13 @@ export function SchoolCombobox({ value, onChange, onOpenChange, error }: SchoolC
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          disabled={!universityId}
           className={cn("w-full justify-between", error && "border-red-500")}
         >
           {selectedSchool ? (
             <span className="truncate">{selectedSchool.abbreviation} - {selectedSchool.name}</span>
           ) : (
-            <span className="text-muted-foreground">Select your school...</span>
+            <span className="text-muted-foreground">{universityId ? "Select your school..." : "Select university first"}</span>
           )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

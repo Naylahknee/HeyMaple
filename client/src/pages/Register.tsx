@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { USC_SCHOOLS, DEGREE_OPTIONS, PROJECT_TYPES, GRADUATION_YEARS, getMajorsForSchool } from "@/lib/uscData";
+import { UNIVERSITIES, DEGREE_OPTIONS, PROJECT_TYPES, GRADUATION_YEARS, getMajorsForSchool, getUniversityFromEmail } from "@/lib/uscData";
 import { SchoolCombobox } from "@/components/SchoolCombobox";
 import { ModeBadge } from "@/components/ModeBadge";
 import { CheckCircle2, Mail, Briefcase, GraduationCap, Target } from "lucide-react";
@@ -17,6 +17,7 @@ export default function Register() {
     firstName: "",
     lastName: "",
     email: "",
+    university: "",
     school: "",
     major: "",
     degree: "",
@@ -43,7 +44,9 @@ export default function Register() {
       if (!formData.firstName.trim()) newErrors.firstName = "First name required";
       if (!formData.lastName.trim()) newErrors.lastName = "Last name required";
       if (!formData.email.trim()) newErrors.email = "Email required";
-      if (!formData.email.includes("@usc.edu")) newErrors.email = "Please use your USC email (@usc.edu)";
+      const uni = getUniversityFromEmail(formData.email);
+      if (!uni) newErrors.email = "Please use your USC (@usc.edu) or UCLA (@ucla.edu) email";
+      else handleInputChange("university", uni.id);
     } else if (stepNum === 2) {
       if (!formData.school) newErrors.school = "School required";
       if (!formData.major) newErrors.major = "Major required";
@@ -70,7 +73,8 @@ export default function Register() {
     }
   };
 
-  const selectedSchool = USC_SCHOOLS.find(s => s.id === formData.school);
+  const selectedUniversity = UNIVERSITIES.find(u => u.id === formData.university);
+  const selectedSchoolData = selectedUniversity?.schools.find(s => s.id === formData.school);
   const selectedProject = PROJECT_TYPES.find(p => p.id === formData.projectType);
 
   return (
@@ -79,7 +83,7 @@ export default function Register() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-heading font-bold mb-2">Join Hey Maple</h1>
-          <p className="text-muted-foreground text-lg">Find your perfect teammates at USC</p>
+          <p className="text-muted-foreground text-lg">Find your perfect teammates {selectedUniversity ? `at ${selectedUniversity.name}` : "at USC or UCLA"}</p>
           <p className="text-sm text-muted-foreground mt-2">Step {step} of 4</p>
         </div>
 
@@ -162,6 +166,7 @@ export default function Register() {
                   <Label htmlFor="school">School</Label>
                   <SchoolCombobox
                     value={formData.school}
+                    universityId={formData.university}
                     onChange={(val) => {
                       handleInputChange("school", val);
                       handleInputChange("major", "");
@@ -179,7 +184,7 @@ export default function Register() {
                         <SelectValue placeholder="Select your major" />
                       </SelectTrigger>
                       <SelectContent>
-                        {getMajorsForSchool(formData.school).map(major => (
+                        {getMajorsForSchool(formData.school, formData.university).map(major => (
                           <SelectItem key={major} value={major}>
                             {major}
                           </SelectItem>
@@ -304,8 +309,12 @@ export default function Register() {
                   <p className="font-semibold">{formData.email}</p>
                 </div>
                 <div className="border-t pt-4">
-                  <p className="text-xs text-muted-foreground mb-1">School</p>
-                  <p className="font-semibold">{selectedSchool?.abbreviation}</p>
+                  <p className="text-xs text-muted-foreground mb-1">University</p>
+                  <p className="font-semibold">{selectedUniversity?.name}</p>
+                </div>
+                <div className="border-t pt-4">
+                  <p className="text-xs text-muted-foreground mb-1">School & Major</p>
+                  <p className="font-semibold">{selectedSchoolData?.abbreviation} • {formData.major}</p>
                 </div>
                 <div className="border-t pt-4">
                   <p className="text-xs text-muted-foreground mb-1">Degree & GraduationCap</p>

@@ -15,6 +15,9 @@ export interface ModeDefinition {
 export interface User {
   id: string;
   name: string;
+  email: string;
+  university: string; // "usc" or "ucla"
+  school: string;
   major: string;
   year: number;
   avatar: string;
