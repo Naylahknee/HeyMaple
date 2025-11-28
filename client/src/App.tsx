@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Layout } from "@/components/Layout";
 
 import Home from "@/pages/Home";
+import Register from "@/pages/Register";
 import Assessment from "@/pages/Assessment";
 import Results from "@/pages/Results";
 import Dashboard from "@/pages/Dashboard";
@@ -18,6 +19,7 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/register" component={Register} />
         <Route path="/assessment" component={Assessment} />
         <Route path="/results" component={Results} />
         <Route path="/dashboard" component={Dashboard} />

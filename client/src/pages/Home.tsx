@@ -46,9 +46,9 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/assessment">
+              <Link href="/register">
                 <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90">
-                  Find Your Mode <ArrowRight className="ml-2" />
+                  Join Hey Maple <ArrowRight className="ml-2" />
                 </Button>
               </Link>
               <Link href="/dashboard">
@@ -168,11 +168,11 @@ export default function Home() {
       <section className="py-24 text-center container mx-auto px-4">
          <h2 className="text-4xl font-heading font-bold mb-6">Ready to find your people?</h2>
          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-           Take the 3-minute assessment to discover your Collaboration Mode.
+           Sign up with your USC email and get matched with your perfect teammates in minutes.
          </p>
-         <Link href="/assessment">
+         <Link href="/register">
             <Button size="lg" className="h-14 px-10 text-lg rounded-full shadow-lg bg-primary hover:bg-primary/90">
-              Start Assessment
+              Register for Free
             </Button>
          </Link>
       </section>
