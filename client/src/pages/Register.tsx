@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { USC_SCHOOLS, DEGREE_OPTIONS, PROJECT_TYPES, GRADUATION_YEARS } from "@/lib/uscData";
+import { USC_SCHOOLS, DEGREE_OPTIONS, PROJECT_TYPES, GRADUATION_YEARS, getMajorsForSchool } from "@/lib/uscData";
+import { SchoolCombobox } from "@/components/SchoolCombobox";
 import { ModeBadge } from "@/components/ModeBadge";
-import { CheckCircle2, Mail, Briefcase, GraduationCap, Target } from "lucide-react";
+import { CheckCircle2, Mail, Briefcase, Graduation, Target } from "lucide-react";
 
 export default function Register() {
   const [_, setLocation] = useLocation();
@@ -17,6 +18,7 @@ export default function Register() {
     lastName: "",
     email: "",
     school: "",
+    major: "",
     degree: "",
     graduationYear: new Date().getFullYear().toString(),
     projectType: "",
@@ -44,8 +46,9 @@ export default function Register() {
       if (!formData.email.includes("@usc.edu")) newErrors.email = "Please use your USC email (@usc.edu)";
     } else if (stepNum === 2) {
       if (!formData.school) newErrors.school = "School required";
+      if (!formData.major) newErrors.major = "Major required";
       if (!formData.degree) newErrors.degree = "Degree level required";
-      if (!formData.graduationYear) newErrors.graduationYear = "GraduationCap year required";
+      if (!formData.graduationYear) newErrors.graduationYear = "Graduation year required";
     } else if (stepNum === 3) {
       if (!formData.projectType) newErrors.projectType = "Project type required";
     }
@@ -157,20 +160,35 @@ export default function Register() {
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="school">School</Label>
-                  <Select value={formData.school} onValueChange={(val) => handleInputChange("school", val)}>
-                    <SelectTrigger className={errors.school ? "border-red-500" : ""}>
-                      <SelectValue placeholder="Select your school" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {USC_SCHOOLS.map(school => (
-                        <SelectItem key={school.id} value={school.id}>
-                          {school.abbreviation} - {school.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <SchoolCombobox
+                    value={formData.school}
+                    onChange={(val) => {
+                      handleInputChange("school", val);
+                      handleInputChange("major", "");
+                    }}
+                    error={errors.school}
+                  />
                   {errors.school && <p className="text-red-500 text-sm mt-1">{errors.school}</p>}
                 </div>
+
+                {formData.school && (
+                  <div>
+                    <Label htmlFor="major">Major</Label>
+                    <Select value={formData.major} onValueChange={(val) => handleInputChange("major", val)}>
+                      <SelectTrigger className={errors.major ? "border-red-500" : ""}>
+                        <SelectValue placeholder="Select your major" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {getMajorsForSchool(formData.school).map(major => (
+                          <SelectItem key={major} value={major}>
+                            {major}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {errors.major && <p className="text-red-500 text-sm mt-1">{errors.major}</p>}
+                  </div>
+                )}
 
                 <div>
                   <Label htmlFor="degree">Degree Level</Label>
