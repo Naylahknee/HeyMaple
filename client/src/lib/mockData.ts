@@ -1,4 +1,9 @@
 import { CollaborationMode, ModeDefinition, Question, User } from './types';
+import avatar1 from '@assets/generated_images/college-age_female_student_portrait.png';
+import avatar2 from '@assets/generated_images/college-age_male_student_portrait.png';
+import avatar3 from '@assets/generated_images/college-age_diverse_female_student.png';
+import avatar4 from '@assets/generated_images/college-age_male_student_portrait_b46c59e3.png';
+import avatar5 from '@assets/generated_images/college-age_female_student_portrait_25cb67df.png';
 
 export const MODES: Record<CollaborationMode, ModeDefinition> = {
   Architect: {
@@ -177,7 +182,7 @@ export const MOCK_USERS: User[] = [
     name: "Sarah Chen",
     major: "Computer Science",
     year: 2025,
-    avatar: "https://i.pravatar.cc/150?u=u1",
+    avatar: avatar1,
     mode: "Architect",
     secondaryMode: "Builder",
     modeConfidence: 85,
@@ -189,7 +194,7 @@ export const MOCK_USERS: User[] = [
     name: "Marcus Johnson",
     major: "Business Admin",
     year: 2024,
-    avatar: "https://i.pravatar.cc/150?u=u2",
+    avatar: avatar2,
     mode: "Coordinator",
     secondaryMode: "Catalyst",
     modeConfidence: 90,
@@ -201,7 +206,7 @@ export const MOCK_USERS: User[] = [
     name: "Emily Davis",
     major: "Interaction Design",
     year: 2025,
-    avatar: "https://i.pravatar.cc/150?u=u3",
+    avatar: avatar3,
     mode: "Refiner",
     secondaryMode: "Architect",
     modeConfidence: 75,
@@ -213,7 +218,7 @@ export const MOCK_USERS: User[] = [
     name: "Alex Rivera",
     major: "Electrical Engineering",
     year: 2026,
-    avatar: "https://i.pravatar.cc/150?u=u4",
+    avatar: avatar4,
     mode: "Builder",
     secondaryMode: "Refiner",
     modeConfidence: 80,
@@ -225,7 +230,7 @@ export const MOCK_USERS: User[] = [
     name: "Jordan Lee",
     major: "Marketing",
     year: 2024,
-    avatar: "https://i.pravatar.cc/150?u=u5",
+    avatar: avatar5,
     mode: "Catalyst",
     secondaryMode: "Coordinator",
     modeConfidence: 88,

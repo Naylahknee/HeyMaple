@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Pencil, Settings, Share2 } from "lucide-react";
+import profileAvatar from '@assets/generated_images/college-age_female_student_portrait.png';
 
 export default function Profile() {
   // Mock logged in user
@@ -13,7 +14,7 @@ export default function Profile() {
     name: "Jordan Smith",
     major: "Computer Science",
     year: 2025,
-    avatar: "https://github.com/shadcn.png",
+    avatar: profileAvatar,
     mode: "Architect",
     secondaryMode: "Builder",
     modeConfidence: 85,
