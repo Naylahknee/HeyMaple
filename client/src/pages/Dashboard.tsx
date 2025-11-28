@@ -4,15 +4,20 @@ import { CollaborationMode, User } from "@/lib/types";
 import { ProfileCard } from "@/components/ProfileCard";
 import { ModeBadge } from "@/components/ModeBadge";
 import { MatchResult } from "@/components/MatchResult";
+import { ConnectionRequest } from "@/components/ConnectionRequest";
+import { UserReview } from "@/components/UserReview";
 import { Input } from "@/components/ui/input";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search, SlidersHorizontal, MessageSquare, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Toast } from "@/components/ui/toast";
 
 export default function Dashboard() {
   const [filterMode, setFilterMode] = useState<CollaborationMode | "All">("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [connectionRequestOpen, setConnectionRequestOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   
   // Simulate "My" profile as Architect for demo purposes
   const myMode: CollaborationMode = "Architect";
@@ -23,6 +28,16 @@ export default function Dashboard() {
                           user.skills.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesMode && matchesSearch;
   });
+
+  const handleConnectClick = (user: User) => {
+    setSelectedUser(user);
+    setConnectionRequestOpen(true);
+  };
+
+  const handleConnectionRequest = (introMessage: string) => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   return (
     <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 p-4 md:p-8">
@@ -96,8 +111,24 @@ export default function Dashboard() {
           </div>
         )}
 
+        {showToast && (
+          <div className="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-in slide-in-from-bottom-5">
+            ✓ Connection request sent! They'll see it in their notifications.
+          </div>
+        )}
+
+        {/* Connection Request Dialog */}
+        {selectedUser && (
+          <ConnectionRequest
+            user={selectedUser}
+            isOpen={connectionRequestOpen}
+            onOpenChange={setConnectionRequestOpen}
+            onConnect={handleConnectionRequest}
+          />
+        )}
+
         {/* User Detail Dialog */}
-        <Dialog open={!!selectedUser} onOpenChange={(open) => !open && setSelectedUser(null)}>
+        <Dialog open={!!selectedUser && !connectionRequestOpen} onOpenChange={(open) => !open && setSelectedUser(null)}>
           <DialogContent className="max-w-2xl p-0 overflow-hidden gap-0">
              {selectedUser && (
                <>
@@ -138,9 +169,26 @@ export default function Dashboard() {
                    </div>
                  </div>
 
-                 <div className="bg-muted/30 p-6 border-t flex justify-end gap-3">
-                   <Button variant="outline" onClick={() => setSelectedUser(null)}>Close</Button>
-                   <Button>Connect Request</Button>
+                 <div className="space-y-6 border-t pt-6">
+                   {selectedUser.reviews && selectedUser.reviews.length > 0 && (
+                     <div>
+                       <h4 className="text-sm font-semibold mb-3">Collaborator Reviews</h4>
+                       <div className="space-y-3">
+                         {selectedUser.reviews.map((review, idx) => (
+                           <UserReview key={idx} review={review} />
+                         ))}
+                       </div>
+                     </div>
+                   )}
+
+                   <div className="flex gap-3">
+                     <Button variant="outline" className="flex-1 gap-2" onClick={() => setSelectedUser(null)}>
+                       <MessageSquare size={16} /> Message
+                     </Button>
+                     <Button className="flex-1 gap-2" onClick={() => handleConnectClick(selectedUser)}>
+                       <Heart size={16} /> Send Connection Request
+                     </Button>
+                   </div>
                  </div>
                </>
              )}

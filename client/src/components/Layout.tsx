@@ -1,8 +1,9 @@
 import { Link, useLocation } from "wouter";
 import logo from "@assets/generated_images/modern_minimalist_maple_leaf_logo.png";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MessageSquare, Bell } from "lucide-react";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -14,6 +15,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { href: "/dashboard", label: "Dashboard" },
     { href: "/profile", label: "My Profile" },
   ];
+
+  // Show connection nav only on protected pages
+  const isProtected = ['/dashboard', '/messages', '/notifications', '/profile'].includes(location);
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground flex flex-col">
@@ -31,27 +35,49 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
-            {navItems.map((item) => (
-              <Link 
-                key={item.href} 
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  location === item.href ? "text-primary" : "text-muted-foreground"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="h-6 w-px bg-border mx-2" />
-            <button className="text-sm font-medium text-muted-foreground hover:text-foreground">
-              Sign In
-            </button>
-            <Link href="/assessment">
-              <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors hover-elevate">
-                Get Started
-              </button>
-            </Link>
+            {isProtected ? (
+              <>
+                <Link href="/dashboard" className={cn("text-sm font-medium transition-colors hover:text-primary", location === "/dashboard" ? "text-primary" : "text-muted-foreground")}>
+                  Find Teammates
+                </Link>
+                <Link href="/messages" className="text-muted-foreground hover:text-foreground relative">
+                  <MessageSquare size={20} />
+                  <span className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+                </Link>
+                <Link href="/notifications" className="text-muted-foreground hover:text-foreground relative">
+                  <Bell size={20} />
+                  <span className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">2</span>
+                </Link>
+                <div className="h-6 w-px bg-border mx-2" />
+                <Link href="/profile" className={cn("text-sm font-medium transition-colors hover:text-primary", location === "/profile" ? "text-primary" : "text-muted-foreground")}>
+                  Profile
+                </Link>
+              </>
+            ) : (
+              <>
+                {navItems.map((item) => (
+                  <Link 
+                    key={item.href} 
+                    href={item.href}
+                    className={cn(
+                      "text-sm font-medium transition-colors hover:text-primary",
+                      location === item.href ? "text-primary" : "text-muted-foreground"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="h-6 w-px bg-border mx-2" />
+                <button className="text-sm font-medium text-muted-foreground hover:text-foreground">
+                  Sign In
+                </button>
+                <Link href="/assessment">
+                  <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors hover-elevate">
+                    Get Started
+                  </button>
+                </Link>
+              </>
+            )}
           </nav>
 
           {/* Mobile Menu Toggle */}

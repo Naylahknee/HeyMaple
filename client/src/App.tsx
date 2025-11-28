@@ -8,6 +8,8 @@ import Home from "@/pages/Home";
 import Assessment from "@/pages/Assessment";
 import Results from "@/pages/Results";
 import Dashboard from "@/pages/Dashboard";
+import Messages from "@/pages/Messages";
+import Notifications from "@/pages/Notifications";
 import Profile from "@/pages/Profile";
 import NotFound from "@/pages/not-found";
 
@@ -19,6 +21,8 @@ function Router() {
         <Route path="/assessment" component={Assessment} />
         <Route path="/results" component={Results} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/messages" component={Messages} />
+        <Route path="/notifications" component={Notifications} />
         <Route path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>

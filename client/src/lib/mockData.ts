@@ -1,4 +1,4 @@
-import { CollaborationMode, ModeDefinition, Question, User } from './types';
+import { CollaborationMode, ModeDefinition, Question, User, Message, Connection, Notification } from './types';
 import avatar1 from '@assets/generated_images/college-age_female_student_portrait.png';
 import avatar2 from '@assets/generated_images/college-age_male_student_portrait.png';
 import avatar3 from '@assets/generated_images/college-age_diverse_female_student.png';
@@ -187,7 +187,11 @@ export const MOCK_USERS: User[] = [
     secondaryMode: "Builder",
     modeConfidence: 85,
     skills: ["System Design", "React", "Python", "AWS"],
-    bio: "I love building scalable systems and thinking about the big picture. Looking for builders to help execute a new fintech idea."
+    bio: "I love building scalable systems and thinking about the big picture. Looking for builders to help execute a new fintech idea.",
+    verification: { emailVerified: true, studentIdVerified: true },
+    reviews: [
+      { authorName: "Alex Rivera", authorMode: "Builder", rating: 5, text: "Sarah's vision was crystal clear and kept us aligned. Perfect collaboration.", projectName: "PayFlow App", date: "2 months ago" }
+    ]
   },
   {
     id: "u2",
@@ -199,7 +203,11 @@ export const MOCK_USERS: User[] = [
     secondaryMode: "Catalyst",
     modeConfidence: 90,
     skills: ["Project Management", "Notion", "Agile", "Public Speaking"],
-    bio: "Obsessed with keeping teams organized and moving forward. I turn chaos into clear action items."
+    bio: "Obsessed with keeping teams organized and moving forward. I turn chaos into clear action items.",
+    verification: { emailVerified: true, studentIdVerified: true },
+    reviews: [
+      { authorName: "Sarah Chen", authorMode: "Architect", rating: 5, text: "Marcus organized us flawlessly. Every sprint was on track.", projectName: "PayFlow App", date: "2 months ago" }
+    ]
   },
   {
     id: "u3",
@@ -211,7 +219,11 @@ export const MOCK_USERS: User[] = [
     secondaryMode: "Architect",
     modeConfidence: 75,
     skills: ["Figma", "User Testing", "Accessibility", "CSS"],
-    bio: "Good design is invisible. I love taking rough prototypes and polishing them into professional products."
+    bio: "Good design is invisible. I love taking rough prototypes and polishing them into professional products.",
+    verification: { emailVerified: true, studentIdVerified: false },
+    reviews: [
+      { authorName: "Marcus Johnson", authorMode: "Coordinator", rating: 5, text: "Emily's attention to detail elevated the entire product. Users loved the polish.", projectName: "PayFlow App", date: "2 months ago" }
+    ]
   },
   {
     id: "u4",
@@ -223,7 +235,11 @@ export const MOCK_USERS: User[] = [
     secondaryMode: "Refiner",
     modeConfidence: 80,
     skills: ["C++", "Embedded Systems", "Circuit Design", "Prototyping"],
-    bio: "Just let me build. I love hackathons and shipping real hardware/software solutions quickly."
+    bio: "Just let me build. I love hackathons and shipping real hardware/software solutions quickly.",
+    verification: { emailVerified: true, studentIdVerified: true },
+    reviews: [
+      { authorName: "Emily Davis", authorMode: "Refiner", rating: 5, text: "Shipped features faster than anyone I've worked with. Zero technical debt.", projectName: "PayFlow App", date: "2 months ago" }
+    ]
   },
   {
     id: "u5",
@@ -235,6 +251,28 @@ export const MOCK_USERS: User[] = [
     secondaryMode: "Coordinator",
     modeConfidence: 88,
     skills: ["Growth Hacking", "Networking", "Social Media", "Fundraising"],
-    bio: "I connect the dots. If you need funding, users, or connections for your project, I'm your person."
+    bio: "I connect the dots. If you need funding, users, or connections for your project, I'm your person.",
+    verification: { emailVerified: true, studentIdVerified: true },
+    reviews: [
+      { authorName: "Sarah Chen", authorMode: "Architect", rating: 5, text: "Jordan got us 5K beta users in 2 weeks. Game changer for validation.", projectName: "PayFlow App", date: "2 months ago" }
+    ]
   }
+];
+
+export const MOCK_MESSAGES: Message[] = [
+  { id: "m1", senderId: "u1", senderName: "Sarah Chen", senderAvatar: avatar1, text: "Hey! I saw you're a builder. I'm working on a fintech project and need someone who can execute quickly.", timestamp: new Date(Date.now() - 3600000) },
+  { id: "m2", senderId: "me", senderName: "You", senderAvatar: avatar1, text: "That sounds perfect! I love shipping fast. What's the main challenge?", timestamp: new Date(Date.now() - 3000000) },
+  { id: "m3", senderId: "u1", senderName: "Sarah Chen", senderAvatar: avatar1, text: "We need to build the payment processing layer and API integration by end of month. Think you can handle it?", timestamp: new Date(Date.now() - 2400000) },
+  { id: "m4", senderId: "me", senderName: "You", senderAvatar: avatar1, text: "Absolutely. I've done similar integrations before. Let's jump on a call?", timestamp: new Date(Date.now() - 1800000) },
+];
+
+export const MOCK_CONNECTIONS: Connection[] = [
+  { id: "c1", userId: "me", matchId: "u1", status: "connected", introMessage: "Love your vision for fintech!", createdAt: new Date(Date.now() - 86400000) },
+  { id: "c2", userId: "me", matchId: "u2", status: "pending", introMessage: "Your org skills would help us stay on track", createdAt: new Date(Date.now() - 43200000) },
+];
+
+export const MOCK_NOTIFICATIONS: Notification[] = [
+  { id: "n1", type: "connection_request", title: "Sarah Chen wants to connect", description: "Love your vision for fintech!", relatedUserId: "u1", read: false, createdAt: new Date(Date.now() - 3600000) },
+  { id: "n2", type: "message", title: "New message from Sarah Chen", description: "That sounds perfect! I love shipping fast...", relatedUserId: "u1", read: false, createdAt: new Date(Date.now() - 1800000) },
+  { id: "n3", type: "profile_viewed", title: "Marcus Johnson viewed your profile", description: "", relatedUserId: "u2", read: true, createdAt: new Date(Date.now() - 7200000) },
 ];
