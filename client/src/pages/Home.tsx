@@ -36,7 +36,7 @@ export default function Home() {
             
             <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight text-foreground mb-6">
               Where Students <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
                 Branch Out
               </span>
             </h1>
