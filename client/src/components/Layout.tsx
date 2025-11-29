@@ -25,8 +25,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative w-8 h-8 overflow-hidden rounded-lg bg-primary/10 p-1 transition-transform group-hover:scale-105 flex items-center justify-center text-primary">
-              <MapleLeafIcon size={28} />
+            <div className="relative w-8 h-8 transition-transform group-hover:scale-105 text-green-500">
+              <MapleLeafIcon className="w-8 h-8" />
             </div>
             <span className="font-heading font-bold text-xl text-foreground tracking-tight">
               Hey Maple
@@ -117,8 +117,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4 text-center md:text-left grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
-               <div className="text-primary/80">
-                 <MapleLeafIcon size={24} />
+               <div className="text-green-500 opacity-80">
+                 <MapleLeafIcon className="w-6 h-6" />
                </div>
                <span className="font-heading font-bold text-lg text-foreground/80">Hey Maple</span>
             </div>

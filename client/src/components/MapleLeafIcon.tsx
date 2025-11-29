@@ -2,7 +2,7 @@ import React from "react";
 
 interface MapleLeafIconProps {
   className?: string;
-  size?: number; // in px
+  size?: number;
 }
 
 export function MapleLeafIcon({
@@ -14,39 +14,34 @@ export function MapleLeafIcon({
       className={className}
       width={size}
       height={size}
-      viewBox="0 0 100 100"
+      viewBox="0 0 200 200"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Main leaf outline */}
+      {/* Outer leaf shape */}
       <path
-        d="M 20 70 Q 30 50 40 35 Q 60 15 75 20 Q 80 25 78 45 Q 75 65 55 75 Q 35 85 20 70"
-        fill="none"
+        d="M 60 140 C 50 120 45 100 50 75 C 55 50 75 35 100 32 C 130 28 155 45 160 75 C 165 105 150 140 120 160 C 100 175 70 170 60 140 Z"
+        fill="currentColor"
         stroke="currentColor"
-        strokeWidth="6"
+        strokeWidth="12"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       
       {/* Inner vein detail */}
       <path
-        d="M 35 55 Q 50 45 60 40"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="6"
+        d="M 90 110 Q 110 95 130 80"
+        stroke="white"
+        strokeWidth="10"
         strokeLinecap="round"
+        opacity="0.4"
       />
       
       {/* Stem */}
       <path
-        d="M 22 70 Q 15 80 10 95"
-        fill="none"
+        d="M 65 145 Q 55 165 45 185"
         stroke="currentColor"
-        strokeWidth="6"
+        strokeWidth="12"
         strokeLinecap="round"
       />
     </svg>
