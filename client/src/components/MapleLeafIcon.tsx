@@ -15,38 +15,31 @@ export function MapleLeafIcon({
       width={size}
       height={size}
       viewBox="0 0 100 100"
-      fill="currentColor"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Main maple leaf shape */}
+      {/* Outer leaf shape */}
       <path
-        d="
-          M50 10
-          L55 25
-          L70 20
-          L60 35
-          L80 40
-          L65 50
-          L55 65
-          L75 80
-          L55 70
-          L50 90
-          L45 70
-          L25 80
-          L35 65
-          L15 60
-          L35 50
-          L20 40
-          L40 35
-          L30 20
-          L45 25
-          Z
-        "
+        d="M 50 15 Q 75 25 75 50 Q 75 80 50 85 Q 25 80 25 50 Q 25 25 50 15"
         fill="currentColor"
+        stroke="none"
+      />
+      
+      {/* Inner vein/curve detail */}
+      <path
+        d="M 50 20 Q 65 30 65 50 Q 65 75 50 80"
+        fill="none"
+        stroke="white"
+        strokeWidth="3"
+        opacity="0.6"
       />
 
       {/* Stem */}
-      <rect x="48" y="90" width="4" height="8" fill="currentColor" />
+      <line x1="50" y1="85" x2="50" y2="95" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
     </svg>
   );
 }
