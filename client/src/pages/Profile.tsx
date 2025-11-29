@@ -12,6 +12,9 @@ export default function Profile() {
   const user: User = {
     id: "me",
     name: "Jordan Smith",
+    email: "jsmith@usc.edu",
+    university: "usc",
+    school: "usc-viterbi",
     major: "Computer Science",
     year: 2025,
     avatar: profileAvatar,
