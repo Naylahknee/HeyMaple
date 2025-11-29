@@ -121,7 +121,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                <span className="font-heading font-bold text-lg text-foreground/80">Hey Maple</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Helping students build better teams through psychology-based matching.
+              Building networks, growing futures.
             </p>
           </div>
           
