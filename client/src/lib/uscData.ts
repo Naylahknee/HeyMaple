@@ -489,55 +489,176 @@ export const DEGREE_OPTIONS = [
 ];
 
 export const PROJECT_TYPES = [
+  // Undergraduate-Level Projects
   {
-    id: "capstone",
-    name: "Capstone Project",
-    description: "Final comprehensive project for degree completion",
+    id: "ug-capstone",
+    name: "Capstone Project (Undergrad)",
+    description: "Applied, practical, or research-based final project",
+    level: "Undergraduate"
   },
   {
-    id: "thesis",
-    name: "Master's Thesis",
-    description: "Original research and thesis work",
+    id: "ug-senior-thesis",
+    name: "Senior Thesis",
+    description: "Long-form academic research paper",
+    level: "Undergraduate"
   },
   {
-    id: "senior-seminar",
-    name: "Senior Seminar",
-    description: "Advanced seminar course with project component",
+    id: "ug-senior-project",
+    name: "Senior Project",
+    description: "Creative or professional project (film, design, engineering build, etc.)",
+    level: "Undergraduate"
   },
   {
-    id: "portfolio",
-    name: "Portfolio",
-    description: "Building a professional portfolio",
+    id: "ug-portfolio",
+    name: "Portfolio (Undergrad)",
+    description: "Collection of work demonstrating competency (arts, design, communications)",
+    level: "Undergraduate"
   },
   {
-    id: "creative",
-    name: "Creative Project",
-    description: "Creative or artistic project",
+    id: "ug-practicum",
+    name: "Practicum",
+    description: "Hands-on professional experience with reflective analysis",
+    level: "Undergraduate"
   },
   {
-    id: "comprehensive",
-    name: "Comprehensive Exams",
-    description: "Preparing for and executing comprehensive exams",
+    id: "ug-internship",
+    name: "Internship + Final Report",
+    description: "Work placement combined with a written evaluation or presentation",
+    level: "Undergraduate"
   },
   {
-    id: "coursework",
-    name: "Additional Coursework",
-    description: "Collaborative coursework or group assignments",
-  },
-  {
-    id: "internship",
-    name: "Internships",
-    description: "Internship project or group internship prep",
-  },
-  {
-    id: "research",
+    id: "ug-research",
     name: "Research Project",
-    description: "Academic or independent research",
+    description: "Independent or faculty-supervised study",
+    level: "Undergraduate"
   },
   {
-    id: "undecided",
-    name: "Undecided",
-    description: "Still exploring options",
+    id: "ug-group-project",
+    name: "Group/Team Project",
+    description: "Collaborative project often tied to a capstone course",
+    level: "Undergraduate"
+  },
+  {
+    id: "ug-applied-project",
+    name: "Applied Project",
+    description: "Solving a real-world problem for an organization or industry partner",
+    level: "Undergraduate"
+  },
+  {
+    id: "ug-clinical",
+    name: "Clinical Experience",
+    description: "Required in fields like nursing, education, counseling",
+    level: "Undergraduate"
+  },
+  {
+    id: "ug-fieldwork",
+    name: "Field Study/Fieldwork",
+    description: "Data collection or observational research done on-site",
+    level: "Undergraduate"
+  },
+  {
+    id: "ug-performance",
+    name: "Performance or Production Project",
+    description: "Theater, film, dance, music programs",
+    level: "Undergraduate"
+  },
+  {
+    id: "ug-design",
+    name: "Design Project",
+    description: "Engineering, architecture, UX, product design",
+    level: "Undergraduate"
+  },
+  {
+    id: "ug-service-learning",
+    name: "Service-Learning Project",
+    description: "Community-based project with academic integration",
+    level: "Undergraduate"
+  },
+  {
+    id: "ug-comprehensive-exam",
+    name: "Comprehensive Exam (Undergrad)",
+    description: "Used in some majors instead of a project",
+    level: "Undergraduate"
+  },
+
+  // Graduate-Level Projects
+  {
+    id: "grad-thesis",
+    name: "Master's Thesis",
+    description: "Research-based, original academic contribution",
+    level: "Graduate"
+  },
+  {
+    id: "grad-dissertation",
+    name: "PhD Dissertation",
+    description: "Large-scale, original research advancing a field",
+    level: "Graduate"
+  },
+  {
+    id: "grad-capstone",
+    name: "Capstone (Graduate)",
+    description: "Applied professional project demonstrating mastery",
+    level: "Graduate"
+  },
+  {
+    id: "grad-arp",
+    name: "Applied Research Project (ARP)",
+    description: "Common in public admin, education, social work",
+    level: "Graduate"
+  },
+  {
+    id: "grad-professional",
+    name: "Professional Project",
+    description: "Industry-oriented deliverable (business plan, campaign, product build)",
+    level: "Graduate"
+  },
+  {
+    id: "grad-portfolio",
+    name: "Portfolio (Graduate)",
+    description: "Curated body of advanced work; common in arts, design, education",
+    level: "Graduate"
+  },
+  {
+    id: "grad-clinical",
+    name: "Clinical Practicum",
+    description: "Required in counseling, psychology, social work, medical fields",
+    level: "Graduate"
+  },
+  {
+    id: "grad-residency",
+    name: "Residency Project",
+    description: "Medicine, PA, NP, and some arts MFA programs",
+    level: "Graduate"
+  },
+  {
+    id: "grad-case-study",
+    name: "Case Study Analysis",
+    description: "MBA, MPA, policy, and applied social sciences",
+    level: "Graduate"
+  },
+  {
+    id: "grad-action-research",
+    name: "Action Research Project",
+    description: "Especially in education and organizational leadership programs",
+    level: "Graduate"
+  },
+  {
+    id: "grad-comprehensive-exam",
+    name: "Comprehensive Exam (Graduate)",
+    description: "Sometimes required instead of or in addition to a thesis",
+    level: "Graduate"
+  },
+  {
+    id: "grad-qualifying-exam",
+    name: "Qualifying Exam",
+    description: "Doctoral-level test required before dissertation research",
+    level: "Graduate"
+  },
+  {
+    id: "grad-field-research",
+    name: "Field Research / Fieldwork Report",
+    description: "Anthropology, environmental science, journalism",
+    level: "Graduate"
   },
 ];
 

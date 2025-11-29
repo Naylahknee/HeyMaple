@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { UNIVERSITIES, DEGREE_OPTIONS, PROJECT_TYPES, GRADUATION_YEARS, getMajorsForSchool, getUniversityFromEmail } from "@/lib/uscData";
 import { SchoolCombobox } from "@/components/SchoolCombobox";
@@ -256,11 +256,23 @@ export default function Register() {
                     <SelectValue placeholder="Select project type" />
                   </SelectTrigger>
                   <SelectContent>
-                    {PROJECT_TYPES.map(project => (
-                      <SelectItem key={project.id} value={project.id}>
-                        {project.name}
-                      </SelectItem>
-                    ))}
+                    <SelectGroup>
+                      <SelectLabel className="text-muted-foreground pl-2 py-2 font-bold">Undergraduate Projects</SelectLabel>
+                      {PROJECT_TYPES.filter(p => p.level === "Undergraduate").map(project => (
+                        <SelectItem key={project.id} value={project.id}>
+                          {project.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                    
+                    <SelectGroup>
+                      <SelectLabel className="text-muted-foreground pl-2 py-2 font-bold mt-2 border-t">Graduate Projects</SelectLabel>
+                      {PROJECT_TYPES.filter(p => p.level === "Graduate").map(project => (
+                        <SelectItem key={project.id} value={project.id}>
+                          {project.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
                 {errors.projectType && <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>}

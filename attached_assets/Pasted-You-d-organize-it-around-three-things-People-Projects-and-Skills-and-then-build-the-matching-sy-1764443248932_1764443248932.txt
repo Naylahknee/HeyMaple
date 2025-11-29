@@ -1,0 +1,299 @@
+You’d organize it around three things:
+People, Projects, and Skills – and then build the matching system on top of those.
+
+I’ll lay it out like a taxonomy / data model so you can turn this into a database or app structure.
+
+
+---
+
+1. Core Entities
+
+A. User (who they are)
+
+All users share a core profile, with role layered on top.
+
+User profile fields:
+
+Name
+
+Role: Student, Alumni, Professor
+
+School / Program: USC – Digital Media Management
+
+Degree level: Undergrad, Master’s, PhD
+
+Graduation year (or expected)
+
+Time zone / availability window
+
+Preferred connection type: Quick Q&A, Ongoing mentor, Project partner, Reviewer
+
+
+“Depth” fields to avoid superficial LinkedIn vibes:
+
+“What I’m currently working on” (short paragraph)
+
+“What I can help with” (skills + examples)
+
+“What I refuse to do” (boundaries)
+
+Connection preferences: Short calls, Async only, Group collab, etc.
+
+
+
+---
+
+B. Skills (what they can do)
+
+This is the main organizing axis for matching.
+
+Skill taxonomy examples:
+
+Technical: Python, React, Data Viz, SQL, Unity, Figma, R, Cloud, etc.
+
+Methods: User Research, Survey Design, A/B Testing, Qualitative Analysis, Interviewing, Storyboarding.
+
+Domain: Streaming Industry, Education Tech, Mental Health, Finance, Gaming.
+
+Deliverables: Deck Design, Wireframing, Copywriting, Video Editing, Podcast Editing, Statistical Modeling.
+
+
+Each skill gets:
+
+Level: Beginner | Intermediate | Advanced | Expert
+
+Preference: Love doing | Will do | Only if paid | Teaching only
+
+
+
+---
+
+C. Projects (what needs help)
+
+A Project is the hub that attracts other people.
+
+Project fields:
+
+Project type: Capstone, Thesis, Course Project, Independent Study, Startup Idea, Research Assistant Help
+
+Program: Digital Media, CS, Business, etc.
+
+Stage: Idea, Proposal, Early Build, Testing, Polish, Presentation
+
+Description: problem, goal, context
+
+Timeline: start/end dates, key deadlines
+
+Commitment needed: One-time feedback, Short-term help, Long-term collab
+
+Compensation: Unpaid, Mutual exchange, Paid
+
+
+Needs (sub-entity inside project): Think of these as “roles to fill.”
+
+Example:
+
+Need #1: Coder – Skills: React, Node, Firebase
+
+Need #2: Researcher – Skills: Survey Design, Qualitative Coding
+
+Need #3: Deck Designer – Skills: Presentation Design, Copywriting
+
+
+Each Need:
+
+Required skills (tags)
+
+Nice-to-have skills
+
+Time expectation (hrs/week)
+
+Duration (weeks)
+
+
+
+---
+
+2. Matching System Organization
+
+The matching layer connects User ⇄ Project ⇄ Skills.
+
+A. Search Modes
+
+1. “I need help” mode (for project owners)
+
+Filter by: role (Student, Alumni, Professor)
+
+Skills needed
+
+Program / school
+
+Availability (time zones, evenings, weekends)
+
+Preferred connection type
+
+
+
+2. “I can help” mode (for helpers)
+
+See projects aligned with:
+
+Your skills
+
+Your program / domain
+
+Your preferred commitment level
+
+
+Filter by project type: Capstone only, Thesis only, etc.
+
+
+
+
+
+---
+
+B. Matching Logic (simple version)
+
+For every Project Need, rank users by:
+
+1. Skill overlap
+
+Required skills matched
+
+Nice-to-have skills matched
+
+
+
+2. Context fit
+
+Same program or related field
+
+Same school or partner school
+
+Past experience with similar project type (Capstone, Thesis, etc.)
+
+
+
+3. Logistics
+
+Availability overlap
+
+Preferred commitment
+
+
+
+
+Then display to the project owner as:
+
+“Top 5 suggested matches”
+
+“People from your program”
+
+“Alumni who’ve done a similar project”
+
+
+
+---
+
+3. Information Architecture (how the app is organized)
+
+Home tabs could look like:
+
+1. Projects
+
+My Projects
+
+Open Projects (browse all)
+
+Filters: Capstone, Thesis, Course, Startup, Research Assistant
+
+
+
+2. People
+
+Browse by:
+
+Role: Students, Alumni, Professors
+
+Skills: Coding, Editing, Design, Stats, Industry Expertise
+
+Program / Department
+
+
+
+
+3. Matches
+
+Incoming requests
+
+Suggested matches for your project
+
+Suggested projects where your skills are needed
+
+
+
+4. Messages / Calls
+
+1:1 chat
+
+File sharing and quick “project room” per connection
+
+
+
+5. Campus / Community
+
+Groups by program, cohort, or topic
+
+“Capstone 2025 – Digital Media” group
+
+“Stats & Research Help” group
+
+“First-gen Grad Students” group
+
+
+
+
+
+---
+
+4. Non-Superficial Features (how you keep it real)
+
+To avoid becoming LinkedIn 2.0:
+
+Project-first profiles
+
+When you open someone’s profile, you see “What I’m working on now” and “How I can help” before buzzwords.
+
+
+Contextual intros
+
+When you message someone, include:
+
+Your program
+
+Your project type and stage
+
+What you’re asking for specifically
+
+
+
+Micro-commitments
+
+Options like “30-minute brainstorm,” “One-time feedback on deck,” “Three-week sprint,” so people know exactly what’s expected.
+
+
+Reflection prompts
+
+After a collab: short questions like “What was most helpful?”, “Would you work with this person again?” – which improves matching over time.
+
+
+
+
+---
+
+If you want, next step could be:
+
+A table schema (Postgres/Notion/Airtable) with all key fields
+
+Or a user flow: “I’m doing a digital media capstone and need a coder → how do I get from login to matched in 3 steps?”
