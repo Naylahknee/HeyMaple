@@ -71,7 +71,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Challenge</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">The Branching Out Timing Problem</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">The Networking, Timing Problem</h2>
             <p className="text-lg text-muted-foreground">
               Most students wait until graduation to start branching out and networking, missing crucial opportunities for mentorship, collaboration, and career growth during their college years.
             </p>
