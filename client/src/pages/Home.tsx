@@ -7,7 +7,7 @@ import {
   ArrowRight, CheckCircle2, Users, Zap, 
   Clock, UserX, TrendingDown, Sprout, GraduationCap, Briefcase,
   Code, Mic, LineChart, Palette, Stethoscope, Scale,
-  UserPlus, Network, TrendingUp, Layout
+  UserPlus, Network, TrendingUp
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -66,7 +66,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NEW SECTION: The Challenge (The Networking Timing Problem) */}
+      {/* The Challenge */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -116,7 +116,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NEW SECTION: The Solution (Natural Growth, Real Connections) */}
+      {/* The Solution */}
       <section className="py-24 bg-muted/30 border-y">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -187,8 +187,107 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NEW SECTION: Communities (Find Your Branch) */}
+      {/* How It Works + 5 Modes Integrated */}
       <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Process</div>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">How It Works</h2>
+            <p className="text-lg text-muted-foreground">
+              Three simple steps to start building your professional network. Discover your collaboration style and find your perfect teammates.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="relative p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
+              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg">1</div>
+              <div className="mb-6 mt-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                  <UserPlus size={32} />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-center">Create Your Profile</h3>
+              <p className="text-center text-muted-foreground mb-4">
+                Share your major, interests, and working style. Our algorithm identifies which of the 5 collaboration modes matches you best.
+              </p>
+              <div className="text-xs text-muted-foreground italic text-center">
+                Discover: Architect, Builder, Connector, Refiner, or Visionary
+              </div>
+            </div>
+
+            <div className="relative p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
+              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg">2</div>
+              <div className="mb-6 mt-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center">
+                  <Network size={32} />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-center">Join Branches & Find People</h3>
+              <p className="text-center text-muted-foreground mb-4">
+                Connect with communities in Tech, Business, Creative, Healthcare, and Law. Meet alumni, mentors, and peers who share your interests.
+              </p>
+              <div className="text-xs text-muted-foreground italic text-center">
+                6 industry branches to explore
+              </div>
+            </div>
+
+            <div className="relative p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
+              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg">3</div>
+              <div className="mb-6 mt-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                  <TrendingUp size={32} />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-center">Get Matched & Collaborate</h3>
+              <p className="text-center text-muted-foreground mb-4">
+                Our matching engine finds complementary teammates. Build dream teams with people who fill your gaps and amplify your strengths.
+              </p>
+              <div className="text-xs text-muted-foreground italic text-center">
+                Psychology-based compatibility scoring
+              </div>
+            </div>
+          </div>
+
+          {/* 5 Modes Preview */}
+          <div className="mb-8">
+            <div className="text-center mb-12">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold mb-2">Your Collaboration Mode</h3>
+              <p className="text-muted-foreground">Which type of collaborator are you?</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {Object.values(MODES).map((mode, idx) => (
+                <motion.div 
+                  key={mode.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="p-5 rounded-xl border bg-card hover:shadow-lg transition-all hover:-translate-y-1"
+                >
+                  <div className="mb-3">
+                    <ModeBadge mode={mode.id} size="md" />
+                  </div>
+                  <p className="text-xs font-medium text-muted-foreground italic mb-3 min-h-[32px]">
+                    "{mode.tagline}"
+                  </p>
+                  <ul className="space-y-1.5">
+                    {mode.strengths.slice(0, 2).map(strength => (
+                      <li key={strength} className="text-xs flex items-start gap-1.5">
+                        <CheckCircle2 size={12} className="text-green-500 mt-0.5 shrink-0" />
+                        <span>{strength}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Find Your Branch - Communities */}
+      <section className="py-24 bg-muted/30 border-y">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">Communities</div>
@@ -207,7 +306,7 @@ export default function Home() {
               { icon: Stethoscope, name: "Healthcare Branch", desc: "Connect with doctors, researchers, and healthcare innovators", color: "text-red-500", bg: "bg-red-50 dark:bg-red-950/30" },
               { icon: Scale, name: "Law Branch", desc: "Network with lawyers, judges, and legal professionals", color: "text-amber-500", bg: "bg-amber-50 dark:bg-amber-950/30" },
             ].map((branch, idx) => (
-              <div key={idx} className="flex gap-4 p-6 rounded-xl border hover:shadow-md transition-shadow">
+              <div key={idx} className="flex gap-4 p-6 rounded-xl border hover:shadow-md transition-shadow bg-background">
                 <div className={`w-12 h-12 rounded-xl ${branch.bg} ${branch.color} flex items-center justify-center shrink-0`}>
                   <branch.icon size={24} />
                 </div>
@@ -221,48 +320,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Value Prop Section */}
+      {/* Why Projects Fail - The Matching System */}
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">The 5 Collaboration Modes</h2>
-            <p className="text-lg text-muted-foreground">
-              Every great team needs a mix of these archetypes. Which one are you?
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {Object.values(MODES).map((mode, idx) => (
-              <motion.div 
-                key={mode.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="p-6 rounded-2xl border bg-card hover:shadow-lg transition-all hover:-translate-y-1 group"
-              >
-                <div className="mb-4">
-                  <ModeBadge mode={mode.id} size="lg" />
-                </div>
-                <p className="text-sm font-medium text-muted-foreground italic mb-4 min-h-[40px]">
-                  "{mode.tagline}"
-                </p>
-                <ul className="space-y-2">
-                  {mode.strengths.slice(0, 2).map(strength => (
-                    <li key={strength} className="text-sm flex items-start gap-2">
-                      <CheckCircle2 size={16} className="text-green-500 mt-0.5 shrink-0" />
-                      <span>{strength}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Section */}
-      <section className="py-24 bg-muted/30 border-y">
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Why Projects Fail</h2>
@@ -283,9 +342,9 @@ export default function Home() {
                   <Zap size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">The Solution</h3>
+                  <h3 className="text-xl font-bold mb-2">The Hey Maple Solution</h3>
                   <p className="text-muted-foreground">
-                    Hey Maple identifies your natural working style and pairs you with complementary teammates who fill your gaps.
+                    Our psychology-based matching identifies your working style and pairs you with complementary teammates who fill your gaps.
                   </p>
                 </div>
               </div>
@@ -296,7 +355,7 @@ export default function Home() {
             <div className="relative bg-card border rounded-2xl p-8 shadow-xl">
               <div className="flex items-center justify-between mb-6 border-b pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">A</div>
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-sm font-bold">A</div>
                   <div>
                     <div className="font-bold">Architect</div>
                     <div className="text-xs text-muted-foreground">Visionary</div>
@@ -304,7 +363,7 @@ export default function Home() {
                 </div>
                 <div className="text-2xl font-bold text-green-500">+</div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">B</div>
+                  <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-sm font-bold">B</div>
                   <div>
                     <div className="font-bold">Builder</div>
                     <div className="text-xs text-muted-foreground">Executor</div>
@@ -324,65 +383,11 @@ export default function Home() {
         </div>
       </section>
       
-      {/* NEW SECTION: The Process (How It Works) */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Process</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">How It Works</h2>
-            <p className="text-lg text-muted-foreground">
-              Getting started is simple. Follow these three steps to begin building your professional network while you're still in school.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="relative p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
-              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg">1</div>
-              <div className="mb-6 mt-4 flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
-                  <UserPlus size={32} />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-center">Create Your Profile</h3>
-              <p className="text-center text-muted-foreground">
-                Share your major, interests, and career goals to get matched with relevant mentors and collaborators.
-              </p>
-            </div>
-
-            <div className="relative p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
-              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg">2</div>
-              <div className="mb-6 mt-4 flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center">
-                  <Network size={32} />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-center">Join Branches</h3>
-              <p className="text-center text-muted-foreground">
-                Connect with like-minded students and alumni in skill-based communities that match your interests.
-              </p>
-            </div>
-
-            <div className="relative p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
-              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg">3</div>
-              <div className="mb-6 mt-4 flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
-                  <TrendingUp size={32} />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-center">Grow Your Network</h3>
-              <p className="text-center text-muted-foreground">
-                Build meaningful relationships through mentorship, collaboration, and organic networking opportunities.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
+      {/* Final CTA */}
       <section className="py-24 text-center container mx-auto px-4">
-         <h2 className="text-4xl font-heading font-bold mb-6">Join the Beta Launch</h2>
+         <h2 className="text-4xl font-heading font-bold mb-6">Ready to find your people?</h2>
          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-           Be among the first USC students to access Hey Maple. Get early access to exclusive mentorship opportunities and cross-major collaborations.
+           Sign up with your USC email and get matched with your perfect teammates in minutes.
          </p>
          <Link href="/register">
             <Button size="lg" className="h-14 px-10 text-lg rounded-full shadow-lg bg-primary hover:bg-primary/90">
