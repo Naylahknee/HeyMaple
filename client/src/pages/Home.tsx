@@ -42,7 +42,7 @@ export default function Home() {
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              Hey Maple matches you with teammates based on <strong>how you work</strong>, not just what you know.
+              Connect with alumni mentors and cross-major collaborators before graduation. Build your professional network while you're still growing.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
