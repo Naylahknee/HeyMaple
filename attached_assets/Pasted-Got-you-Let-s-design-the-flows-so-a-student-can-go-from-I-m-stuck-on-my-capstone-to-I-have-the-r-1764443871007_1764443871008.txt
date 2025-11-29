@@ -1,0 +1,458 @@
+Got you. Let’s design the flows so a student can go from “I’m stuck on my capstone” to “I have the right person helping me” in as few steps as possible.
+
+I’ll give you four core flows:
+
+1. Student: “I need help on my capstone”
+
+
+2. Student/Alumni/Professor: “I want to help”
+
+
+3. Ongoing: Managing matches and collabs
+
+
+4. Onboarding shortcuts so this doesn’t become a chore
+
+
+
+You can translate each into screens or routes.
+
+
+---
+
+1. Flow: Student Needs Help With a Capstone
+
+Goal: From login to seeing 3–5 strong matches in under a minute once profile is set.
+
+Step 0 – Entry Point
+
+User chooses: Log in or Sign up
+
+After logging in, home screen asks:
+“What do you want to do today?”
+
+Get help on a project
+
+Offer help to others
+
+Just browse
+
+
+
+User taps “Get help on a project”.
+
+
+---
+
+Step 1 – Create / Select Project
+
+Screen: “Choose a project”
+
+Options:
+
++ New Project
+
+Existing list (if any):
+
+“Capstone – Streaming Analysis App”
+
+“DMM 530 Group Campaign”
+
+
+
+
+If New Project:
+
+Screen: “Project basics”
+
+Project title
+
+Project type: Capstone (required)
+
+Program: Digital Media Management
+
+Stage: Idea | Proposal | Early Build | Testing | Nearly Done
+
+Due date (or date range)
+
+
+Tap Next.
+
+
+---
+
+Step 2 – Define What Help Is Needed
+
+Screen: “What do you need help with?”
+
+User can add “roles” (Needs):
+
+Each role has:
+
+Role label (free text): Coder, Data Analyst, Deck Designer
+
+Skills (tags): choose from a list or type and add
+
+Example: React, Firebase, API integration
+
+
+Time commitment:
+
+One-time feedback (1–2 hr)
+
+Short sprint (1–2 weeks)
+
+Ongoing (4+ weeks)
+
+
+Compensation:
+
+Skill swap
+
+Paid
+
+Unpaid / credit only
+
+
+
+User might create:
+
+Need #1: Coder – React, Firebase
+
+Need #2: UX Feedback – Figma, UX research
+
+
+Tap Find Matches.
+
+
+---
+
+Step 3 – Matching Screen
+
+Screen: “Suggested people for: Coder (React, Firebase)”
+
+Show cards ranked by match score:
+
+Each profile card:
+
+Name + Role: Alex – Alumni (’23), Software Engineer
+
+Program & school
+
+Skills that match (highlighted)
+
+“What I can help with” snippet
+
+Availability badges: Evenings, Weekends, Async OK
+
+Past experience: Helped 3 capstones | Built 2 apps
+
+
+Top sections:
+
+Top Matches
+
+People from your program
+
+Alumni who’ve done capstones like this
+
+
+User taps a profile → sees:
+
+Profile Detail:
+
+About
+
+Detailed skills
+
+“I’m best at helping with…”
+
+Projects previously helped on
+
+Ratings/reviews (if you add them later)
+
+
+CTAs:
+
+Request Help
+
+Save for later
+
+
+
+---
+
+Step 4 – Contact Request Flow
+
+User taps Request Help → modal:
+
+Screen: “Send a request”
+
+Pre-filled contextual message template:
+
+Auto-populate:
+
+Your program
+
+Project type + title
+
+Help needed & time frame
+
+
+
+Example:
+
+> “Hi Alex, I’m a current DMM student working on a capstone where I’m building a prototype for a streaming insights app. I saw you list React + Firebase and that you’ve helped on capstones before.
+I’m looking for: [Coder for 2-week sprint]
+What I’d love from you: [Help with auth + basic dashboard]
+Timeline: [Now–April 15].
+Would you be open to a 20–30 minute call to see if it’s a fit?”
+
+
+
+User can edit, then tap Send Request.
+
+Result:
+
+Request goes to Matches / Inbox for both users.
+
+
+
+---
+
+2. Flow: “I Want to Help” (Student / Alumni / Professor)
+
+Goal: From login to “I’ve found relevant projects to help” in a couple of taps.
+
+Step 0 – Entry
+
+Home screen:
+
+> “What do you want to do today?”
+Get help on a project | Offer help to others | Just browse
+
+
+
+User taps “Offer help to others”.
+
+
+---
+
+Step 1 – Confirm Helper Profile
+
+If helper profile incomplete, quick setup:
+
+“What can you help with?” (skills + examples)
+
+“How do you prefer to help?”
+
+Quick Q&A
+
+One-time feedback
+
+Longer collabs
+
+
+Availability: days/times
+
+
+Tap Save & See Projects.
+
+
+---
+
+Step 2 – Project Feed
+
+Screen: “Projects that need your skills”
+
+List cards like:
+
+“Capstone – Streaming Analysis App”
+
+Needs: Coder (React, Firebase)
+
+Program: Digital Media Management
+
+Time: 2–3 weeks | Evenings
+
+
+“Thesis – Social Media in Education”
+
+Needs: Data analysis (R/SPSS)
+
+Time: Short sprint
+
+
+
+Filters at top:
+
+Project type: Capstone, Thesis, Course, Startup
+
+Program: Your program, All, Related fields
+
+Commitment: Quick help, Short-term, Long-term
+
+
+User taps a project → sees:
+
+Project Detail:
+
+Overview
+
+Owner profile
+
+Specific Needs
+
+Timeline
+
+
+CTAs:
+
+Offer Help
+
+Ask a Question
+
+Save
+
+
+Offer Help triggers similar contextual message:
+
+> “Hi [Name], I saw your capstone project and I can help with [X skills]. I’m available [times]. Want to hop on a call or chat async?”
+
+
+
+
+---
+
+3. Flow: Managing Matches & Collaboration
+
+You want this to feel like a focused work hub, not another inbox.
+
+Screen: “Matches”
+
+Tabs:
+
+Requests (incoming/outgoing)
+
+Active Collaborations
+
+Past Collaborations
+
+
+Requests:
+
+Incoming: accept / decline / ask a question
+
+Outgoing: pending / accepted / declined
+
+
+Active Collaboration Card:
+
+Project name
+
+Collaborator name(s)
+
+Role: Coder, UX, Advisor
+
+Quick actions:
+
+Open chat
+
+Schedule call
+
+Share files (link out to Drive/Notion/etc.)
+
+
+
+Optional later:
+
+Add a “Check-in” button:
+
+“Still working together?” → helps keep data current.
+
+
+
+
+---
+
+4. Onboarding Shortcuts (So People Actually Use It)
+
+To avoid friction:
+
+A. Program-specific Quick Starts
+
+When someone joins and selects a program (e.g., Digital Media Management), show:
+
+“Popular project types in your program”
+
+Capstone – media app
+
+Thesis – audience research
+
+Campaign project – streaming client
+
+
+1-tap templates for project descriptions.
+
+
+
+---
+
+B. “I Don’t Know What I Need” Flow
+
+Button: “Not sure what to ask for?”
+
+Flow:
+
+Ask 3 questions:
+
+1. What are you working on? (short text)
+
+
+2. Where are you stuck? (choose: idea, research, coding, design, writing, presentation)
+
+
+3. What’s your deadline?
+
+
+
+
+Then suggest:
+
+“You probably need:”
+
+Researcher
+
+Coder
+
+Deck/Presentation helper
+
+
+
+And pre-fill the Needs.
+
+
+---
+
+C. Anti-superficial Prompts
+
+When editing profile:
+
+Replace “Headline” with:
+
+“What is one type of project you LOVE helping with?”
+
+“What is one thing you refuse to do?”
+
+
+
+Those show prominently near name to keep it grounded.
+
+
+---
+
+If you want, I can turn this into:
+
+A screen-by-screen list you can hand to a designer, or
+
+A data schema (tables + fields) to hand to a dev / to plug into something like Supabase or Airtable.

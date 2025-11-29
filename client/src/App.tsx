@@ -14,6 +14,12 @@ import Notifications from "@/pages/Notifications";
 import Profile from "@/pages/Profile";
 import NotFound from "@/pages/not-found";
 
+import CreateProject from "@/pages/CreateProject";
+import ProjectMatches from "@/pages/ProjectMatches";
+import HelperSetup from "@/pages/HelperSetup";
+import ProjectFeed from "@/pages/ProjectFeed";
+import Matches from "@/pages/Matches";
+
 function Router() {
   return (
     <Layout>
@@ -26,6 +32,14 @@ function Router() {
         <Route path="/messages" component={Messages} />
         <Route path="/notifications" component={Notifications} />
         <Route path="/profile" component={Profile} />
+        
+        {/* New Flows */}
+        <Route path="/create-project" component={CreateProject} />
+        <Route path="/project-matches" component={ProjectMatches} />
+        <Route path="/helper-setup" component={HelperSetup} />
+        <Route path="/project-feed" component={ProjectFeed} />
+        <Route path="/matches" component={Matches} />
+        
         <Route component={NotFound} />
       </Switch>
     </Layout>

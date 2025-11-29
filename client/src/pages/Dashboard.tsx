@@ -12,7 +12,10 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Toast } from "@/components/ui/toast";
 
+import { useLocation } from "wouter";
+
 export default function Dashboard() {
+  const [_, setLocation] = useLocation();
   const [filterMode, setFilterMode] = useState<CollaborationMode | "All">("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
@@ -22,37 +25,41 @@ export default function Dashboard() {
   // Simulate "My" profile as Architect for demo purposes
   const myMode: CollaborationMode = "Architect";
 
-  const filteredUsers = MOCK_USERS.filter(user => {
-    const matchesMode = filterMode === "All" || user.mode === filterMode;
-    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          user.skills.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesMode && matchesSearch;
-  });
-
-  const handleConnectClick = (user: User) => {
-    setSelectedUser(user);
-    setConnectionRequestOpen(true);
-  };
-
-  const handleConnectionRequest = (introMessage: string) => {
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
-  };
-
   return (
     <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 p-4 md:p-8">
       <div className="container mx-auto max-w-6xl">
         
+        {/* Entry Point Section */}
+        <div className="mb-12 p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border rounded-2xl text-center md:text-left md:flex items-center justify-between gap-8">
+          <div>
+            <h2 className="text-3xl font-heading font-bold mb-2">What do you want to do today?</h2>
+            <p className="text-muted-foreground text-lg">Start building your team or offer your skills to others.</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 mt-6 md:mt-0">
+            <Button size="lg" className="h-14 px-8 text-lg shadow-lg" onClick={() => setLocation("/create-project")}>
+              Get Help on a Project
+            </Button>
+            <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-2" onClick={() => setLocation("/helper-setup")}>
+              Offer Help to Others
+            </Button>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-heading font-bold">Find Teammates</h1>
+            <h1 className="text-3xl font-heading font-bold">Browse Community</h1>
             <p className="text-muted-foreground">
-              Based on your profile, here are your best matches.
+              Connect directly with students and alumni.
             </p>
           </div>
-          <div className="flex items-center gap-2 bg-white p-1 rounded-lg border shadow-sm">
-            <span className="text-xs font-medium px-2 text-muted-foreground">You are an:</span>
-            <ModeBadge mode={myMode} size="sm" />
+          <div className="flex gap-3">
+             <Button variant="outline" onClick={() => setLocation("/matches")}>
+               My Matches & Collabs
+             </Button>
+             <div className="flex items-center gap-2 bg-white p-1 rounded-lg border shadow-sm">
+               <span className="text-xs font-medium px-2 text-muted-foreground">You are an:</span>
+               <ModeBadge mode={myMode} size="sm" />
+             </div>
           </div>
         </div>
 
