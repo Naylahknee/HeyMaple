@@ -74,7 +74,7 @@ export default function Dashboard() {
               onClick={() => setFilterMode("All")}
               className="rounded-full"
             >
-              All Branches
+              All
             </Button>
             {Object.keys(MODES).map((mode) => (
               <Button
@@ -83,7 +83,7 @@ export default function Dashboard() {
                 onClick={() => setFilterMode(mode as CollaborationMode)}
                 className="rounded-full"
               >
-                {mode} Branch
+                {mode}
               </Button>
             ))}
             <Button variant="ghost" size="icon">

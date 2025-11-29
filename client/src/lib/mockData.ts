@@ -180,9 +180,6 @@ export const MOCK_USERS: User[] = [
   {
     id: "u1",
     name: "Sarah Chen",
-    email: "schen@usc.edu",
-    university: "usc",
-    school: "usc-viterbi",
     major: "Computer Science",
     year: 2025,
     avatar: avatar1,
@@ -199,9 +196,6 @@ export const MOCK_USERS: User[] = [
   {
     id: "u2",
     name: "Marcus Johnson",
-    email: "marcusj@usc.edu",
-    university: "usc",
-    school: "usc-marshall",
     major: "Business Admin",
     year: 2024,
     avatar: avatar2,
@@ -218,9 +212,6 @@ export const MOCK_USERS: User[] = [
   {
     id: "u3",
     name: "Emily Davis",
-    email: "edavis@ucla.edu",
-    university: "ucla",
-    school: "ucla-communications",
     major: "Interaction Design",
     year: 2025,
     avatar: avatar3,
@@ -237,9 +228,6 @@ export const MOCK_USERS: User[] = [
   {
     id: "u4",
     name: "Alex Rivera",
-    email: "arivera@ucla.edu",
-    university: "ucla",
-    school: "ucla-engineering",
     major: "Electrical Engineering",
     year: 2026,
     avatar: avatar4,
@@ -256,9 +244,6 @@ export const MOCK_USERS: User[] = [
   {
     id: "u5",
     name: "Jordan Lee",
-    email: "jlee@usc.edu",
-    university: "usc",
-    school: "usc-marshall",
     major: "Marketing",
     year: 2024,
     avatar: avatar5,

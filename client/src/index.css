@@ -69,21 +69,21 @@
   --popover: 0 0% 100%;
   --popover-foreground: 222 47% 11%;
 
-  /* Primary - Hey Maple Green (from Logo) */
-  --primary: 138 76% 45%;  /* ~#1cc947 - Bright Green */
-  --primary-foreground: 0 0% 100%;
+  /* Primary - Maple Red/Orange */
+  --primary: 10 75% 57%;
+  --primary-foreground: 210 40% 98%;
 
-  /* Secondary - Hey Maple Blue (from Logo text) */
-  --secondary: 221 83% 53%; /* ~#2563eb - Bright Blue */
-  --secondary-foreground: 0 0% 100%;
+  /* Secondary - Slate Blue (Grounding) */
+  --secondary: 215 25% 27%;
+  --secondary-foreground: 210 40% 98%;
 
   /* Muted - Soft Grays */
   --muted: 210 40% 96.1%;
   --muted-foreground: 215.4 16.3% 46.9%;
 
-  /* Accent - Light Green Wash */
-  --accent: 138 76% 96%;
-  --accent-foreground: 138 76% 40%;
+  /* Accent - Light Maple Wash */
+  --accent: 10 75% 96%;
+  --accent-foreground: 10 75% 45%;
 
   /* Destructive */
   --destructive: 0 84.2% 60.2%;
@@ -92,17 +92,17 @@
   /* Borders & Inputs */
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 138 76% 45%;
+  --ring: 10 75% 57%;
 
   /* Mode Specific Colors */
-  --mode-architect: 221 83% 53%;  /* Blue (Hey color) */
-  --mode-builder: 138 76% 45%;    /* Green (Maple color) */
+  --mode-architect: 217 91% 60%;  /* Blue */
+  --mode-builder: 25 95% 53%;     /* Orange */
   --mode-coordinator: 262 83% 58%; /* Purple */
   --mode-refiner: 173 80% 40%;    /* Teal */
   --mode-catalyst: 45 93% 47%;    /* Gold/Yellow */
 
-  --chart-1: 138 76% 45%;
-  --chart-2: 221 83% 53%;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
   --chart-3: 197 37% 24%;
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
@@ -120,24 +120,24 @@
   --popover: 222 47% 11%;
   --popover-foreground: 210 40% 98%;
 
-  --primary: 138 76% 45%;
-  --primary-foreground: 0 0% 100%;
+  --primary: 10 75% 57%;
+  --primary-foreground: 210 40% 98%;
 
-  --secondary: 221 83% 53%;
-  --secondary-foreground: 0 0% 100%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
 
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
 
   --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 0 0% 100%;
+  --accent-foreground: 210 40% 98%;
 
   --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: 210 40% 98%;
 
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
-  --ring: 138 76% 45%;
+  --ring: 10 75% 57%;
 }
 
 @layer base {
