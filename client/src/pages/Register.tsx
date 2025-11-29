@@ -255,24 +255,19 @@ export default function Register() {
                   <SelectTrigger className={errors.projectType ? "border-red-500" : ""}>
                     <SelectValue placeholder="Select project type" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel className="text-muted-foreground pl-2 py-2 font-bold">Undergraduate Projects</SelectLabel>
-                      {PROJECT_TYPES.filter(p => p.level === "Undergraduate").map(project => (
-                        <SelectItem key={project.id} value={project.id}>
-                          {project.name}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                    
-                    <SelectGroup>
-                      <SelectLabel className="text-muted-foreground pl-2 py-2 font-bold mt-2 border-t">Graduate Projects</SelectLabel>
-                      {PROJECT_TYPES.filter(p => p.level === "Graduate").map(project => (
-                        <SelectItem key={project.id} value={project.id}>
-                          {project.name}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
+                  <SelectContent className="max-h-[400px]">
+                    {Array.from(new Set(PROJECT_TYPES.map(p => p.category))).map(category => (
+                      <SelectGroup key={category}>
+                        <SelectLabel className="text-muted-foreground pl-2 py-2 font-bold text-xs uppercase tracking-wider bg-muted/20 sticky top-0 z-10 backdrop-blur-sm border-b">
+                          {category}
+                        </SelectLabel>
+                        {PROJECT_TYPES.filter(p => p.category === category).map(project => (
+                          <SelectItem key={project.id} value={project.id}>
+                            {project.name}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    ))}
                   </SelectContent>
                 </Select>
                 {errors.projectType && <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>}

@@ -1,0 +1,242 @@
+Here is a clean, database-ready structure organized by category, with each project type nested under its purpose. This is the format universities typically use on the backend. No fluff. Just structure.
+
+
+---
+
+PROJECT TYPE DATABASE STRUCTURE
+
+1. Research-Based Projects
+
+Undergraduate Research Project
+
+Senior Thesis
+
+Master’s Thesis
+
+PhD Dissertation
+
+Action Research Project
+
+Applied Research Project (ARP)
+
+Field Research / Fieldwork Report
+
+Lab-Based Research Project
+
+Case Study Analysis
+
+Policy Analysis Project
+
+Qualifying Exam (Doctoral)
+
+Comprehensive Exam (Undergraduate/Graduate)
+
+
+2. Applied / Professional Projects
+
+Undergraduate Capstone
+
+Graduate Capstone
+
+Senior Project (Applied)
+
+Applied Project (Problem-Solving)
+
+Professional Project (Industry Deliverable)
+
+Product Prototype + Documentation
+
+Studio Project (Architecture, Planning, Fine Arts)
+
+Residency Project (Medical/Clinical/Arts MFA)
+
+Clinical Practicum
+
+Teaching Practicum
+
+Practicum (non-clinical)
+
+Internship + Final Report (Undergrad)
+
+Internship + Graduate-Level Analysis
+
+Service-Learning Project
+
+Design Project (Engineering, UX, Product)
+
+
+3. Creative / Performance Projects
+
+Performance or Production Project (Theater, Film, Dance, Music)
+
+Creative Dissertation (MFA: novel, screenplay, poetry, etc.)
+
+Studio Art Project
+
+Media Production Project
+
+Portfolio (Undergrad)
+
+Graduate Portfolio (MFA, MEd, Design)
+
+
+4. Collaborative / Team-Based Projects
+
+Group/Team Project (Undergrad or Graduate)
+
+Multi-Disciplinary Capstone
+
+Industry Partner Project
+
+Cross-Functional Design Sprint or Lab
+
+Roundtable or Symposium Presentation
+
+
+5. Clinical, Medical, and Licensing-Track Projects
+
+Clinical Experience (Nursing, Counseling, Psychology)
+
+Clinical Practicum (Graduate Level)
+
+Residency Project (MD, PA, NP, MFA Performance)
+
+Supervised Hours Documentation (for licensure)
+
+Case Formulation (Psychology)
+
+Treatment Plan & Outcome Study (Behavioral Health)
+
+
+6. Education-Specific Projects
+
+Teaching Practicum / Student Teaching
+
+Curriculum Design Project
+
+Action Research Project (Teacher Education)
+
+Learning Assessment Study
+
+Educational Intervention Project
+
+
+7. Policy, Social Science, and Public Administration Projects
+
+Policy Analysis Project
+
+Applied Research Project (ARP)
+
+Program Evaluation Report
+
+Community-Based Field Study
+
+Service-Learning Research Component
+
+Public Management Capstone
+
+Social Impact Assessment
+
+
+8. STEM-Specific Projects
+
+Lab Research Project
+
+Engineering Capstone
+
+Senior Design Project
+
+Prototype Build + Technical Report
+
+STEM Fieldwork Study
+
+Data Analysis Project
+
+Computational Model Project
+
+
+9. Arts, Media, and Creative Technologies Projects
+
+Film Production Project
+
+Media Campaign Capstone
+
+Interactive Media Prototype
+
+Creative Dissertation
+
+MFA Portfolio
+
+Performance or Production Project
+
+Art Installation / Exhibition
+
+
+10. Business, Entrepreneurship, and Communications Projects
+
+Business Plan Project
+
+Startup Incubator Capstone
+
+Market Analysis Project
+
+Communications Campaign
+
+Strategic Communications Plan
+
+Consulting Project (MBA/MPP)
+
+Entrepreneurship Capstone
+
+Brand or Media Strategy Project
+
+
+
+---
+
+Optional Database Fields You Can Add
+
+Use this to structure your actual database table or Airtable/Notion setup:
+
+Project Type Name
+
+Category
+
+Academic Level (Undergrad/Master’s/Doctoral/All)
+
+Discipline/Department
+
+Purpose
+
+Deliverable Format (paper, prototype, performance, portfolio, exam, etc.)
+
+Individual or Group
+
+Fieldwork Required?
+
+Practicum/Clinical Component?
+
+Licensure Track?
+
+Prerequisites
+
+Typical Duration
+
+Credit Value
+
+
+
+---
+
+If you want, I can also generate:
+
+A CSV ready to upload
+
+A Notion or Airtable template
+
+A visual taxonomy diagram
+
+Or a “Master List Table” with every project type as a row
+
+
+Just tell me which format you need.

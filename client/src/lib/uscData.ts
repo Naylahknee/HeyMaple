@@ -489,225 +489,487 @@ export const DEGREE_OPTIONS = [
 ];
 
 export const PROJECT_TYPES = [
-  // Undergraduate-Level Projects
+  // 1. Research-Based Projects
   {
-    id: "ug-capstone",
-    name: "Capstone Project (Undergrad)",
-    description: "Applied, practical, or research-based final project",
-    level: "Undergraduate"
+    id: "ug-research",
+    name: "Undergraduate Research Project",
+    description: "Independent or faculty-supervised study",
+    level: "Undergraduate",
+    category: "Research-Based Projects"
   },
   {
     id: "ug-senior-thesis",
     name: "Senior Thesis",
     description: "Long-form academic research paper",
-    level: "Undergraduate"
+    level: "Undergraduate",
+    category: "Research-Based Projects"
   },
-  {
-    id: "ug-senior-project",
-    name: "Senior Project",
-    description: "Creative or professional project (film, design, engineering build, etc.)",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-portfolio",
-    name: "Portfolio (Undergrad)",
-    description: "Collection of work demonstrating competency (arts, design, communications)",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-practicum",
-    name: "Practicum",
-    description: "Hands-on professional experience with reflective analysis",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-internship",
-    name: "Internship + Final Report",
-    description: "Work placement combined with a written evaluation or presentation",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-research",
-    name: "Research Project",
-    description: "Independent or faculty-supervised study",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-group-project",
-    name: "Group/Team Project",
-    description: "Collaborative project often tied to a capstone course",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-applied-project",
-    name: "Applied Project",
-    description: "Solving a real-world problem for an organization or industry partner",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-clinical",
-    name: "Clinical Experience",
-    description: "Required in fields like nursing, education, counseling",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-fieldwork",
-    name: "Field Study/Fieldwork",
-    description: "Data collection or observational research done on-site",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-performance",
-    name: "Performance or Production Project",
-    description: "Theater, film, dance, music programs",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-design",
-    name: "Design Project",
-    description: "Engineering, architecture, UX, product design",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-service-learning",
-    name: "Service-Learning Project",
-    description: "Community-based project with academic integration",
-    level: "Undergraduate"
-  },
-  {
-    id: "ug-comprehensive-exam",
-    name: "Comprehensive Exam (Undergrad)",
-    description: "Used in some majors instead of a project",
-    level: "Undergraduate"
-  },
-
-  // Graduate-Level Projects
   {
     id: "grad-thesis",
     name: "Master's Thesis",
     description: "Research-based, original academic contribution",
-    level: "Graduate"
+    level: "Graduate",
+    category: "Research-Based Projects"
   },
   {
     id: "grad-dissertation",
     name: "PhD Dissertation",
     description: "Large-scale, original research advancing a field",
-    level: "Graduate"
-  },
-  {
-    id: "grad-capstone",
-    name: "Capstone (Graduate)",
-    description: "Applied professional project demonstrating mastery",
-    level: "Graduate"
-  },
-  {
-    id: "grad-arp",
-    name: "Applied Research Project (ARP)",
-    description: "Common in public admin, education, social work",
-    level: "Graduate"
-  },
-  {
-    id: "grad-professional",
-    name: "Professional Project",
-    description: "Industry-oriented deliverable (business plan, campaign, product build)",
-    level: "Graduate"
-  },
-  {
-    id: "grad-portfolio",
-    name: "Portfolio (Graduate)",
-    description: "Curated body of advanced work; common in arts, design, education",
-    level: "Graduate"
-  },
-  {
-    id: "grad-clinical",
-    name: "Clinical Practicum",
-    description: "Required in counseling, psychology, social work, medical fields",
-    level: "Graduate"
-  },
-  {
-    id: "grad-residency",
-    name: "Residency Project",
-    description: "Medicine, PA, NP, and some arts MFA programs",
-    level: "Graduate"
-  },
-  {
-    id: "grad-case-study",
-    name: "Case Study Analysis",
-    description: "MBA, MPA, policy, and applied social sciences",
-    level: "Graduate"
+    level: "Graduate",
+    category: "Research-Based Projects"
   },
   {
     id: "grad-action-research",
     name: "Action Research Project",
     description: "Especially in education and organizational leadership programs",
-    level: "Graduate"
+    level: "Graduate",
+    category: "Research-Based Projects"
   },
   {
-    id: "grad-comprehensive-exam",
-    name: "Comprehensive Exam (Graduate)",
-    description: "Sometimes required instead of or in addition to a thesis",
-    level: "Graduate"
-  },
-  {
-    id: "grad-qualifying-exam",
-    name: "Qualifying Exam",
-    description: "Doctoral-level test required before dissertation research",
-    level: "Graduate"
+    id: "grad-arp",
+    name: "Applied Research Project (ARP)",
+    description: "Common in public admin, education, social work",
+    level: "Graduate",
+    category: "Research-Based Projects"
   },
   {
     id: "grad-field-research",
     name: "Field Research / Fieldwork Report",
     description: "Anthropology, environmental science, journalism",
-    level: "Graduate"
-  },
-  {
-    id: "grad-creative-dissertation",
-    name: "Creative Dissertation",
-    description: "MFA programs (novel, screenplay, poetry collection)",
-    level: "Graduate"
-  },
-  {
-    id: "grad-studio-project",
-    name: "Studio Project",
-    description: "Architecture, urban planning, fine arts",
-    level: "Graduate"
+    level: "Graduate",
+    category: "Research-Based Projects"
   },
   {
     id: "grad-lab-research",
     name: "Lab-Based Research Project",
     description: "STEM and biomedical fields",
-    level: "Graduate"
+    level: "Graduate",
+    category: "Research-Based Projects"
   },
   {
-    id: "grad-internship-analysis",
-    name: "Internship + Graduate-Level Analysis",
-    description: "Required for MBA, MPP, MPA, etc.",
-    level: "Graduate"
-  },
-  {
-    id: "grad-teaching-practicum",
-    name: "Teaching Practicum",
-    description: "Required for doctoral candidates who teach",
-    level: "Graduate"
+    id: "grad-case-study",
+    name: "Case Study Analysis",
+    description: "MBA, MPA, policy, and applied social sciences",
+    level: "Graduate",
+    category: "Research-Based Projects"
   },
   {
     id: "grad-policy-analysis",
     name: "Policy Analysis Project",
     description: "Public policy and social science programs",
-    level: "Graduate"
+    level: "Graduate",
+    category: "Research-Based Projects"
+  },
+  {
+    id: "grad-qualifying-exam",
+    name: "Qualifying Exam (Doctoral)",
+    description: "Doctoral-level test required before dissertation research",
+    level: "Graduate",
+    category: "Research-Based Projects"
+  },
+  {
+    id: "comprehensive-exam",
+    name: "Comprehensive Exam",
+    description: "Used in some majors instead of a project",
+    level: "All",
+    category: "Research-Based Projects"
+  },
+
+  // 2. Applied / Professional Projects
+  {
+    id: "ug-capstone",
+    name: "Undergraduate Capstone",
+    description: "Applied, practical, or research-based final project",
+    level: "Undergraduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "grad-capstone",
+    name: "Graduate Capstone",
+    description: "Applied professional project demonstrating mastery",
+    level: "Graduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "ug-senior-project",
+    name: "Senior Project (Applied)",
+    description: "Creative or professional project (film, design, engineering build, etc.)",
+    level: "Undergraduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "ug-applied-project",
+    name: "Applied Project (Problem-Solving)",
+    description: "Solving a real-world problem for an organization or industry partner",
+    level: "Undergraduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "grad-professional",
+    name: "Professional Project (Industry Deliverable)",
+    description: "Industry-oriented deliverable (business plan, campaign, product build)",
+    level: "Graduate",
+    category: "Applied / Professional Projects"
   },
   {
     id: "grad-product-prototype",
     name: "Product Prototype + Documentation",
     description: "Engineering, HCI, design, media innovation",
-    level: "Graduate"
+    level: "Graduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "grad-studio-project",
+    name: "Studio Project",
+    description: "Architecture, urban planning, fine arts",
+    level: "Graduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "grad-residency",
+    name: "Residency Project",
+    description: "Medicine, PA, NP, and some arts MFA programs",
+    level: "Graduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "grad-clinical",
+    name: "Clinical Practicum",
+    description: "Required in counseling, psychology, social work, medical fields",
+    level: "Graduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "grad-teaching-practicum",
+    name: "Teaching Practicum",
+    description: "Required for doctoral candidates who teach",
+    level: "Graduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "ug-practicum",
+    name: "Practicum (non-clinical)",
+    description: "Hands-on professional experience with reflective analysis",
+    level: "Undergraduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "ug-internship",
+    name: "Internship + Final Report",
+    description: "Work placement combined with a written evaluation or presentation",
+    level: "Undergraduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "grad-internship-analysis",
+    name: "Internship + Graduate-Level Analysis",
+    description: "Required for MBA, MPP, MPA, etc.",
+    level: "Graduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "ug-service-learning",
+    name: "Service-Learning Project",
+    description: "Community-based project with academic integration",
+    level: "Undergraduate",
+    category: "Applied / Professional Projects"
+  },
+  {
+    id: "ug-design",
+    name: "Design Project",
+    description: "Engineering, architecture, UX, product design",
+    level: "Undergraduate",
+    category: "Applied / Professional Projects"
+  },
+
+  // 3. Creative / Performance Projects
+  {
+    id: "ug-performance",
+    name: "Performance or Production Project",
+    description: "Theater, film, dance, music programs",
+    level: "Undergraduate",
+    category: "Creative / Performance Projects"
+  },
+  {
+    id: "grad-creative-dissertation",
+    name: "Creative Dissertation",
+    description: "MFA programs (novel, screenplay, poetry collection)",
+    level: "Graduate",
+    category: "Creative / Performance Projects"
+  },
+  {
+    id: "studio-art",
+    name: "Studio Art Project",
+    description: "Fine arts, sculpture, painting, etc.",
+    level: "All",
+    category: "Creative / Performance Projects"
+  },
+  {
+    id: "media-production",
+    name: "Media Production Project",
+    description: "Film, digital media, multimedia",
+    level: "All",
+    category: "Creative / Performance Projects"
+  },
+  {
+    id: "ug-portfolio",
+    name: "Portfolio (Undergrad)",
+    description: "Collection of work demonstrating competency (arts, design, communications)",
+    level: "Undergraduate",
+    category: "Creative / Performance Projects"
+  },
+  {
+    id: "grad-portfolio",
+    name: "Graduate Portfolio (MFA, MEd, Design)",
+    description: "Curated body of advanced work; common in arts, design, education",
+    level: "Graduate",
+    category: "Creative / Performance Projects"
+  },
+
+  // 4. Collaborative / Team-Based Projects
+  {
+    id: "ug-group-project",
+    name: "Group/Team Project",
+    description: "Collaborative project often tied to a capstone course",
+    level: "All",
+    category: "Collaborative / Team-Based Projects"
+  },
+  {
+    id: "multi-disciplinary-capstone",
+    name: "Multi-Disciplinary Capstone",
+    description: "Project involving students from different majors",
+    level: "All",
+    category: "Collaborative / Team-Based Projects"
+  },
+  {
+    id: "industry-partner",
+    name: "Industry Partner Project",
+    description: "Project sponsored by an external company or organization",
+    level: "All",
+    category: "Collaborative / Team-Based Projects"
+  },
+  {
+    id: "design-sprint",
+    name: "Cross-Functional Design Sprint",
+    description: "Intensive, time-boxed design challenge",
+    level: "All",
+    category: "Collaborative / Team-Based Projects"
   },
   {
     id: "grad-symposium",
     name: "Roundtable or Symposium Presentation",
     description: "Required in some professional programs",
-    level: "Graduate"
+    level: "Graduate",
+    category: "Collaborative / Team-Based Projects"
   },
+
+  // 5. Clinical, Medical, and Licensing-Track Projects
+  {
+    id: "ug-clinical",
+    name: "Clinical Experience",
+    description: "Required in fields like nursing, education, counseling",
+    level: "Undergraduate",
+    category: "Clinical, Medical, and Licensing-Track Projects"
+  },
+  {
+    id: "supervised-hours",
+    name: "Supervised Hours Documentation",
+    description: "Tracking hours for licensure",
+    level: "Graduate",
+    category: "Clinical, Medical, and Licensing-Track Projects"
+  },
+  {
+    id: "case-formulation",
+    name: "Case Formulation",
+    description: "Psychology and counseling case analysis",
+    level: "Graduate",
+    category: "Clinical, Medical, and Licensing-Track Projects"
+  },
+  {
+    id: "treatment-plan",
+    name: "Treatment Plan & Outcome Study",
+    description: "Behavioral health intervention and assessment",
+    level: "Graduate",
+    category: "Clinical, Medical, and Licensing-Track Projects"
+  },
+
+  // 6. Education-Specific Projects
+  {
+    id: "student-teaching",
+    name: "Teaching Practicum / Student Teaching",
+    description: "Classroom teaching experience",
+    level: "All",
+    category: "Education-Specific Projects"
+  },
+  {
+    id: "curriculum-design",
+    name: "Curriculum Design Project",
+    description: "Developing educational materials and plans",
+    level: "All",
+    category: "Education-Specific Projects"
+  },
+  {
+    id: "learning-assessment",
+    name: "Learning Assessment Study",
+    description: "Evaluating student learning outcomes",
+    level: "All",
+    category: "Education-Specific Projects"
+  },
+  {
+    id: "educational-intervention",
+    name: "Educational Intervention Project",
+    description: "Implementing and testing an educational strategy",
+    level: "All",
+    category: "Education-Specific Projects"
+  },
+
+  // 7. Policy, Social Science, and Public Administration Projects
+  {
+    id: "program-evaluation",
+    name: "Program Evaluation Report",
+    description: "Assessing the effectiveness of a program",
+    level: "Graduate",
+    category: "Policy, Social Science, and Public Administration Projects"
+  },
+  {
+    id: "community-field-study",
+    name: "Community-Based Field Study",
+    description: "Research conducted within a community setting",
+    level: "All",
+    category: "Policy, Social Science, and Public Administration Projects"
+  },
+  {
+    id: "public-management-capstone",
+    name: "Public Management Capstone",
+    description: "Capstone for MPA/MPP programs",
+    level: "Graduate",
+    category: "Policy, Social Science, and Public Administration Projects"
+  },
+  {
+    id: "social-impact-assessment",
+    name: "Social Impact Assessment",
+    description: "Evaluating the social effects of a project or policy",
+    level: "All",
+    category: "Policy, Social Science, and Public Administration Projects"
+  },
+
+  // 8. STEM-Specific Projects
+  {
+    id: "engineering-capstone",
+    name: "Engineering Capstone",
+    description: "Major design experience for engineering students",
+    level: "Undergraduate",
+    category: "STEM-Specific Projects"
+  },
+  {
+    id: "senior-design",
+    name: "Senior Design Project",
+    description: "Culminating design project for engineering/tech majors",
+    level: "Undergraduate",
+    category: "STEM-Specific Projects"
+  },
+  {
+    id: "prototype-build",
+    name: "Prototype Build + Technical Report",
+    description: "Creating a physical or digital prototype with documentation",
+    level: "All",
+    category: "STEM-Specific Projects"
+  },
+  {
+    id: "stem-fieldwork",
+    name: "STEM Fieldwork Study",
+    description: "Data collection in the field (biology, geology, etc.)",
+    level: "All",
+    category: "STEM-Specific Projects"
+  },
+  {
+    id: "data-analysis",
+    name: "Data Analysis Project",
+    description: "Statistical or computational analysis of data",
+    level: "All",
+    category: "STEM-Specific Projects"
+  },
+  {
+    id: "computational-model",
+    name: "Computational Model Project",
+    description: "Simulating systems using computer models",
+    level: "All",
+    category: "STEM-Specific Projects"
+  },
+
+  // 9. Arts, Media, and Creative Technologies Projects
+  {
+    id: "media-campaign",
+    name: "Media Campaign Capstone",
+    description: "Strategic media or advertising campaign",
+    level: "All",
+    category: "Arts, Media, and Creative Technologies Projects"
+  },
+  {
+    id: "interactive-media",
+    name: "Interactive Media Prototype",
+    description: "Game, app, or interactive installation",
+    level: "All",
+    category: "Arts, Media, and Creative Technologies Projects"
+  },
+  {
+    id: "art-installation",
+    name: "Art Installation / Exhibition",
+    description: "Public display of artistic work",
+    level: "All",
+    category: "Arts, Media, and Creative Technologies Projects"
+  },
+
+  // 10. Business, Entrepreneurship, and Communications Projects
+  {
+    id: "business-plan",
+    name: "Business Plan Project",
+    description: "Comprehensive plan for a new business venture",
+    level: "All",
+    category: "Business, Entrepreneurship, and Communications Projects"
+  },
+  {
+    id: "startup-incubator",
+    name: "Startup Incubator Capstone",
+    description: "Developing a startup within an academic incubator",
+    level: "All",
+    category: "Business, Entrepreneurship, and Communications Projects"
+  },
+  {
+    id: "market-analysis",
+    name: "Market Analysis Project",
+    description: "Researching market trends and opportunities",
+    level: "All",
+    category: "Business, Entrepreneurship, and Communications Projects"
+  },
+  {
+    id: "communications-campaign",
+    name: "Communications Campaign",
+    description: "Strategic communication plan for a client or cause",
+    level: "All",
+    category: "Business, Entrepreneurship, and Communications Projects"
+  },
+  {
+    id: "consulting-project",
+    name: "Consulting Project (MBA/MPP)",
+    description: "Advising a real-world client on a business problem",
+    level: "Graduate",
+    category: "Business, Entrepreneurship, and Communications Projects"
+  },
+  {
+    id: "entrepreneurship-capstone",
+    name: "Entrepreneurship Capstone",
+    description: "Launching or pitching a new venture",
+    level: "All",
+    category: "Business, Entrepreneurship, and Communications Projects"
+  },
+  {
+    id: "brand-strategy",
+    name: "Brand or Media Strategy Project",
+    description: "Developing a brand identity and strategy",
+    level: "All",
+    category: "Business, Entrepreneurship, and Communications Projects"
+  }
 ];
 
 export const GRADUATION_YEARS = Array.from({ length: 8 }, (_, i) => {
