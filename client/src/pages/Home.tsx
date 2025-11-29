@@ -70,7 +70,7 @@ export default function Home() {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-sm font-semibold text-leaf tracking-wider uppercase mb-2">The Challenge</div>
+            <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Challenge</div>
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">The Networking, Timing Problem</h2>
             <p className="text-lg text-muted-foreground">
               Most students wait until graduation to start branching out and networking, missing crucial opportunities for mentorship, collaboration, and career growth during their college years.
@@ -121,7 +121,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="text-sm font-semibold text-leaf tracking-wider uppercase mb-2">The Solution</div>
+              <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Solution</div>
               <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Branch Out Naturally, Build Real Connections</h2>
               <p className="text-lg text-muted-foreground mb-8">
                 Hey Maple creates organic opportunities for students to branch out with alumni, professors, and peers. Connect naturally while you're still learning and growing.
@@ -191,7 +191,7 @@ export default function Home() {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-sm font-semibold text-leaf tracking-wider uppercase mb-2">The Process</div>
+            <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Process</div>
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">How to Branch Out</h2>
             <p className="text-lg text-muted-foreground">
               Three simple steps to start branching out and building your professional network. Discover your collaboration style and find your perfect teammates.
@@ -290,7 +290,7 @@ export default function Home() {
       <section className="py-24 bg-muted/30 border-y">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-sm font-semibold text-leaf tracking-wider uppercase mb-2">Communities</div>
+            <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">Communities</div>
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Choose Your Branch</h2>
             <p className="text-lg text-muted-foreground">
               Pick a skill-based branch where students, alumni, professors, and mentors collaborate, share knowledge, and build meaningful professional relationships.
