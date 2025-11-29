@@ -42,12 +42,12 @@ export default function Home() {
             <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight text-foreground mb-6">
               Stop Guessing. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-600">
-                Start Collaborating.
+                Start Branching Out.
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              Connect with alumni mentors and cross-major collaborators before graduation. Build your professional network while you're still growing.
+              Branch out with alumni mentors, professors, and cross-major collaborators before graduation. Build your professional network while you're still growing.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -71,9 +71,9 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Challenge</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">The Networking Timing Problem</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">The Branching Out Timing Problem</h2>
             <p className="text-lg text-muted-foreground">
-              Most students wait until graduation to start networking, missing crucial opportunities for mentorship, collaboration, and career growth during their college years.
+              Most students wait until graduation to start branching out and networking, missing crucial opportunities for mentorship, collaboration, and career growth during their college years.
             </p>
           </div>
 
@@ -82,9 +82,9 @@ export default function Home() {
               <div className="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6">
                 <Clock size={24} />
               </div>
-              <h3 className="text-xl font-bold mb-3">Too Late</h3>
+              <h3 className="text-xl font-bold mb-3">Too Late to Branch Out</h3>
               <p className="text-muted-foreground">
-                Most students only access alumni networks after graduation, when they're competing with thousands of other new grads.
+                Most students only branch out to alumni networks after graduation, when they're competing with thousands of other new grads.
               </p>
             </div>
 
@@ -111,7 +111,7 @@ export default function Home() {
 
           <div className="max-w-2xl mx-auto text-center bg-primary/5 border border-primary/10 rounded-2xl p-8">
             <p className="text-4xl font-bold text-primary mb-2">87% of Students</p>
-            <p className="text-lg text-muted-foreground">wish they had started networking earlier in their college career</p>
+            <p className="text-lg text-muted-foreground">wish they had started branching out earlier in their college career</p>
           </div>
         </div>
       </section>
@@ -122,9 +122,9 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Solution</div>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Natural Growth, Real Connections</h2>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Branch Out Naturally, Build Real Connections</h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Hey Maple creates organic networking opportunities that feel natural, not forced. Connect with alumni and peers while you're still learning and growing.
+                Hey Maple creates organic opportunities for students to branch out with alumni, professors, and peers. Connect naturally while you're still learning and growing.
               </p>
 
               <div className="space-y-6">
@@ -192,9 +192,9 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Process</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">How It Works</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">How to Branch Out</h2>
             <p className="text-lg text-muted-foreground">
-              Three simple steps to start building your professional network. Discover your collaboration style and find your perfect teammates.
+              Three simple steps to start branching out and building your professional network. Discover your collaboration style and find your perfect teammates.
             </p>
           </div>
 
@@ -208,7 +208,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-3 text-center">Create Your Profile</h3>
               <p className="text-center text-muted-foreground mb-4">
-                Share your major, interests, and working style. Our algorithm identifies which of the 5 collaboration modes matches you best.
+                Share your major, interests, and working style. Our algorithm identifies which of the 5 collaboration modes helps you branch out most effectively.
               </p>
               <div className="text-xs text-muted-foreground italic text-center">
                 Discover: Architect, Builder, Connector, Refiner, or Visionary
@@ -222,9 +222,9 @@ export default function Home() {
                   <Network size={32} />
                 </div>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-center">Join Branches & Find People</h3>
+              <h3 className="text-xl font-bold mb-3 text-center">Join a Branch & Find Your People</h3>
               <p className="text-center text-muted-foreground mb-4">
-                Connect with communities in Tech, Business, Creative, Healthcare, and Law. Meet alumni, mentors, and peers who share your interests.
+                Choose from 6 branches: Tech, Business, Creative, Healthcare, Law, and Media. Branch out to meet alumni, professors, mentors, and peers who share your interests.
               </p>
               <div className="text-xs text-muted-foreground italic text-center">
                 6 industry branches to explore
@@ -238,9 +238,9 @@ export default function Home() {
                   <TrendingUp size={32} />
                 </div>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-center">Get Matched & Collaborate</h3>
+              <h3 className="text-xl font-bold mb-3 text-center">Get Matched & Start Collaborating</h3>
               <p className="text-center text-muted-foreground mb-4">
-                Our matching engine finds complementary teammates. Build dream teams with people who fill your gaps and amplify your strengths.
+                Our matching engine finds complementary teammates within your branch. Build dream teams with people who fill your gaps and amplify your strengths.
               </p>
               <div className="text-xs text-muted-foreground italic text-center">
                 Psychology-based compatibility scoring
@@ -291,20 +291,20 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">Communities</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Find Your Branch</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Choose Your Branch</h2>
             <p className="text-lg text-muted-foreground">
-              Join skill-based communities where students and alumni collaborate, share knowledge, and build meaningful professional relationships.
+              Pick a skill-based branch where students, alumni, professors, and mentors collaborate, share knowledge, and build meaningful professional relationships.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: Code, name: "Tech Branch", desc: "Connect with software engineers, data scientists, and tech entrepreneurs", color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-950/30" },
-              { icon: Mic, name: "Media Branch", desc: "Network with journalists, content creators, and media professionals", color: "text-pink-500", bg: "bg-pink-50 dark:bg-pink-950/30" },
-              { icon: LineChart, name: "Business Branch", desc: "Meet consultants, finance professionals, and startup founders", color: "text-green-500", bg: "bg-green-50 dark:bg-green-950/30" },
-              { icon: Palette, name: "Creative Branch", desc: "Collaborate with designers, artists, and creative directors", color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-950/30" },
-              { icon: Stethoscope, name: "Healthcare Branch", desc: "Connect with doctors, researchers, and healthcare innovators", color: "text-red-500", bg: "bg-red-50 dark:bg-red-950/30" },
-              { icon: Scale, name: "Law Branch", desc: "Network with lawyers, judges, and legal professionals", color: "text-amber-500", bg: "bg-amber-50 dark:bg-amber-950/30" },
+              { icon: Code, name: "Tech Branch", desc: "Branch out with software engineers, data scientists, and tech entrepreneurs", color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-950/30" },
+              { icon: Mic, name: "Media Branch", desc: "Branch out with journalists, content creators, and media professionals", color: "text-pink-500", bg: "bg-pink-50 dark:bg-pink-950/30" },
+              { icon: LineChart, name: "Business Branch", desc: "Branch out with consultants, finance professionals, and startup founders", color: "text-green-500", bg: "bg-green-50 dark:bg-green-950/30" },
+              { icon: Palette, name: "Creative Branch", desc: "Branch out with designers, artists, and creative directors", color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-950/30" },
+              { icon: Stethoscope, name: "Healthcare Branch", desc: "Branch out with doctors, researchers, and healthcare innovators", color: "text-red-500", bg: "bg-red-50 dark:bg-red-950/30" },
+              { icon: Scale, name: "Law Branch", desc: "Branch out with lawyers, judges, and legal professionals", color: "text-amber-500", bg: "bg-amber-50 dark:bg-amber-950/30" },
             ].map((branch, idx) => (
               <div key={idx} className="flex gap-4 p-6 rounded-xl border hover:shadow-md transition-shadow bg-background">
                 <div className={`w-12 h-12 rounded-xl ${branch.bg} ${branch.color} flex items-center justify-center shrink-0`}>
@@ -312,7 +312,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-bold mb-1">{branch.name}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{branch.desc}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{branch.desc} and mentors.</p>
                 </div>
               </div>
             ))}
@@ -324,16 +324,16 @@ export default function Home() {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Why Projects Fail</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Why Collaborations Fail When You Branch Out</h2>
             <div className="space-y-8">
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center shrink-0">
                   <Users size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">Incompatible Styles</h3>
+                  <h3 className="text-xl font-bold mb-2">Incompatible Collaboration Styles</h3>
                   <p className="text-muted-foreground">
-                    Putting two "Architects" together leads to endless planning and no building. Two "Refiners" means nothing ever ships.
+                    When you branch out, pairing two "Architects" together leads to endless planning and no building. Two "Refiners" means nothing ever ships.
                   </p>
                 </div>
               </div>
@@ -344,7 +344,7 @@ export default function Home() {
                 <div>
                   <h3 className="text-xl font-bold mb-2">The Hey Maple Solution</h3>
                   <p className="text-muted-foreground">
-                    Our psychology-based matching identifies your working style and pairs you with complementary teammates who fill your gaps.
+                    Our psychology-based matching identifies your collaboration mode and pairs you with complementary teammates within your branch—people who fill your gaps.
                   </p>
                 </div>
               </div>
@@ -385,9 +385,9 @@ export default function Home() {
       
       {/* Final CTA */}
       <section className="py-24 text-center container mx-auto px-4">
-         <h2 className="text-4xl font-heading font-bold mb-6">Ready to find your people?</h2>
+         <h2 className="text-4xl font-heading font-bold mb-6">Ready to branch out and find your people?</h2>
          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-           Sign up with your USC email and get matched with your perfect teammates in minutes.
+           Sign up with your USC email to branch out with alumni, professors, mentors, and peers. Get matched with your perfect team in minutes.
          </p>
          <Link href="/register">
             <Button size="lg" className="h-14 px-10 text-lg rounded-full shadow-lg bg-primary hover:bg-primary/90">
