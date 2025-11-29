@@ -71,7 +71,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Challenge</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">The Networking, Timing Problem</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              The Networking<br />
+              <span className="text-leaf">Timing Problem</span>
+            </h2>
             <p className="text-lg text-muted-foreground">
               Most students wait until graduation to start branching out and networking, missing crucial opportunities for mentorship, collaboration, and career growth during their college years.
             </p>
@@ -122,7 +125,10 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Solution</div>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Branch Out Naturally, Build Real Connections</h2>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
+                Branch Out Naturally,<br />
+                <span className="text-leaf">Build Real Connections</span>
+              </h2>
               <p className="text-lg text-muted-foreground mb-8">
                 Hey Maple creates organic opportunities for students to branch out with alumni, professors, and peers. Connect naturally while you're still learning and growing.
               </p>
@@ -192,7 +198,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Process</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">How to Branch Out</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              How to<br />
+              <span className="text-leaf">Branch Out</span>
+            </h2>
             <p className="text-lg text-muted-foreground">
               Three simple steps to start branching out and building your professional network. Discover your collaboration style and find your perfect teammates.
             </p>
@@ -291,7 +300,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">Communities</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Choose Your Branch</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              Choose Your<br />
+              <span className="text-leaf">Branch</span>
+            </h2>
             <p className="text-lg text-muted-foreground">
               Pick a skill-based branch where students, alumni, professors, and mentors collaborate, share knowledge, and build meaningful professional relationships.
             </p>
@@ -324,7 +336,10 @@ export default function Home() {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Why Collaborations Fail When You Branch Out</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
+              Why Collaborations Fail<br />
+              <span className="text-leaf">When You Branch Out</span>
+            </h2>
             <div className="space-y-8">
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center shrink-0">
