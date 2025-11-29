@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import logo from "@assets/generated_images/modern_minimalist_maple_leaf_logo.png";
+import logo from "@assets/generated_images/geometric_maple_leaf_network_logo.png";
 import { cn } from "@/lib/utils";
 import { Menu, X, MessageSquare, Bell } from "lucide-react";
 import { useState } from "react";
