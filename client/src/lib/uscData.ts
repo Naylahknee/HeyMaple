@@ -660,6 +660,54 @@ export const PROJECT_TYPES = [
     description: "Anthropology, environmental science, journalism",
     level: "Graduate"
   },
+  {
+    id: "grad-creative-dissertation",
+    name: "Creative Dissertation",
+    description: "MFA programs (novel, screenplay, poetry collection)",
+    level: "Graduate"
+  },
+  {
+    id: "grad-studio-project",
+    name: "Studio Project",
+    description: "Architecture, urban planning, fine arts",
+    level: "Graduate"
+  },
+  {
+    id: "grad-lab-research",
+    name: "Lab-Based Research Project",
+    description: "STEM and biomedical fields",
+    level: "Graduate"
+  },
+  {
+    id: "grad-internship-analysis",
+    name: "Internship + Graduate-Level Analysis",
+    description: "Required for MBA, MPP, MPA, etc.",
+    level: "Graduate"
+  },
+  {
+    id: "grad-teaching-practicum",
+    name: "Teaching Practicum",
+    description: "Required for doctoral candidates who teach",
+    level: "Graduate"
+  },
+  {
+    id: "grad-policy-analysis",
+    name: "Policy Analysis Project",
+    description: "Public policy and social science programs",
+    level: "Graduate"
+  },
+  {
+    id: "grad-product-prototype",
+    name: "Product Prototype + Documentation",
+    description: "Engineering, HCI, design, media innovation",
+    level: "Graduate"
+  },
+  {
+    id: "grad-symposium",
+    name: "Roundtable or Symposium Presentation",
+    description: "Required in some professional programs",
+    level: "Graduate"
+  },
 ];
 
 export const GRADUATION_YEARS = Array.from({ length: 8 }, (_, i) => {
