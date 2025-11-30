@@ -301,7 +301,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">Communities</div>
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Choose Your<br />
+              Find Your<br />
               <span className="text-leaf">Branch</span>
             </h2>
             <p className="text-lg text-muted-foreground">
