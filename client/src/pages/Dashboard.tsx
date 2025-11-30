@@ -25,6 +25,24 @@ export default function Dashboard() {
   // Simulate "My" profile as Architect for demo purposes
   const myMode: CollaborationMode = "Architect";
 
+  const filteredUsers = MOCK_USERS.filter(user => {
+    const matchesMode = filterMode === "All" || user.mode === filterMode;
+    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          user.skills.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesMode && matchesSearch;
+  });
+
+  const handleConnectClick = (user: User) => {
+    setConnectionRequestOpen(true);
+  };
+
+  const handleConnectionRequest = (message: string) => {
+    setConnectionRequestOpen(false);
+    setSelectedUser(null);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 p-4 md:p-8">
       <div className="container mx-auto max-w-6xl">
