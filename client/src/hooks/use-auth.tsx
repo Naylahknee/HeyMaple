@@ -8,12 +8,18 @@ interface User {
   name: string;
   email: string;
   avatar?: string;
+  university?: string;
+  school?: string;
+  major?: string;
+  degree?: string;
+  graduationYear?: string;
+  projectType?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  login: (email: string, name?: string) => void;
+  login: (email: string, name?: string, additionalData?: Partial<User>) => void;
   logout: () => void;
   loginWithProvider: (provider: string) => void;
 }
@@ -71,12 +77,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [user, location]);
 
-  const login = (email: string, name: string = 'User') => {
+  const login = (email: string, name: string = 'User', additionalData: Partial<User> = {}) => {
     const newUser = {
       id: '1',
       name,
       email,
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`,
+      ...additionalData
     };
     setUser(newUser);
     localStorage.setItem('heymaple_user', JSON.stringify(newUser));

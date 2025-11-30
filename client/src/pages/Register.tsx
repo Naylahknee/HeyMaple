@@ -82,7 +82,7 @@ export default function Register() {
     if (validateStep(step)) {
       // In a real app we'd register here. For prototype we'll just log them in or move to assessment.
       // Let's log them in so the state persists
-      login(formData.email, formData.firstName);
+      login(formData.email, formData.firstName, formData);
       // Navigate to assessment
       setLocation("/assessment");
     }
@@ -312,6 +312,9 @@ export default function Register() {
 
               <div>
                 <Label htmlFor="projectType">Project Type</Label>
+                <div className="mb-2 text-sm text-muted-foreground">
+                  Don't worry, you can add specific project details later.
+                </div>
                 <Select value={formData.projectType} onValueChange={(val) => handleInputChange("projectType", val)}>
                   <SelectTrigger className={errors.projectType ? "border-red-500" : ""}>
                     <SelectValue placeholder="Select project type" />
