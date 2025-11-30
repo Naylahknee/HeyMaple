@@ -1,13 +1,24 @@
 import { Link, useLocation } from "wouter";
 import mapleLeafLogo from "@/assets/heymaple-logo.png";
 import { cn } from "@/lib/utils";
-import { Menu, X, MessageSquare, Bell } from "lucide-react";
+import { Menu, X, MessageSquare, Bell, LogOut, User } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { useAuth } from "@/hooks/use-auth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -17,7 +28,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   ];
 
   // Show connection nav only on protected pages
-  const isProtected = ['/dashboard', '/messages', '/notifications', '/profile'].includes(location);
+  const isProtected = ['/dashboard', '/messages', '/notifications', '/profile', '/matches', '/project-feed'].includes(location);
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground flex flex-col">
@@ -35,7 +46,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
-            {isProtected ? (
+            {user ? (
               <>
                 <Link href="/dashboard" className={cn("text-sm font-medium transition-colors hover:text-primary", location === "/dashboard" ? "text-primary" : "text-muted-foreground")}>
                   Find Teammates
@@ -49,9 +60,61 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <span className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">2</span>
                 </Link>
                 <div className="h-6 w-px bg-border mx-2" />
-                <Link href="/profile" className={cn("text-sm font-medium transition-colors hover:text-primary", location === "/profile" ? "text-primary" : "text-muted-foreground")}>
-                  Profile
-                </Link>
+                
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage src={user.avatar} alt={user.name} />
+                        <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56" align="end" forceMount>
+                    <DropdownMenuLabel className="font-normal">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none">{user.name}</p>
+                        <p className="text-xs leading-none text-muted-foreground">
+                          {user.email}
+                        </p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/profile" className="cursor-pointer w-full">
+                        <User className="mr-2 h-4 w-4" />
+                        <span>Profile</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard" className="cursor-pointer w-full">
+                        <div className="flex items-center">
+                          <svg
+                            className="mr-2 h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <rect width="7" height="9" x="3" y="3" rx="1" />
+                            <rect width="7" height="5" x="14" y="3" rx="1" />
+                            <rect width="7" height="9" x="14" y="12" rx="1" />
+                            <rect width="7" height="5" x="3" y="16" rx="1" />
+                          </svg>
+                          <span>Dashboard</span>
+                        </div>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logout} className="cursor-pointer text-red-600 focus:text-red-600">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Log out</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </>
             ) : (
               <>
@@ -68,10 +131,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   </Link>
                 ))}
                 <div className="h-6 w-px bg-border mx-2" />
-                <button className="text-sm font-medium text-muted-foreground hover:text-foreground">
-                  Sign In
-                </button>
-                <Link href="/assessment">
+                <Link href="/login">
+                  <button className="text-sm font-medium text-muted-foreground hover:text-foreground">
+                    Sign In
+                  </button>
+                </Link>
+                <Link href="/register">
                   <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors hover-elevate">
                     Get Started
                   </button>
@@ -92,19 +157,59 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {/* Mobile Nav */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t bg-white p-4 space-y-4 animate-in slide-in-from-top-5">
-            {navItems.map((item) => (
-              <Link 
-                key={item.href} 
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "block py-2 text-base font-medium transition-colors",
-                  location === item.href ? "text-primary" : "text-muted-foreground"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {user ? (
+              <>
+                <div className="flex items-center gap-3 px-2 py-2 mb-4 border-b">
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-medium">{user.name}</p>
+                    <p className="text-xs text-muted-foreground">{user.email}</p>
+                  </div>
+                </div>
+                <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-base font-medium">
+                  Dashboard
+                </Link>
+                <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-base font-medium">
+                  My Profile
+                </Link>
+                <Link href="/messages" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-base font-medium">
+                  Messages
+                </Link>
+                <Link href="/notifications" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-base font-medium">
+                  Notifications
+                </Link>
+                <button onClick={() => { logout(); setMobileMenuOpen(false); }} className="block w-full text-left py-2 text-base font-medium text-red-600">
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                {navItems.map((item) => (
+                  <Link 
+                    key={item.href} 
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "block py-2 text-base font-medium transition-colors",
+                      location === item.href ? "text-primary" : "text-muted-foreground"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="border-t pt-4 mt-2 flex flex-col gap-3">
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                    <Button variant="outline" className="w-full">Sign In</Button>
+                  </Link>
+                  <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
+                    <Button className="w-full">Get Started</Button>
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         )}
       </header>

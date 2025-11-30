@@ -960,3 +960,16 @@ export function getUniversityFromEmail(email: string): UniversityData | undefine
   const domain = email.substring(email.lastIndexOf("@"));
   return UNIVERSITIES.find(u => u.emailDomain === domain);
 }
+
+export function searchSchools(query: string, universityId: string): USCSchool[] {
+  const university = UNIVERSITIES.find(u => u.id === universityId);
+  if (!university) return [];
+
+  const lowerQuery = query.toLowerCase().trim();
+  if (!lowerQuery) return university.schools;
+
+  return university.schools.filter(school =>
+    school.name.toLowerCase().includes(lowerQuery) ||
+    school.abbreviation.toLowerCase().includes(lowerQuery)
+  );
+}
