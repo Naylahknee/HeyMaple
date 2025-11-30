@@ -20,250 +20,367 @@ export interface UniversityData {
 // USC SCHOOLS AND MAJORS
 export const USC_SCHOOLS: USCSchool[] = [
   {
-    id: "usc-viterbi",
-    name: "Viterbi School of Engineering",
-    abbreviation: "Viterbi",
-    majors: [
-      "Aerospace Engineering",
-      "Biomedical Engineering",
-      "Chemical Engineering",
-      "Civil Engineering",
-      "Computer Engineering",
-      "Computer Science",
-      "Data Science",
-      "Electrical Engineering",
-      "Environmental Engineering",
-      "Industrial and Systems Engineering",
-      "Mechanical Engineering",
-      "Petroleum Engineering",
-      "Architectural Engineering",
-      "Engineering Management",
-      "Astronautical Engineering",
-    ]
-  },
-  {
-    id: "usc-marshall",
-    name: "Marshall School of Business",
-    abbreviation: "Marshall",
-    majors: [
-      "Accounting",
-      "Business Administration",
-      "Finance",
-      "Management",
-      "Marketing",
-      "International Business",
-      "Real Estate Development",
-      "Business Analytics",
-      "Entrepreneurship",
-      "Management of Organizations",
-      "Supply Chain Management",
-      "Information Systems",
-    ]
-  },
-  {
-    id: "usc-annenberg",
-    name: "Annenberg School for Communication and Journalism",
-    abbreviation: "Annenberg",
-    majors: [
-      "Journalism",
-      "Communication",
-      "Public Relations",
-      "Digital Journalism",
-      "Broadcasting",
-      "Media Studies",
-      "Integrated Media",
-      "Documentary Studies",
-      "Strategic Communications",
-    ]
-  },
-  {
     id: "usc-dornsife",
     name: "USC Dornsife College of Letters, Arts and Sciences",
     abbreviation: "Dornsife",
     majors: [
-      "American Studies",
+      "American Studies and Ethnicity",
       "Anthropology",
+      "Archaeology",
       "Art History",
+      "Astronomy",
       "Biochemistry",
-      "Biology",
+      "Biological Sciences",
+      "Biophysics",
       "Chemistry",
       "Classics",
-      "Dance",
-      "Drama",
-      "Economics",
+      "Cognitive Science",
+      "Comparative Literature",
+      "Computational Neuroscience",
+      "Earth Sciences",
       "East Asian Languages and Cultures",
+      "Economics",
       "English",
-      "Environmental Science",
+      "Environmental Studies",
       "French",
-      "Gender Studies",
+      "Gender and Sexuality Studies",
+      "Geographic Information Science and Technology",
       "Geology",
-      "German",
+      "Global Studies",
+      "Health and Human Sciences",
       "History",
+      "Human Biology",
+      "Human Security and Geospatial Intelligence",
       "International Relations",
       "Italian",
       "Japanese",
-      "Latin American Studies",
+      "Latin American and Iberian Cultures",
+      "Linguistics",
       "Mathematics",
-      "Medieval and Byzantine Studies",
-      "Middle Eastern Studies",
-      "Music",
+      "Middle East Studies",
       "Neuroscience",
       "Philosophy",
       "Physics",
       "Political Science",
       "Psychology",
-      "Public Diplomacy",
-      "Religious Studies",
+      "Quantitative Biology",
+      "Religion",
       "Sociology",
       "Spanish",
-      "Statistics",
-      "Theatre",
-      "Urban Studies",
-      "Women's and Gender Studies",
-      "World Languages",
+      "Spatial Sciences",
+      "Thematic Option",
+    ]
+  },
+  {
+    id: "usc-marshall",
+    name: "USC Marshall School of Business",
+    abbreviation: "Marshall",
+    majors: [
+      "Accounting",
+      "Business Administration",
+      "Business Administration (Cinematic Arts)",
+      "Business Administration (International Relations)",
+      "Business Administration (Real Estate Finance)",
+      "Business Analytics",
+      "Business Taxation",
+      "Entrepreneurship and Innovation",
+      "Finance",
+      "Food Industry Leadership",
+      "Global Supply Chain Management",
+      "Human Resources Management",
+      "Library and Information Science",
+      "Management and Organization",
+      "Marketing",
+      "Social Entrepreneurship",
+      "Strategy",
+    ]
+  },
+  {
+    id: "usc-viterbi",
+    name: "USC Viterbi School of Engineering",
+    abbreviation: "Viterbi",
+    majors: [
+      "Aerospace Engineering",
+      "Applied Data Science",
+      "Astronautical Engineering",
+      "Biomedical Engineering",
+      "Chemical Engineering",
+      "Civil Engineering",
+      "Computer Engineering",
+      "Computer Science",
+      "Computer Science (Games)",
+      "Cyber Security Engineering",
+      "Electrical Engineering",
+      "Environmental Engineering",
+      "Financial Engineering",
+      "Green Technologies",
+      "Industrial and Systems Engineering",
+      "Mechanical Engineering",
+      "Petroleum Engineering",
+      "Product Development Engineering",
+      "Systems Architecting and Engineering",
+    ]
+  },
+  {
+    id: "usc-annenberg",
+    name: "USC Annenberg School for Communication and Journalism",
+    abbreviation: "Annenberg",
+    majors: [
+      "Communication",
+      "Communication Data Science",
+      "Communication Management",
+      "Digital Media Management",
+      "Digital Social Media",
+      "Global Communication",
+      "Journalism",
+      "Public Diplomacy",
+      "Public Relations",
+      "Public Relations Innovation, Strategy and Management",
+      "Strategic Public Relations",
     ]
   },
   {
     id: "usc-sca",
-    name: "School of Cinematic Arts",
+    name: "USC School of Cinematic Arts",
     abbreviation: "SCA",
     majors: [
       "Animation and Digital Arts",
-      "Critical Studies",
-      "Directing",
-      "Documentary",
+      "Cinema and Media Studies",
       "Film and Television Production",
       "Interactive Media and Games",
-      "Production",
+      "Media Arts and Practice",
       "Producing",
-      "Screenwriting",
-      "Sound Design",
-      "Visual Effects",
+      "Writing for Screen and Television",
     ]
   },
   {
-    id: "usc-socialwork",
-    name: "School of Social Work",
-    abbreviation: "Social Work",
+    id: "usc-roski",
+    name: "USC Roski School of Art and Design",
+    abbreviation: "Roski",
     majors: [
-      "Social Work",
-      "Clinical Social Work",
-      "Community Practice",
-      "School Social Work",
-      "Healthcare Social Work",
+      "Art",
+      "Curatorial Practices and the Public Sphere",
+      "Design",
+      "Fine Arts",
+    ]
+  },
+  {
+    id: "usc-thornton",
+    name: "USC Thornton School of Music",
+    abbreviation: "Thornton",
+    majors: [
+      "Arts Leadership",
+      "Choral Music",
+      "Classical Guitar",
+      "Composition",
+      "Early Music",
+      "Jazz Studies",
+      "Music Industry",
+      "Music Production",
+      "Music Teaching and Learning",
+      "Musicology",
+      "Organ",
+      "Piano",
+      "Popular Music Performance",
+      "Screen Scoring",
+      "Strings",
+      "Vocal Arts",
+      "Winds and Percussion",
+    ]
+  },
+  {
+    id: "usc-architecture",
+    name: "USC School of Architecture",
+    abbreviation: "Architecture",
+    majors: [
+      "Architecture",
+      "Building Science",
+      "Heritage Conservation",
+      "Landscape Architecture",
+    ]
+  },
+  {
+    id: "usc-iovine-young",
+    name: "USC Iovine and Young Academy",
+    abbreviation: "Iovine & Young",
+    majors: [
+      "Arts, Technology and the Business of Innovation",
+      "Integrated Design, Business and Technology",
+      "Product Innovation",
+    ]
+  },
+  {
+    id: "usc-kaufman",
+    name: "USC Glorya Kaufman School of Dance",
+    abbreviation: "Kaufman",
+    majors: [
+      "Dance",
+      "Choreography",
+    ]
+  },
+  {
+    id: "usc-drama",
+    name: "USC School of Dramatic Arts",
+    abbreviation: "Dramatic Arts",
+    majors: [
+      "Acting",
+      "Applied Theatre Arts",
+      "Design",
+      "Dramatic Writing",
+      "Production",
+      "Sound Design",
+      "Stage Management",
+      "Technical Direction",
+      "Visual and Performing Arts Studies",
+    ]
+  },
+  {
+    id: "usc-law",
+    name: "USC Gould School of Law",
+    abbreviation: "Gould Law",
+    majors: [
+      "Business Law",
+      "Compliance",
+      "Entertainment Law and Industry",
+      "Health Care Compliance",
+      "Human Resources Law",
+      "International Trade Law and Economics",
+      "Law (JD)",
+      "Master of Laws (LLM)",
+      "Privacy Law and Cybersecurity",
+    ]
+  },
+  {
+    id: "usc-medicine",
+    name: "Keck School of Medicine of USC",
+    abbreviation: "Keck Medicine",
+    majors: [
+      "Biochemistry and Molecular Medicine",
+      "Global Medicine",
+      "Health Promotion and Disease Prevention Studies",
+      "Medicine (MD)",
+      "Molecular Microbiology and Immunology",
+      "Neurobiology",
+      "Pain Medicine",
+      "Pathology",
+      "Physician Assistant Practice",
+      "Public Health",
+      "Stem Cell Biology and Regenerative Medicine",
+      "Translational Biomedical Informatics",
     ]
   },
   {
     id: "usc-pharmacy",
-    name: "School of Pharmacy",
-    abbreviation: "Pharmacy",
+    name: "USC Alfred E. Mann School of Pharmacy and Pharmaceutical Sciences",
+    abbreviation: "Mann Pharmacy",
     majors: [
-      "Pharmacy",
+      "Biopharmaceutical Marketing",
+      "Clinical and Experimental Therapeutics",
+      "Health Economics",
+      "Healthcare Decision Analysis",
+      "Management of Drug Development",
+      "Medical Product Quality",
       "Pharmaceutical Sciences",
-      "Clinical and Administrative Pharmacy",
-      "Health Outcomes and Pharmacy Practice",
+      "Pharmacology and Drug Development",
+      "Pharmacy (PharmD)",
+      "Regulatory Science",
     ]
   },
   {
-    id: "usc-occupational",
-    name: "Chan Division of Occupational Science and Occupational Therapy",
-    abbreviation: "OT",
+    id: "usc-socialwork",
+    name: "USC Suzanne Dworak-Peck School of Social Work",
+    abbreviation: "Social Work",
+    majors: [
+      "Nursing",
+      "Social Work (MSW)",
+      "Social Work (DSW)",
+      "Social Change and Innovation",
+    ]
+  },
+  {
+    id: "usc-rossier",
+    name: "USC Rossier School of Education",
+    abbreviation: "Rossier",
+    majors: [
+      "Educational Counseling",
+      "Educational Leadership",
+      "Enrollment Management and Policy",
+      "Learning Design and Technology",
+      "Organizational Change and Leadership",
+      "School Counseling",
+      "School Leadership",
+      "Teaching (MAT)",
+      "Teaching English to Speakers of Other Languages (TESOL)",
+    ]
+  },
+  {
+    id: "usc-price",
+    name: "USC Sol Price School of Public Policy",
+    abbreviation: "Price",
+    majors: [
+      "Health Administration",
+      "Nonprofit Leadership and Management",
+      "Public Administration",
+      "Public Policy",
+      "Real Estate Development",
+      "Urban Planning",
+    ]
+  },
+  {
+    id: "usc-gerontology",
+    name: "USC Leonard Davis School of Gerontology",
+    abbreviation: "Gerontology",
+    majors: [
+      "Aging Services Management",
+      "Gerontology",
+      "Lifespan Health",
+      "Long Term Care Administration",
+      "Medical Gerontology",
+      "Nutrition, Healthspan and Longevity",
+      "Senior Living Hospitality",
+    ]
+  },
+  {
+    id: "usc-dentistry",
+    name: "Herman Ostrow School of Dentistry of USC",
+    abbreviation: "Ostrow Dentistry",
+    majors: [
+      "Community Oral Health",
+      "Dental Hygiene",
+      "Dentistry (DDS)",
+      "Geriatric Dentistry",
+      "Orofacial Pain and Oral Medicine",
+    ]
+  },
+  {
+    id: "usc-biokinesiology",
+    name: "USC Division of Biokinesiology and Physical Therapy",
+    abbreviation: "Biokinesiology & PT",
+    majors: [
+      "Biokinesiology",
+      "Physical Therapy (DPT)",
+    ]
+  },
+  {
+    id: "usc-ot",
+    name: "USC Chan Division of Occupational Science and Occupational Therapy",
+    abbreviation: "Occupational Therapy",
     majors: [
       "Occupational Science",
       "Occupational Therapy",
     ]
   },
   {
-    id: "usc-roski",
-    name: "Roski School of Art and Design",
-    abbreviation: "Roski",
+    id: "usc-bovard",
+    name: "USC Bovard College",
+    abbreviation: "Bovard",
     majors: [
-      "Fine Arts",
-      "Graphic Design",
-      "Illustration",
-      "Art Direction",
-      "Digital Arts",
-      "Sculpture",
-      "Painting",
-      "Printmaking",
-      "Photography",
+      "Criminal Justice",
+      "Hospitality and Tourism",
+      "Human Resource Management",
+      "Project Management",
     ]
-  },
-  {
-    id: "usc-rossier",
-    name: "Rossier School of Education",
-    abbreviation: "Rossier",
-    majors: [
-      "Education",
-      "Teaching",
-      "School Leadership",
-      "Higher Education Administration",
-      "Educational Psychology",
-      "Curriculum and Instruction",
-      "Learning Design and Technologies",
-    ]
-  },
-  {
-    id: "usc-gerontology",
-    name: "Leonard Davis School of Gerontology",
-    abbreviation: "Gerontology",
-    majors: [
-      "Gerontology",
-      "Applied Gerontology",
-      "Geriatric Medicine",
-    ]
-  },
-  {
-    id: "usc-keck",
-    name: "Keck School of Medicine",
-    abbreviation: "Keck Medicine",
-    majors: [
-      "Medicine",
-      "Biomedical Sciences",
-      "Clinical Research",
-      "Molecular Pharmacology",
-      "Pathology",
-    ]
-  },
-  {
-    id: "usc-law",
-    name: "Gould School of Law",
-    abbreviation: "Law",
-    majors: [
-      "Juris Doctor",
-      "Corporate Law",
-      "Environmental Law",
-      "Entertainment Law",
-      "International Law",
-      "Public Interest Law",
-    ]
-  },
-  {
-    id: "usc-dentistry",
-    name: "School of Dentistry",
-    abbreviation: "Dentistry",
-    majors: [
-      "Doctor of Dental Medicine",
-      "Dental Hygiene",
-      "Prosthodontics",
-      "Orthodontics",
-      "Periodontics",
-      "Oral Surgery",
-    ]
-  },
-  {
-    id: "usc-price",
-    name: "Sol Price School of Public Policy",
-    abbreviation: "Price",
-    majors: [
-      "Public Administration",
-      "Public Policy",
-      "Urban Planning",
-      "Public Affairs",
-      "Policy Analysis",
-      "Environmental Policy",
-    ]
-  },
+  }
 ];
 
 // UCLA SCHOOLS AND MAJORS
@@ -389,6 +506,7 @@ export const UCLA_SCHOOLS: USCSchool[] = [
       "Library & Information Science",
       "Information Systems Management",
       "Learning Analytics",
+      "Social Welfare",
     ]
   },
   {
@@ -460,8 +578,8 @@ export const UNIVERSITIES: UniversityData[] = [
     name: "University of Southern California",
     emailDomain: "@usc.edu",
     colors: {
-      primary: "#cc0000", // USC Cardinal Red
-      secondary: "#ffb81c", // USC Gold
+      primary: "#990000", // USC Cardinal Red
+      secondary: "#FFC72C", // USC Gold
       accent: "#ffffff", // White
     },
     schools: USC_SCHOOLS,
@@ -471,8 +589,8 @@ export const UNIVERSITIES: UniversityData[] = [
     name: "University of California, Los Angeles",
     emailDomain: "@ucla.edu",
     colors: {
-      primary: "#2e5090", // UCLA Blue
-      secondary: "#ffc52f", // UCLA Gold
+      primary: "#2D68C4", // UCLA Blue
+      secondary: "#F2A900", // UCLA Gold
       accent: "#ffffff", // White
     },
     schools: UCLA_SCHOOLS,
@@ -483,7 +601,7 @@ export const DEGREE_OPTIONS = [
   "Bachelor's Degree",
   "Master's Degree",
   "PhD",
-  "Professional Degree (MD, JD, DDS, DPT)",
+  "Professional Degree (MD, JD, DDS, DPT, PharmD, DSW)",
   "Certificate Program",
   "Diploma",
 ];
@@ -818,191 +936,27 @@ export const PROJECT_TYPES = [
   {
     id: "educational-intervention",
     name: "Educational Intervention Project",
-    description: "Implementing and testing an educational strategy",
-    level: "All",
+    description: "Designing and testing an educational intervention",
+    level: "Graduate",
     category: "Education-Specific Projects"
-  },
-
-  // 7. Policy, Social Science, and Public Administration Projects
-  {
-    id: "program-evaluation",
-    name: "Program Evaluation Report",
-    description: "Assessing the effectiveness of a program",
-    level: "Graduate",
-    category: "Policy, Social Science, and Public Administration Projects"
-  },
-  {
-    id: "community-field-study",
-    name: "Community-Based Field Study",
-    description: "Research conducted within a community setting",
-    level: "All",
-    category: "Policy, Social Science, and Public Administration Projects"
-  },
-  {
-    id: "public-management-capstone",
-    name: "Public Management Capstone",
-    description: "Capstone for MPA/MPP programs",
-    level: "Graduate",
-    category: "Policy, Social Science, and Public Administration Projects"
-  },
-  {
-    id: "social-impact-assessment",
-    name: "Social Impact Assessment",
-    description: "Evaluating the social effects of a project or policy",
-    level: "All",
-    category: "Policy, Social Science, and Public Administration Projects"
-  },
-
-  // 8. STEM-Specific Projects
-  {
-    id: "engineering-capstone",
-    name: "Engineering Capstone",
-    description: "Major design experience for engineering students",
-    level: "Undergraduate",
-    category: "STEM-Specific Projects"
-  },
-  {
-    id: "senior-design",
-    name: "Senior Design Project",
-    description: "Culminating design project for engineering/tech majors",
-    level: "Undergraduate",
-    category: "STEM-Specific Projects"
-  },
-  {
-    id: "prototype-build",
-    name: "Prototype Build + Technical Report",
-    description: "Creating a physical or digital prototype with documentation",
-    level: "All",
-    category: "STEM-Specific Projects"
-  },
-  {
-    id: "stem-fieldwork",
-    name: "STEM Fieldwork Study",
-    description: "Data collection in the field (biology, geology, etc.)",
-    level: "All",
-    category: "STEM-Specific Projects"
-  },
-  {
-    id: "data-analysis",
-    name: "Data Analysis Project",
-    description: "Statistical or computational analysis of data",
-    level: "All",
-    category: "STEM-Specific Projects"
-  },
-  {
-    id: "computational-model",
-    name: "Computational Model Project",
-    description: "Simulating systems using computer models",
-    level: "All",
-    category: "STEM-Specific Projects"
-  },
-
-  // 9. Arts, Media, and Creative Technologies Projects
-  {
-    id: "media-campaign",
-    name: "Media Campaign Capstone",
-    description: "Strategic media or advertising campaign",
-    level: "All",
-    category: "Arts, Media, and Creative Technologies Projects"
-  },
-  {
-    id: "interactive-media",
-    name: "Interactive Media Prototype",
-    description: "Game, app, or interactive installation",
-    level: "All",
-    category: "Arts, Media, and Creative Technologies Projects"
-  },
-  {
-    id: "art-installation",
-    name: "Art Installation / Exhibition",
-    description: "Public display of artistic work",
-    level: "All",
-    category: "Arts, Media, and Creative Technologies Projects"
-  },
-
-  // 10. Business, Entrepreneurship, and Communications Projects
-  {
-    id: "business-plan",
-    name: "Business Plan Project",
-    description: "Comprehensive plan for a new business venture",
-    level: "All",
-    category: "Business, Entrepreneurship, and Communications Projects"
-  },
-  {
-    id: "startup-incubator",
-    name: "Startup Incubator Capstone",
-    description: "Developing a startup within an academic incubator",
-    level: "All",
-    category: "Business, Entrepreneurship, and Communications Projects"
-  },
-  {
-    id: "market-analysis",
-    name: "Market Analysis Project",
-    description: "Researching market trends and opportunities",
-    level: "All",
-    category: "Business, Entrepreneurship, and Communications Projects"
-  },
-  {
-    id: "communications-campaign",
-    name: "Communications Campaign",
-    description: "Strategic communication plan for a client or cause",
-    level: "All",
-    category: "Business, Entrepreneurship, and Communications Projects"
-  },
-  {
-    id: "consulting-project",
-    name: "Consulting Project (MBA/MPP)",
-    description: "Advising a real-world client on a business problem",
-    level: "Graduate",
-    category: "Business, Entrepreneurship, and Communications Projects"
-  },
-  {
-    id: "entrepreneurship-capstone",
-    name: "Entrepreneurship Capstone",
-    description: "Launching or pitching a new venture",
-    level: "All",
-    category: "Business, Entrepreneurship, and Communications Projects"
-  },
-  {
-    id: "brand-strategy",
-    name: "Brand or Media Strategy Project",
-    description: "Developing a brand identity and strategy",
-    level: "All",
-    category: "Business, Entrepreneurship, and Communications Projects"
   }
 ];
 
-export const GRADUATION_YEARS = Array.from({ length: 8 }, (_, i) => {
-  const year = new Date().getFullYear() + i;
-  return year;
-});
+export const GRADUATION_YEARS = [
+  2024, 2025, 2026, 2027, 2028, 2029, 2030
+];
 
-// Helper functions
-export const getUniversityFromEmail = (email: string): UniversityData | null => {
-  return UNIVERSITIES.find(uni => email.includes(uni.emailDomain)) || null;
-};
-
-export const searchSchools = (query: string, universityId: string): USCSchool[] => {
-  const university = UNIVERSITIES.find(u => u.id === universityId);
-  if (!university) return [];
-  
-  if (!query.trim()) return university.schools;
-  
-  const lowerQuery = query.toLowerCase();
-  return university.schools.filter(school =>
-    school.name.toLowerCase().includes(lowerQuery) ||
-    school.abbreviation.toLowerCase().includes(lowerQuery)
-  );
-};
-
-export const getMajorsForSchool = (schoolId: string, universityId: string): string[] => {
+// Helper function to get majors for a school
+export function getMajorsForSchool(schoolId: string, universityId: string): string[] {
   const university = UNIVERSITIES.find(u => u.id === universityId);
   if (!university) return [];
   
   const school = university.schools.find(s => s.id === schoolId);
-  return school?.majors || [];
-};
+  return school ? school.majors.sort() : [];
+}
 
-export const getUniversityById = (universityId: string): UniversityData | null => {
-  return UNIVERSITIES.find(u => u.id === universityId) || null;
-};
+// Helper function to find university from email
+export function getUniversityFromEmail(email: string): UniversityData | undefined {
+  const domain = email.substring(email.lastIndexOf("@"));
+  return UNIVERSITIES.find(u => u.emailDomain === domain);
+}
