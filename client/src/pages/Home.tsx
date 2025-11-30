@@ -126,8 +126,8 @@ export default function Home() {
             <div>
               <div className="text-sm font-semibold text-primary tracking-wider uppercase mb-2">The Solution</div>
               <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
-                Branch Out Naturally,<br />
-                <span className="text-leaf">Build Real Connections</span>
+                Natural Growth,<br />
+                <span className="text-leaf">Real Connections</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
                 Hey Maple creates organic opportunities for students to branch out with alumni, professors, and peers. Connect naturally while you're still learning and growing.
