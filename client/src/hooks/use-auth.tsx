@@ -23,7 +23,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [_, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
 
   const applyUniversityTheme = (email: string) => {
     const university = getUniversityFromEmail(email);
@@ -32,18 +32,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (university) {
       // Apply university colors
       const primaryHsl = hexToHsl(university.colors.primary);
-      const secondaryHsl = hexToHsl(university.colors.secondary);
       
       root.style.setProperty('--primary', primaryHsl);
       // For primary foreground, we might want to keep it white or adjust based on contrast
       // But for now, let's keep it simple or assume white works for dark uni colors
       root.style.setProperty('--primary-foreground', '0 0% 100%'); 
-      
-      // We can also set secondary if we want, though secondary is often used for backgrounds
-      // root.style.setProperty('--secondary', secondaryHsl);
     } else {
       // Reset to default Hey Maple colors (Blue)
-      // --primary: 221 83% 53%;
       root.style.removeProperty('--primary');
       root.style.removeProperty('--primary-foreground');
     }
@@ -56,7 +51,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
-        applyUniversityTheme(parsedUser.email);
       } catch (e) {
         console.error('Failed to parse user from local storage');
         localStorage.removeItem('heymaple_user');
@@ -64,6 +58,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     setIsLoading(false);
   }, []);
+
+  // Theme switcher effect based on location and user
+  useEffect(() => {
+    if (user && location !== '/' && location !== '/login' && location !== '/register') {
+      applyUniversityTheme(user.email);
+    } else {
+      // Reset theme on public pages or if not logged in
+      const root = document.documentElement;
+      root.style.removeProperty('--primary');
+      root.style.removeProperty('--primary-foreground');
+    }
+  }, [user, location]);
 
   const login = (email: string, name: string = 'User') => {
     const newUser = {
@@ -74,17 +80,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
     setUser(newUser);
     localStorage.setItem('heymaple_user', JSON.stringify(newUser));
-    applyUniversityTheme(email);
+    // Theme will be applied by effect when location changes
     setLocation('/dashboard');
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('heymaple_user');
-    // Reset theme
-    const root = document.documentElement;
-    root.style.removeProperty('--primary');
-    root.style.removeProperty('--primary-foreground');
+    // Theme will be reset by effect
     setLocation('/');
   };
 
@@ -104,7 +107,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       };
       setUser(newUser);
       localStorage.setItem('heymaple_user', JSON.stringify(newUser));
-      applyUniversityTheme(email);
+      // Theme will be applied by effect
       setIsLoading(false);
       setLocation('/dashboard');
     }, 1000);
