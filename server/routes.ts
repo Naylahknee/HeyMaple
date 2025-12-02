@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertProfileSchema, insertConnectionSchema } from "@shared/schema";
+import { insertProfileSchema, insertConnectionSchema, insertBetaFeedbackSchema } from "@shared/schema";
 import { log } from "./index";
 
 export async function registerRoutes(
@@ -225,6 +225,23 @@ export async function registerRoutes(
     } catch (error: any) {
       res.status(400).json({ error: error.message });
     }
+  });
+
+  // ===== BETA FEEDBACK =====
+  app.post("/api/feedback", async (req, res) => {
+    try {
+      const validated = insertBetaFeedbackSchema.parse(req.body);
+      const feedback = await storage.createBetaFeedback(validated);
+      log(`Beta feedback received: ${feedback.feedbackType} from ${feedback.email || 'anonymous'}`);
+      res.status(201).json(feedback);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/feedback", async (req, res) => {
+    const feedback = await storage.getAllBetaFeedback();
+    res.json(feedback);
   });
 
   // ===== HEALTH CHECK =====
