@@ -7,7 +7,6 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Lock } from "lucide-react";
-import mapleLeafLogo from "@/assets/heymaple-logo.png";
 
 export default function Login() {
   const { login, loginWithProvider } = useAuth();
@@ -29,16 +28,6 @@ export default function Login() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/">
-            <div className="inline-flex items-center justify-center gap-2 mb-4 group cursor-pointer">
-              <div className="relative w-10 h-10 transition-transform group-hover:scale-105">
-                <img src={mapleLeafLogo} alt="Hey Maple Logo" className="w-full h-full object-contain" />
-              </div>
-              <span className="font-heading font-bold text-2xl text-foreground tracking-tight">
-                Hey Maple
-              </span>
-            </div>
-          </Link>
           <h1 className="text-2xl font-bold font-heading text-foreground">Welcome back</h1>
           <p className="text-muted-foreground mt-2">Sign in to continue to your dashboard</p>
         </div>
