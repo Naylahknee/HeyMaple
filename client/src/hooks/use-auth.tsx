@@ -14,6 +14,8 @@ interface User {
   degree?: string;
   graduationYear?: string;
   projectType?: string;
+  goals?: string[];
+  referralPoints?: number;
 }
 
 interface AuthContextType {
@@ -83,6 +85,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       name,
       email,
       avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`,
+      goals: [],
+      referralPoints: 0,
       ...additionalData
     };
     setUser(newUser);

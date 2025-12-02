@@ -7,10 +7,11 @@ import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
 import { UNIVERSITIES, DEGREE_OPTIONS, PROJECT_TYPES, GRADUATION_YEARS, getMajorsForSchool, getUniversityFromEmail } from "@/lib/uscData";
 import { SchoolCombobox } from "@/components/SchoolCombobox";
 import { ModeBadge } from "@/components/ModeBadge";
-import { CheckCircle2, Mail, Briefcase, GraduationCap, Target } from "lucide-react";
+import { CheckCircle2, Mail, Briefcase, GraduationCap, Target, Compass } from "lucide-react";
 
 export default function Register() {
   const [_, setLocation] = useLocation();
@@ -26,15 +27,34 @@ export default function Register() {
     degree: "",
     graduationYear: new Date().getFullYear().toString(),
     projectType: "",
+    goals: [] as string[],
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors(prev => {
         const newErrors = { ...prev };
         delete newErrors[field];
+        return newErrors;
+      });
+    }
+  };
+  
+  const handleGoalToggle = (goal: string) => {
+    setFormData(prev => {
+      const currentGoals = prev.goals;
+      if (currentGoals.includes(goal)) {
+        return { ...prev, goals: currentGoals.filter(g => g !== goal) };
+      } else {
+        return { ...prev, goals: [...currentGoals, goal] };
+      }
+    });
+    if (errors.goals) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors.goals;
         return newErrors;
       });
     }
@@ -53,10 +73,6 @@ export default function Register() {
         newErrors.email = "Please use a valid .edu university email address";
       } else {
         const uni = getUniversityFromEmail(formData.email);
-        // We still try to auto-detect university, but if not found we don't block unless it's not .edu
-        // If we want to ONLY accept USC/UCLA as per previous logic, we keep that.
-        // But user said "only accept emails from .edu", implying potentially others?
-        // For now, keeping the USC/UCLA auto-select but enforcing .edu generally.
         if (uni) handleInputChange("university", uni.id);
       }
     } else if (stepNum === 2) {
@@ -65,7 +81,12 @@ export default function Register() {
       if (!formData.degree) newErrors.degree = "Degree level required";
       if (!formData.graduationYear) newErrors.graduationYear = "Graduation year required";
     } else if (stepNum === 3) {
-      if (!formData.projectType) newErrors.projectType = "Project type required";
+      if (formData.goals.length === 0) newErrors.goals = "Please select at least one goal";
+    } else if (stepNum === 4) {
+      // Only require project type if "Find teammates" is a goal
+      if (formData.goals.includes("Find teammates") && !formData.projectType) {
+        newErrors.projectType = "Project type required since you're looking for teammates";
+      }
     }
 
     setErrors(newErrors);
@@ -74,7 +95,12 @@ export default function Register() {
 
   const handleNext = () => {
     if (validateStep(step)) {
-      setStep(step + 1);
+      // Skip project type selection (Step 4) if user isn't looking for teammates
+      if (step === 3 && !formData.goals.includes("Find teammates")) {
+        setStep(5);
+      } else {
+        setStep(step + 1);
+      }
     }
   };
 
@@ -92,6 +118,14 @@ export default function Register() {
   const selectedSchoolData = selectedUniversity?.schools.find(s => s.id === formData.school);
   const selectedProject = PROJECT_TYPES.find(p => p.id === formData.projectType);
 
+  const GOAL_OPTIONS = [
+    { id: "Find teammates", label: "Find teammates for my project", icon: "👥" },
+    { id: "Join a project", label: "Join an existing project", icon: "🚀" },
+    { id: "Job referrals", label: "Get job referrals from alumni", icon: "💼" },
+    { id: "Refer others", label: "Refer students/alumni (Earn Rewards)", icon: "🏆" },
+    { id: "Mentorship", label: "Find or become a mentor", icon: "🎓" },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
@@ -99,7 +133,7 @@ export default function Register() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-heading font-bold mb-2">Join Hey Maple</h1>
           <p className="text-muted-foreground text-lg">Find your perfect teammates {selectedUniversity ? `at ${selectedUniversity.name}` : "at USC or UCLA"}</p>
-          <p className="text-sm text-muted-foreground mt-2">Step {step} of 4</p>
+          <p className="text-sm text-muted-foreground mt-2">Step {step > 4 ? 4 : step} of 4</p>
         </div>
 
         {/* Progress Bar */}
@@ -108,7 +142,7 @@ export default function Register() {
             <div
               key={i}
               className={`flex-1 h-1 rounded-full transition-colors ${
-                i <= step ? "bg-primary" : "bg-muted"
+                (step >= i || (step === 5 && i === 4)) ? "bg-primary" : "bg-muted"
               }`}
             />
           ))}
@@ -302,8 +336,58 @@ export default function Register() {
             </div>
           )}
 
-          {/* Step 3: Project Type */}
+          {/* Step 3: Goals (New Step) */}
           {step === 3 && (
+            <div className="space-y-6 animate-in fade-in duration-300">
+              <div className="flex items-center gap-3 mb-8">
+                <Compass className="text-primary" size={24} />
+                <h2 className="text-2xl font-heading font-bold">What brings you here?</h2>
+              </div>
+              
+              <p className="text-muted-foreground mb-4">Select all that apply. This helps us customize your dashboard.</p>
+
+              <div className="grid gap-3">
+                {GOAL_OPTIONS.map((goal) => (
+                  <div
+                    key={goal.id}
+                    className={`relative flex items-start space-x-3 border rounded-lg p-4 cursor-pointer transition-all ${
+                      formData.goals.includes(goal.id)
+                        ? "border-primary bg-primary/5 ring-1 ring-primary"
+                        : "border-border hover:border-primary/50 hover:bg-accent/50"
+                    }`}
+                    onClick={() => handleGoalToggle(goal.id)}
+                  >
+                    <div className="flex h-5 items-center space-x-2">
+                      <Checkbox 
+                        id={`goal-${goal.id}`} 
+                        checked={formData.goals.includes(goal.id)}
+                        onCheckedChange={() => handleGoalToggle(goal.id)}
+                      />
+                    </div>
+                    <div className="flex-1 grid gap-1">
+                      <Label htmlFor={`goal-${goal.id}`} className="cursor-pointer font-medium text-base flex items-center gap-2">
+                        <span>{goal.icon}</span> {goal.label}
+                      </Label>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {errors.goals && <p className="text-red-500 text-sm mt-1">{errors.goals}</p>}
+
+              <div className="flex gap-3 mt-8">
+                <Button variant="outline" onClick={() => setStep(2)} className="flex-1">
+                  Back
+                </Button>
+                <Button onClick={handleNext} className="flex-1">
+                  Continue
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 4: Project Type (Only if seeking teammates) */}
+          {step === 4 && (
             <div className="space-y-6 animate-in fade-in duration-300">
               <div className="flex items-center gap-3 mb-8">
                 <Target className="text-primary" size={24} />
@@ -352,7 +436,7 @@ export default function Register() {
               </div>
 
               <div className="flex gap-3 mt-8">
-                <Button variant="outline" onClick={() => setStep(2)} className="flex-1">
+                <Button variant="outline" onClick={() => setStep(3)} className="flex-1">
                   Back
                 </Button>
                 <Button onClick={handleNext} className="flex-1">
@@ -362,8 +446,8 @@ export default function Register() {
             </div>
           )}
 
-          {/* Step 4: Review */}
-          {step === 4 && (
+          {/* Step 5 (Review) - Formerly Step 4 */}
+          {step === 5 && (
             <div className="space-y-6 animate-in fade-in duration-300">
               <div className="flex items-center gap-3 mb-8">
                 <CheckCircle2 className="text-green-500" size={24} />
@@ -388,13 +472,21 @@ export default function Register() {
                   <p className="font-semibold">{selectedSchoolData?.abbreviation} • {formData.major}</p>
                 </div>
                 <div className="border-t pt-4">
-                  <p className="text-xs text-muted-foreground mb-1">Degree & GraduationCap</p>
-                  <p className="font-semibold">{formData.degree} • Class of {formData.graduationYear}</p>
+                  <p className="text-xs text-muted-foreground mb-1">Goals</p>
+                  <div className="flex flex-wrap gap-2">
+                    {formData.goals.map(g => (
+                      <span key={g} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
+                        {g}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="border-t pt-4">
-                  <p className="text-xs text-muted-foreground mb-1">Project</p>
-                  <p className="font-semibold">{selectedProject?.name}</p>
-                </div>
+                {selectedProject && (
+                  <div className="border-t pt-4">
+                    <p className="text-xs text-muted-foreground mb-1">Project</p>
+                    <p className="font-semibold">{selectedProject.name}</p>
+                  </div>
+                )}
               </div>
 
               <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 text-sm">
@@ -405,7 +497,7 @@ export default function Register() {
               </div>
 
               <div className="flex gap-3 mt-8">
-                <Button variant="outline" onClick={() => setStep(3)} className="flex-1">
+                <Button variant="outline" onClick={() => setStep(formData.goals.includes("Find teammates") ? 4 : 3)} className="flex-1">
                   Back
                 </Button>
                 <Button onClick={handleSubmit} className="flex-1 gap-2">
