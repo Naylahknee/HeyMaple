@@ -1,15 +1,20 @@
+import { useState } from "react";
 import { User } from "@/lib/types";
 import { ModeBadge } from "@/components/ModeBadge";
+import { ChangeRoleDialog } from "@/components/ChangeRoleDialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Pencil, Settings, Share2 } from "lucide-react";
+import { Pencil, Settings, Share2, ShieldAlert } from "lucide-react";
 import profileAvatar from '@assets/generated_images/college-age_female_student_portrait.png';
+import { toast } from "sonner";
 
 export default function Profile() {
+  const [isChangeRoleOpen, setIsChangeRoleOpen] = useState(false);
+  
   // Mock logged in user
-  const user: User = {
+  const [user, setUser] = useState<User>({
     id: "me",
     name: "Jordan Smith",
     major: "Computer Science",
@@ -19,7 +24,23 @@ export default function Profile() {
     secondaryMode: "Builder",
     modeConfidence: 85,
     skills: ["React", "TypeScript", "Node.js", "System Design", "UI/UX"],
-    bio: "I love building scalable systems and thinking about the big picture. Looking for builders to help execute a new fintech idea."
+    bio: "I love building scalable systems and thinking about the big picture. Looking for builders to help execute a new fintech idea.",
+    accountType: "Student" as const,
+  });
+
+  const handleChangeRole = async (newRole: "Student" | "Faculty" | "Alumni", password: string) => {
+    // In production, this would call the backend API
+    // For now, mock validation
+    if (password.length < 6) {
+      throw new Error("Invalid password");
+    }
+    
+    setUser(prev => ({
+      ...prev,
+      accountType: newRole,
+    }));
+    
+    toast.success(`Role changed to ${newRole}`);
   };
 
   return (
@@ -47,10 +68,20 @@ export default function Profile() {
                 <ModeBadge mode={user.mode} />
               </div>
 
-              <div className="flex gap-2 justify-center">
-                 <Button variant="outline" size="sm" className="w-full">
-                   <Settings className="w-4 h-4 mr-2" /> Settings
-                 </Button>
+              <div className="space-y-2">
+                <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Role</div>
+                <div className="text-sm font-medium mb-3 p-2 bg-muted/50 rounded-lg">
+                  {user.accountType}
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => setIsChangeRoleOpen(true)}
+                  data-testid="button-change-role"
+                >
+                  <ShieldAlert className="w-4 h-4 mr-2" /> Change Role
+                </Button>
               </div>
             </Card>
 
@@ -130,6 +161,13 @@ export default function Profile() {
           </div>
         </div>
       </div>
+
+      <ChangeRoleDialog
+        isOpen={isChangeRoleOpen}
+        onOpenChange={setIsChangeRoleOpen}
+        currentRole={user.accountType || "Student"}
+        onConfirm={handleChangeRole}
+      />
     </div>
   );
 }

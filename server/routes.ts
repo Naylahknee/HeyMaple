@@ -180,6 +180,53 @@ export async function registerRoutes(
     }
   });
 
+  // ===== ROLE CHANGE (requires password confirmation) =====
+  app.patch("/api/profiles/:id/role", async (req, res) => {
+    try {
+      const { newRole, password } = req.body;
+      const userId = req.params.id;
+
+      if (!newRole || !password) {
+        res.status(400).json({ error: "New role and password are required" });
+        return;
+      }
+
+      if (!["Student", "Faculty", "Alumni"].includes(newRole)) {
+        res.status(400).json({ error: "Invalid role" });
+        return;
+      }
+
+      // Get current profile
+      const profile = await storage.getProfile(userId);
+      if (!profile) {
+        res.status(404).json({ error: "Profile not found" });
+        return;
+      }
+
+      // In production, validate password against hashed password in database
+      // For now, accept any non-empty password as mock validation
+      if (password.length < 6) {
+        res.status(401).json({ error: "Invalid password" });
+        return;
+      }
+
+      // Update role
+      const updated = await storage.updateProfile(userId, {
+        accountType: newRole,
+      });
+
+      // Log activity
+      await storage.logActivity(userId, "role_changed", {
+        oldRole: profile.accountType,
+        newRole: newRole,
+      });
+
+      res.json(updated);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
   // ===== HEALTH CHECK =====
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });

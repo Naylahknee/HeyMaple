@@ -26,6 +26,7 @@ interface AuthContextType {
   login: (email: string, name?: string, additionalData?: Partial<User>) => void;
   logout: () => void;
   loginWithProvider: (provider: string) => void;
+  updateUserRole: (newRole: 'Student' | 'Faculty' | 'Alumni') => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -104,6 +105,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setLocation('/');
   };
 
+  const updateUserRole = (newRole: 'Student' | 'Faculty' | 'Alumni') => {
+    if (user) {
+      const updatedUser = { ...user, accountType: newRole };
+      setUser(updatedUser);
+      localStorage.setItem('heymaple_user', JSON.stringify(updatedUser));
+    }
+  };
+
   const loginWithProvider = (provider: string) => {
     // Mock social login
     setIsLoading(true);
@@ -127,7 +136,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, loginWithProvider }}>
+    <AuthContext.Provider value={{ user, isLoading, login, logout, loginWithProvider, updateUserRole }}>
       {children}
     </AuthContext.Provider>
   );
