@@ -8,7 +8,9 @@ import { MatchResult } from "@/components/MatchResult";
 import { ConnectionRequest } from "@/components/ConnectionRequest";
 import { UserReview } from "@/components/UserReview";
 import { Input } from "@/components/ui/input";
-import { Search, SlidersHorizontal, MessageSquare, Heart, Award, Gift, Briefcase } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Search, SlidersHorizontal, MessageSquare, Heart, Award, Gift, Briefcase, Lightbulb, Users, Building2, Plus, HandHeart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Toast } from "@/components/ui/toast";
@@ -25,6 +27,9 @@ export default function Dashboard() {
   const [connectionRequestOpen, setConnectionRequestOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [referralModalOpen, setReferralModalOpen] = useState(false);
+  const [postJobModalOpen, setPostJobModalOpen] = useState(false);
+  const [jobForm, setJobForm] = useState({ company: "", role: "", description: "", location: "", jobType: "full-time" });
+  const [isSubmittingJob, setIsSubmittingJob] = useState(false);
   
   // Simulate "My" profile as Architect for demo purposes (or use real user mode if we had it in auth)
   const myMode: CollaborationMode = "Architect";
@@ -50,66 +55,124 @@ export default function Dashboard() {
   // Check if user has "Job referrals" or "Refer others" goals
   const showReferralWidget = user?.goals?.includes("Job referrals") || user?.goals?.includes("Refer others");
   const isReferrer = user?.goals?.includes("Refer others");
+  
+  // Role-based visibility
+  const isStudent = user?.accountType === "Student" || !user?.accountType;
+  const canPostJobs = user?.accountType === "Faculty" || user?.accountType === "Alumni";
+
+  const handlePostJob = async () => {
+    if (!jobForm.company || !jobForm.role) return;
+    setIsSubmittingJob(true);
+    try {
+      const response = await fetch("/api/jobs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...jobForm,
+          postedById: user?.id,
+        }),
+      });
+      if (response.ok) {
+        setPostJobModalOpen(false);
+        setJobForm({ company: "", role: "", description: "", location: "", jobType: "full-time" });
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+      }
+    } catch (error) {
+      console.error("Failed to post job:", error);
+    } finally {
+      setIsSubmittingJob(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 p-4 md:p-8">
       <div className="container mx-auto max-w-6xl">
         
-        {/* Entry Point Section */}
-        <div className="grid gap-6 mb-12">
-          <div className="p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border rounded-2xl text-center md:text-left md:flex items-center justify-between gap-8">
-            <div>
-              <h2 className="text-3xl font-heading font-bold mb-2">What do you want to do today?</h2>
-              <p className="text-muted-foreground text-lg">Start building your team or offer your skills to others.</p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 mt-6 md:mt-0">
-              <Button size="lg" className="h-14 px-8 text-lg shadow-lg" onClick={() => setLocation("/create-project")}>
-                Get Help on a Project
-              </Button>
-              <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-2" onClick={() => setLocation("/helper-setup")}>
-                Offer Help to Others
-              </Button>
-            </div>
+        {/* Entry Point Section - Role-Based Action Cards */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-heading font-bold mb-2">What do you want to do today?</h2>
+            <p className="text-muted-foreground text-lg">Choose an action to get started</p>
           </div>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Get Help - Available to all */}
+            <Card 
+              className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20"
+              onClick={() => setLocation("/create-project")}
+              data-testid="card-get-help"
+            >
+              <CardContent className="p-6 text-center">
+                <div className="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Lightbulb className="h-7 w-7 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="font-heading font-bold text-lg mb-2">Get Help on a Project</h3>
+                <p className="text-sm text-muted-foreground">Find teammates to collaborate on your ideas</p>
+              </CardContent>
+            </Card>
 
-          {/* Referral Widget (Conditionally Rendered) */}
-          {showReferralWidget && (
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20 border-amber-200 dark:border-amber-800">
-                <CardHeader className="pb-2">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-xl flex items-center gap-2 text-amber-900 dark:text-amber-100">
-                      <Briefcase className="h-5 w-5" />
-                      Job & Internship Referrals
-                    </CardTitle>
-                    {isReferrer && (
-                      <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
-                        <Award className="h-3 w-3" /> {user?.referralPoints || 0} pts
-                      </span>
-                    )}
+            {/* Offer Help - Available to all */}
+            <Card 
+              className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/20"
+              onClick={() => setLocation("/helper-setup")}
+              data-testid="card-offer-help"
+            >
+              <CardContent className="p-6 text-center">
+                <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <HandHeart className="h-7 w-7 text-green-600 dark:text-green-400" />
+                </div>
+                <h3 className="font-heading font-bold text-lg mb-2">Offer Help to Others</h3>
+                <p className="text-sm text-muted-foreground">Share your skills and support fellow students</p>
+              </CardContent>
+            </Card>
+
+            {/* Find Jobs - Primarily for Students */}
+            <Card 
+              className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20"
+              onClick={() => setLocation("/jobs")}
+              data-testid="card-find-jobs"
+            >
+              <CardContent className="p-6 text-center">
+                <div className="w-14 h-14 rounded-full bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Briefcase className="h-7 w-7 text-amber-600 dark:text-amber-400" />
+                </div>
+                <h3 className="font-heading font-bold text-lg mb-2">Who's Recruiting?</h3>
+                <p className="text-sm text-muted-foreground">Browse job & internship opportunities</p>
+              </CardContent>
+            </Card>
+
+            {/* Post Opportunity - For Faculty/Alumni */}
+            {canPostJobs ? (
+              <Card 
+                className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
+                onClick={() => setPostJobModalOpen(true)}
+                data-testid="card-post-job"
+              >
+                <CardContent className="p-6 text-center">
+                  <div className="w-14 h-14 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Building2 className="h-7 w-7 text-purple-600 dark:text-purple-400" />
                   </div>
-                  <CardDescription className="text-amber-800/80 dark:text-amber-200/70">
-                    {isReferrer 
-                      ? "Refer talented students to your company and earn rewards."
-                      : "Connect with alumni for career advice and referrals."}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    {isReferrer ? (
-                      <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white border-0" onClick={() => setReferralModalOpen(true)}>
-                        <Gift className="mr-2 h-4 w-4" /> Post Referral Opportunity
-                      </Button>
-                    ) : (
-                      <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white border-0">
-                        Find Alumni Referrals
-                      </Button>
-                    )}
-                  </div>
+                  <h3 className="font-heading font-bold text-lg mb-2">Post Opportunity</h3>
+                  <p className="text-sm text-muted-foreground">Share jobs from your company</p>
                 </CardContent>
               </Card>
-            </div>
-          )}
+            ) : (
+              <Card 
+                className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
+                onClick={() => setLocation("/project-feed")}
+                data-testid="card-browse-projects"
+              >
+                <CardContent className="p-6 text-center">
+                  <div className="w-14 h-14 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Users className="h-7 w-7 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <h3 className="font-heading font-bold text-lg mb-2">Browse Projects</h3>
+                  <p className="text-sm text-muted-foreground">Find projects that need your skills</p>
+                </CardContent>
+              </Card>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
@@ -166,36 +229,85 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Referral Modal */}
-        <Dialog open={referralModalOpen} onOpenChange={setReferralModalOpen}>
+        {/* Post Job Modal */}
+        <Dialog open={postJobModalOpen} onOpenChange={setPostJobModalOpen}>
           <DialogContent className="sm:max-w-[500px]">
             <DialogHeader>
-              <DialogTitle>Post a Referral Opportunity</DialogTitle>
+              <DialogTitle className="flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-purple-600" />
+                Post a Job Opportunity
+              </DialogTitle>
               <DialogDescription>
-                Share details about the role and how you can help refer a fellow alum.
+                Share an open position at your company with USC and UCLA students.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <label className="text-sm font-medium">Company</label>
-                <Input placeholder="e.g. Google, NASA, Startup Inc." />
+                <Label htmlFor="company">Company *</Label>
+                <Input 
+                  id="company"
+                  placeholder="e.g. Google, SpaceX, Startup Inc." 
+                  value={jobForm.company}
+                  onChange={(e) => setJobForm({ ...jobForm, company: e.target.value })}
+                  data-testid="input-job-company"
+                />
               </div>
               <div className="grid gap-2">
-                <label className="text-sm font-medium">Role / Position</label>
-                <Input placeholder="e.g. Software Engineer, Product Manager" />
+                <Label htmlFor="role">Role / Position *</Label>
+                <Input 
+                  id="role"
+                  placeholder="e.g. Software Engineer Intern, Product Manager" 
+                  value={jobForm.role}
+                  onChange={(e) => setJobForm({ ...jobForm, role: e.target.value })}
+                  data-testid="input-job-role"
+                />
               </div>
               <div className="grid gap-2">
-                <label className="text-sm font-medium">Referral Note</label>
-                <Input placeholder="Briefly describe what you're looking for in a candidate..." />
+                <Label htmlFor="location">Location</Label>
+                <Input 
+                  id="location"
+                  placeholder="e.g. Los Angeles, Remote, Hybrid" 
+                  value={jobForm.location}
+                  onChange={(e) => setJobForm({ ...jobForm, location: e.target.value })}
+                  data-testid="input-job-location"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="jobType">Type</Label>
+                <select 
+                  id="jobType"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  value={jobForm.jobType}
+                  onChange={(e) => setJobForm({ ...jobForm, jobType: e.target.value })}
+                  data-testid="select-job-type"
+                >
+                  <option value="full-time">Full-time</option>
+                  <option value="part-time">Part-time</option>
+                  <option value="internship">Internship</option>
+                  <option value="contract">Contract</option>
+                </select>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="description">Description</Label>
+                <Textarea 
+                  id="description"
+                  placeholder="Tell students about this opportunity..." 
+                  value={jobForm.description}
+                  onChange={(e) => setJobForm({ ...jobForm, description: e.target.value })}
+                  className="min-h-[100px]"
+                  data-testid="input-job-description"
+                />
               </div>
             </div>
             <div className="flex justify-end gap-3">
-              <Button variant="outline" onClick={() => setReferralModalOpen(false)}>Cancel</Button>
-              <Button className="bg-amber-600 hover:bg-amber-700" onClick={() => {
-                setReferralModalOpen(false);
-                setShowToast(true); // Reuse existing toast for simplicity or create new one
-              }}>
-                Post Opportunity
+              <Button variant="outline" onClick={() => setPostJobModalOpen(false)}>Cancel</Button>
+              <Button 
+                className="bg-purple-600 hover:bg-purple-700" 
+                onClick={handlePostJob}
+                disabled={!jobForm.company || !jobForm.role || isSubmittingJob}
+                data-testid="button-submit-job"
+              >
+                {isSubmittingJob ? "Posting..." : "Post Opportunity"}
               </Button>
             </div>
           </DialogContent>
