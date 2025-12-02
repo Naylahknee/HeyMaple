@@ -95,7 +95,7 @@ export default function Dashboard() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     {isReferrer ? (
                       <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white border-0" onClick={() => setReferralModalOpen(true)}>
                         <Gift className="mr-2 h-4 w-4" /> Post Referral Opportunity

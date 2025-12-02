@@ -325,11 +325,11 @@ export default function Register() {
                 </div>
               </div>
 
-              <div className="flex gap-3 mt-8">
-                <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
+              <div className="flex flex-col sm:flex-row gap-3 mt-8">
+                <Button variant="outline" onClick={() => setStep(1)} className="flex-1 order-2 sm:order-1">
                   Back
                 </Button>
-                <Button onClick={handleNext} className="flex-1">
+                <Button onClick={handleNext} className="flex-1 order-1 sm:order-2">
                   Continue
                 </Button>
               </div>
@@ -375,11 +375,11 @@ export default function Register() {
               
               {errors.goals && <p className="text-red-500 text-sm mt-1">{errors.goals}</p>}
 
-              <div className="flex gap-3 mt-8">
-                <Button variant="outline" onClick={() => setStep(2)} className="flex-1">
+              <div className="flex flex-col sm:flex-row gap-3 mt-8">
+                <Button variant="outline" onClick={() => setStep(2)} className="flex-1 order-2 sm:order-1">
                   Back
                 </Button>
-                <Button onClick={handleNext} className="flex-1">
+                <Button onClick={handleNext} className="flex-1 order-1 sm:order-2">
                   Continue
                 </Button>
               </div>
@@ -435,11 +435,11 @@ export default function Register() {
                 </p>
               </div>
 
-              <div className="flex gap-3 mt-8">
-                <Button variant="outline" onClick={() => setStep(3)} className="flex-1">
+              <div className="flex flex-col sm:flex-row gap-3 mt-8">
+                <Button variant="outline" onClick={() => setStep(3)} className="flex-1 order-2 sm:order-1">
                   Back
                 </Button>
-                <Button onClick={handleNext} className="flex-1">
+                <Button onClick={handleNext} className="flex-1 order-1 sm:order-2">
                   Continue
                 </Button>
               </div>
@@ -496,11 +496,11 @@ export default function Register() {
                 </p>
               </div>
 
-              <div className="flex gap-3 mt-8">
-                <Button variant="outline" onClick={() => setStep(formData.goals.includes("Find teammates") ? 4 : 3)} className="flex-1">
+              <div className="flex flex-col sm:flex-row gap-3 mt-8">
+                <Button variant="outline" onClick={() => setStep(formData.goals.includes("Find teammates") ? 4 : 3)} className="flex-1 order-2 sm:order-1">
                   Back
                 </Button>
-                <Button onClick={handleSubmit} className="flex-1 gap-2">
+                <Button onClick={handleSubmit} className="flex-1 gap-2 order-1 sm:order-2">
                   <Briefcase size={16} /> Take the Assessment
                 </Button>
               </div>
