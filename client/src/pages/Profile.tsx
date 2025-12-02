@@ -115,7 +115,7 @@ export default function Profile() {
                <div className="mb-8">
                  <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-muted-foreground">Skills</h4>
                  <div className="flex flex-wrap gap-2">
-                   {user.skills.map(skill => (
+                   {(user.skills || []).map(skill => (
                      <Badge key={skill} variant="secondary" className="px-3 py-1 text-sm font-normal">
                        {skill}
                      </Badge>

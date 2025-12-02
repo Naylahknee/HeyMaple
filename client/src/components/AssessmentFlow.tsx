@@ -2,6 +2,7 @@ import { useState } from "react";
 import { QUESTIONS } from "@/lib/mockData";
 import { CollaborationMode } from "@/lib/types";
 import { calculateAssessmentResult } from "@/lib/algorithm";
+import { MapleLeafIcon } from "@/components/MapleLeafIcon";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
@@ -43,7 +44,7 @@ export function AssessmentFlow({ onComplete }: AssessmentFlowProps) {
           <div className="absolute inset-0 border-4 border-muted rounded-full" />
           <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin" />
           <div className="absolute inset-0 flex items-center justify-center">
-             <span className="text-2xl">🍁</span>
+             <MapleLeafIcon size={40} className="w-10 h-10" />
           </div>
         </div>
         <div>
