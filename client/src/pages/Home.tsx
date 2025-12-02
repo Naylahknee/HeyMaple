@@ -3,9 +3,10 @@ import heroBg from "@assets/generated_images/abstract_collaboration_hero_backgro
 import { Button } from "@/components/ui/button";
 import { MODES } from "@/lib/mockData";
 import { ModeBadge } from "@/components/ModeBadge";
+import { MapleLeafIcon } from "@/components/MapleLeafIcon";
 import { 
-  ArrowRight, CheckCircle2, Users, Zap, 
-  Clock, UserX, TrendingDown, Sprout, GraduationCap, Briefcase,
+  ArrowRight, CheckCircle2, Users,
+  Clock, UserX, TrendingDown, GraduationCap, Briefcase,
   Code, Mic, LineChart, Palette, Stethoscope, Scale,
   UserPlus, Network, TrendingUp
 } from "lucide-react";
@@ -353,8 +354,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
-                  <Zap size={24} />
+                <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
+                  <MapleLeafIcon size={24} />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold mb-2">The Hey Maple Solution</h3>

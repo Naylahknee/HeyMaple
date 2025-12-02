@@ -16,16 +16,17 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  university: string; // "usc" or "ucla"
-  school: string;
-  major: string;
-  year: number;
-  avatar: string;
-  mode: CollaborationMode;
-  secondaryMode: CollaborationMode;
-  modeConfidence: number;
-  skills: string[];
-  bio: string;
+  accountType?: 'Student' | 'Faculty' | 'Alumni';
+  university?: string; // "usc" or "ucla"
+  school?: string;
+  major?: string;
+  year?: number;
+  avatar?: string;
+  mode?: CollaborationMode;
+  secondaryMode?: CollaborationMode;
+  modeConfidence?: number;
+  skills?: string[];
+  bio?: string;
   videoPitch?: string;
   portfolioLinks?: string[];
   verification?: {
