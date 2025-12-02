@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Layout } from "@/components/Layout";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { FeedbackWidget } from "@/components/FeedbackWidget";
 
 import Home from "@/pages/Home";
 import RoleSelection from "@/pages/RoleSelection";
@@ -79,6 +80,7 @@ function App() {
       <AuthProvider>
         <Toaster />
         <Router />
+        <FeedbackWidget />
       </AuthProvider>
     </QueryClientProvider>
   );
