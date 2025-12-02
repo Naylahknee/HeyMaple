@@ -13,26 +13,23 @@ export default function RoleSelection() {
       title: "Student",
       description: "Find teammates, mentors, and collaboration opportunities while pursuing your degree",
       icon: GraduationCap,
-      color: "from-blue-500 to-blue-600",
     },
     {
       id: "Alumni",
       title: "Alumni/Mentor",
       description: "Guide current students, refer job opportunities, and build meaningful professional relationships",
       icon: Briefcase,
-      color: "from-orange-500 to-orange-600",
     },
     {
       id: "Faculty",
       title: "Faculty/Professor",
       description: "Connect with students, facilitate collaborations, and strengthen your academic community",
       icon: Users,
-      color: "from-emerald-500 to-emerald-600",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4">
+    <div className="min-h-screen bg-background py-12 px-4">
       <div className="container mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +61,7 @@ export default function RoleSelection() {
                   data-testid={`role-card-${role.id}`}
                 >
                   <div>
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${role.color} flex items-center justify-center mb-6 text-white`}>
+                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
                       <Icon size={32} />
                     </div>
                     <h2 className="text-2xl font-bold mb-3">{role.title}</h2>
