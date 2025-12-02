@@ -13,6 +13,8 @@ interface User {
   major?: string;
   degree?: string;
   graduationYear?: string;
+  accountType?: 'Student' | 'Faculty' | 'Alumni' | 'Graduate Student';
+  skills?: string[];
   projectType?: string;
   goals?: string[];
   referralPoints?: number;
