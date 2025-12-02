@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertProfileSchema, insertConnectionSchema, insertBetaFeedbackSchema } from "@shared/schema";
+import { insertProfileSchema, insertConnectionSchema, insertBetaFeedbackSchema, insertJobOpportunitySchema } from "@shared/schema";
 import { log } from "./index";
 
 export async function registerRoutes(
@@ -242,6 +242,37 @@ export async function registerRoutes(
   app.get("/api/feedback", async (req, res) => {
     const feedback = await storage.getAllBetaFeedback();
     res.json(feedback);
+  });
+
+  // ===== JOB OPPORTUNITIES =====
+  app.post("/api/jobs", async (req, res) => {
+    try {
+      const validated = insertJobOpportunitySchema.parse(req.body);
+      const job = await storage.createJobOpportunity(validated);
+      log(`Job opportunity posted: ${job.role} at ${job.company}`);
+      res.status(201).json(job);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/jobs", async (req, res) => {
+    const jobs = await storage.getActiveJobOpportunities();
+    res.json(jobs);
+  });
+
+  app.get("/api/jobs/user/:userId", async (req, res) => {
+    const jobs = await storage.getJobOpportunitiesByUser(req.params.userId);
+    res.json(jobs);
+  });
+
+  app.patch("/api/jobs/:id", async (req, res) => {
+    try {
+      const job = await storage.updateJobOpportunity(req.params.id, req.body);
+      res.json(job);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
   });
 
   // ===== HEALTH CHECK =====
