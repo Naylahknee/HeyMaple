@@ -166,14 +166,9 @@ heymaple.com
 
               {/* Action Buttons */}
               <div className="flex flex-col gap-3 pt-2">
-                <Link href="/role-selection">
+                <Link href="/login">
                   <Button size="lg" className="w-full h-11 md:h-12 text-base md:text-lg shadow-lg" data-testid="button-ready-to-grow-results">
                     Ready to Grow? <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                  </Button>
-                </Link>
-                <Link href="/login">
-                  <Button size="lg" variant="outline" className="w-full h-10 md:h-12 text-sm md:text-lg" data-testid="button-login-results">
-                    <LogIn className="mr-2 h-4 w-4 md:h-5 md:w-5" /> Already have an account?
                   </Button>
                 </Link>
                 <div className="flex gap-3">
