@@ -16,6 +16,7 @@ export default function Profile() {
   // Mock logged in user
   const [user, setUser] = useState<User>({
     id: "me",
+    email: "jordan@usc.edu",
     name: "Jordan Smith",
     major: "Computer Science",
     year: 2025,
@@ -65,7 +66,7 @@ export default function Profile() {
               <p className="text-muted-foreground text-sm mb-4">{user.major}</p>
               
               <div className="flex justify-center mb-6">
-                <ModeBadge mode={user.mode} />
+                <ModeBadge mode={user.mode || "Architect"} />
               </div>
 
               <div className="space-y-2">

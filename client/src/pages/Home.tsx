@@ -170,8 +170,8 @@ export default function Home() {
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-blue-500/20 p-8 flex items-center justify-center">
                 <div className="bg-card shadow-2xl rounded-xl p-8 max-w-sm w-full">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                      <Sprout size={24} />
+                    <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                      <MapleLeafIcon size={24} />
                     </div>
                     <div>
                       <div className="font-bold text-lg">Growth Focused</div>
