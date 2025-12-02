@@ -28,7 +28,7 @@ export default function Register() {
   const { login, loginWithProvider } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    accountType: "Student" as "Student" | "Faculty" | "Alumni" | "Graduate Student",
+    accountType: "Student" as "Student" | "Faculty" | "Alumni",
     firstName: "",
     lastName: "",
     email: "",
@@ -188,10 +188,9 @@ export default function Register() {
   ];
 
   const ACCOUNT_TYPES = [
-    { id: "Student", label: "Student", description: "Looking to collaborate on projects", icon: User },
+    { id: "Student", label: "Student", description: "Undergrad or grad student looking to collaborate", icon: User },
     { id: "Faculty", label: "Faculty", description: "Offering mentorship or advice", icon: School },
     { id: "Alumni", label: "Alumni / Mentor", description: "Industry mentor or USC alum", icon: Briefcase },
-    { id: "Graduate Student", label: "Graduate Student", description: "Mentor or collaborator", icon: GraduationCap },
   ];
 
   return (

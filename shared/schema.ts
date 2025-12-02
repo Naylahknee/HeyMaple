@@ -10,7 +10,7 @@ export const profiles = pgTable("profiles", {
   firstName: varchar("first_name").notNull(),
   lastName: varchar("last_name").notNull(),
   avatar: text("avatar"),
-  accountType: varchar("account_type").notNull().default("Student"), // Student, Faculty, Alumni, Graduate Student
+  accountType: varchar("account_type").notNull().default("Student"), // Student, Faculty, Alumni
   
   // Academic Info
   university: varchar("university"),
@@ -31,8 +31,8 @@ export const profiles = pgTable("profiles", {
   // Engagement & Reputation
   referralPoints: integer("referral_points").default(0),
   ghostCount: integer("ghost_count").default(0),
-  responseRate: decimal("response_rate", 5, 2).default(sql`0`),
-  avgResponseTimeHours: decimal("avg_response_time_hours", 6, 2),
+  responseRate: decimal("response_rate").default("0"),
+  avgResponseTimeHours: decimal("avg_response_time_hours"),
   lifecycleStage: varchar("lifecycle_stage").default("discovery"), // discovery, connection, collaboration, community
   
   // Tracking
@@ -138,20 +138,20 @@ export const matchFeedback = pgTable("match_feedback", {
 export const userMatchingPreferences = pgTable("user_matching_preferences", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
   userId: uuid("user_id").notNull().references(() => profiles.id).unique(),
-  weightSkills: decimal("weight_skills", 3, 2).default("0.40"),
-  weightDna: decimal("weight_dna", 3, 2).default("0.25"),
-  weightCompletion: decimal("weight_completion", 3, 2).default("0.20"),
-  weightAvailability: decimal("weight_availability", 3, 2).default("0.10"),
-  weightStyle: decimal("weight_style", 3, 2).default("0.05"),
+  weightSkills: decimal("weight_skills").default("0.40"),
+  weightDna: decimal("weight_dna").default("0.25"),
+  weightCompletion: decimal("weight_completion").default("0.20"),
+  weightAvailability: decimal("weight_availability").default("0.10"),
+  weightStyle: decimal("weight_style").default("0.05"),
 });
 
 // ========== HEALTH MONITOR ==========
 export const platformMetrics = pgTable("platform_metrics", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
-  responseRate: decimal("response_rate", 5, 2),
-  avgMatchScore: decimal("avg_match_score", 5, 2),
+  responseRate: decimal("response_rate"),
+  avgMatchScore: decimal("avg_match_score"),
   activeUsers24h: integer("active_users_24h"),
-  retention7day: decimal("retention_7day", 5, 2),
+  retention7day: decimal("retention_7day"),
   recordedAt: timestamp("recorded_at").defaultNow(),
 });
 
@@ -159,8 +159,8 @@ export const platformAlerts = pgTable("platform_alerts", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
   severity: varchar("severity"), // warning, critical
   metricName: varchar("metric_name"),
-  metricValue: decimal("metric_value", 10, 2),
-  threshold: decimal("threshold", 10, 2),
+  metricValue: decimal("metric_value"),
+  threshold: decimal("threshold"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
