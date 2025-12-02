@@ -6,10 +6,12 @@ import { Layout } from "@/components/Layout";
 import { AuthProvider } from "@/hooks/use-auth";
 
 import Home from "@/pages/Home";
+import RoleSelection from "@/pages/RoleSelection";
 import Register from "@/pages/Register";
 import Login from "@/pages/Login";
 import Assessment from "@/pages/Assessment";
 import Results from "@/pages/Results";
+import TermsOfService from "@/pages/TermsOfService";
 import Dashboard from "@/pages/Dashboard";
 import Messages from "@/pages/Messages";
 import Notifications from "@/pages/Notifications";
@@ -27,10 +29,12 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/role-selection" component={RoleSelection} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/assessment" component={Assessment} />
         <Route path="/results" component={Results} />
+        <Route path="/terms-of-service" component={TermsOfService} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/messages" component={Messages} />
         <Route path="/notifications" component={Notifications} />

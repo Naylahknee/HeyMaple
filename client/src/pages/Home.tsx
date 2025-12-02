@@ -51,8 +51,8 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/register">
-                <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90">
+              <Link href="/role-selection">
+                <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90" data-testid="button-join-maple">
                   Join Hey Maple <ArrowRight className="ml-2" />
                 </Button>
               </Link>
