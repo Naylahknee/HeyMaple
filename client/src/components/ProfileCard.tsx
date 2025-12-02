@@ -48,6 +48,11 @@ export function ProfileCard({ user, compact = false, onClick }: ProfileCardProps
                 </span>
               )}
             </div>
+            {user.school && (
+              <p className="text-muted-foreground text-xs">
+                {user.school}
+              </p>
+            )}
             <p className="text-muted-foreground text-sm">
               {user.major} • '{user.year?.toString().slice(2) || '??'}
             </p>
