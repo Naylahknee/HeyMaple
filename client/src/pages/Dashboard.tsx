@@ -32,7 +32,7 @@ export default function Dashboard() {
   const filteredUsers = MOCK_USERS.filter(user => {
     const matchesMode = filterMode === "All" || user.mode === filterMode;
     const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          user.skills.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
+                          (user.skills || []).some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesMode && matchesSearch;
   });
 
@@ -209,7 +209,7 @@ export default function Dashboard() {
                 user={user} 
                 onClick={() => setSelectedUser(user)} 
               />
-              <MatchResult user1Mode={myMode} user2Mode={user.mode} compact />
+              <MatchResult user1Mode={myMode} user2Mode={user.mode || "Architect"} compact />
             </div>
           ))}
         </div>
@@ -251,7 +251,7 @@ export default function Dashboard() {
                            <div className="text-sm font-normal text-muted-foreground">{selectedUser.major}</div>
                          </div>
                        </div>
-                       <ModeBadge mode={selectedUser.mode} />
+                       <ModeBadge mode={selectedUser.mode || "Architect"} />
                      </DialogTitle>
                    </DialogHeader>
                  </div>
@@ -263,7 +263,7 @@ export default function Dashboard() {
                       <div>
                         <h4 className="text-sm font-semibold mb-2">Skills</h4>
                         <div className="flex flex-wrap gap-2">
-                          {selectedUser.skills.map(s => (
+                          {(selectedUser.skills || []).map(s => (
                             <span key={s} className="px-2 py-1 bg-secondary/10 text-secondary rounded text-xs font-medium">
                               {s}
                             </span>
@@ -273,7 +273,7 @@ export default function Dashboard() {
                       
                       <div>
                         <h4 className="text-sm font-semibold mb-2">Compatibility Analysis</h4>
-                        <MatchResult user1Mode={myMode} user2Mode={selectedUser.mode} />
+                        <MatchResult user1Mode={myMode} user2Mode={selectedUser.mode || "Architect"} />
                       </div>
                    </div>
                  </div>

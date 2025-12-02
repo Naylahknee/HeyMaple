@@ -12,7 +12,14 @@ interface ProfileCardProps {
   onClick?: () => void;
 }
 
+const universityLabels: Record<string, string> = {
+  usc: "USC",
+  ucla: "UCLA"
+};
+
 export function ProfileCard({ user, compact = false, onClick }: ProfileCardProps) {
+  const universityDisplay = user.university ? universityLabels[user.university] || user.university.toUpperCase() : null;
+
   return (
     <Card 
       className={cn(
@@ -28,23 +35,33 @@ export function ProfileCard({ user, compact = false, onClick }: ProfileCardProps
             <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
           </Avatar>
           <div>
-            <h3 className={cn("font-heading font-semibold leading-tight group-hover:text-primary transition-colors", compact ? "text-base" : "text-lg")}>
-              {user.name}
-            </h3>
+            <div className="flex items-center gap-2">
+              <h3 className={cn("font-heading font-semibold leading-tight group-hover:text-primary transition-colors", compact ? "text-base" : "text-lg")}>
+                {user.name}
+              </h3>
+              {universityDisplay && (
+                <span className={cn(
+                  "text-xs font-bold px-2 py-0.5 rounded-full",
+                  user.university === "usc" ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" : "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                )}>
+                  {universityDisplay}
+                </span>
+              )}
+            </div>
             <p className="text-muted-foreground text-sm">
-              {user.major} • '{user.year.toString().slice(2)}
+              {user.major} • '{user.year?.toString().slice(2) || '??'}
             </p>
           </div>
         </div>
         {!compact && (
            <div className="text-right hidden sm:block">
              <div className="text-xs text-muted-foreground mb-1">Primary Mode</div>
-             <ModeBadge mode={user.mode} />
+             <ModeBadge mode={user.mode || "Architect"} />
            </div>
         )}
       </div>
 
-      {compact && (
+      {compact && user.mode && (
         <div className="mt-3">
           <ModeBadge mode={user.mode} size="sm" />
         </div>
@@ -57,13 +74,13 @@ export function ProfileCard({ user, compact = false, onClick }: ProfileCardProps
           </p>
           
           <div className="mt-4 flex flex-wrap gap-1.5">
-            {user.skills.slice(0, 4).map(skill => (
+            {(user.skills || []).slice(0, 4).map(skill => (
               <Badge key={skill} variant="secondary" className="text-xs font-normal bg-muted/50 hover:bg-muted">
                 {skill}
               </Badge>
             ))}
-            {user.skills.length > 4 && (
-              <span className="text-xs text-muted-foreground flex items-center px-1">+{user.skills.length - 4}</span>
+            {(user.skills || []).length > 4 && (
+              <span className="text-xs text-muted-foreground flex items-center px-1">+{(user.skills || []).length - 4}</span>
             )}
           </div>
 
