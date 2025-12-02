@@ -14,34 +14,39 @@ export function MapleLeafIcon({
       className={className}
       width={size}
       height={size}
-      viewBox="0 0 200 200"
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Outer leaf shape - Green */}
+      {/* Outer leaf outline */}
       <path
-        d="M 60 140 C 50 120 45 100 50 75 C 55 50 75 35 100 32 C 130 28 155 45 160 75 C 165 105 150 140 120 160 C 100 175 70 170 60 140 Z"
-        fill="#22c55e"
-        stroke="#16a34a"
-        strokeWidth="12"
+        d="M 50 10 
+           C 75 15 85 35 85 55 
+           C 85 75 70 85 50 90 
+           C 30 85 15 75 15 55 
+           C 15 35 25 15 50 10 Z"
+        fill="none"
+        stroke="#22c55e"
+        strokeWidth="6"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       
-      {/* Inner vein detail */}
+      {/* Inner vein curve */}
       <path
-        d="M 90 110 Q 110 95 130 80"
-        stroke="white"
-        strokeWidth="10"
+        d="M 35 55 Q 50 45 60 35"
+        fill="none"
+        stroke="#22c55e"
+        strokeWidth="6"
         strokeLinecap="round"
-        opacity="0.5"
       />
       
       {/* Stem */}
       <path
-        d="M 65 145 Q 55 165 45 185"
-        stroke="#16a34a"
-        strokeWidth="12"
+        d="M 40 85 L 30 100"
+        fill="none"
+        stroke="#22c55e"
+        strokeWidth="6"
         strokeLinecap="round"
       />
     </svg>
