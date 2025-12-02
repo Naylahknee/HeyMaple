@@ -145,6 +145,17 @@ export const userMatchingPreferences = pgTable("user_matching_preferences", {
   weightStyle: decimal("weight_style").default("0.05"),
 });
 
+// ========== BETA FEEDBACK ==========
+export const betaFeedback = pgTable("beta_feedback", {
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: uuid("user_id").references(() => profiles.id),
+  email: varchar("email"),
+  pageUrl: text("page_url"),
+  feedbackType: varchar("feedback_type").default("suggestion"),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // ========== HEALTH MONITOR ==========
 export const platformMetrics = pgTable("platform_metrics", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -229,3 +240,12 @@ export const insertUserMilestoneSchema = createInsertSchema(userMilestones).omit
 
 export type UserMilestone = typeof userMilestones.$inferSelect;
 export type InsertUserMilestone = z.infer<typeof insertUserMilestoneSchema>;
+
+// Beta Feedback Insert Schema
+export const insertBetaFeedbackSchema = createInsertSchema(betaFeedback).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type BetaFeedback = typeof betaFeedback.$inferSelect;
+export type InsertBetaFeedback = z.infer<typeof insertBetaFeedbackSchema>;
