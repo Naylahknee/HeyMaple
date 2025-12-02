@@ -166,12 +166,21 @@ export const platformAlerts = pgTable("platform_alerts", {
 
 // ========== SCHEMAS & TYPES ==========
 
-// Profile Insert Schema
+// Profile Insert Schema - with strict email validation
 export const insertProfileSchema = createInsertSchema(profiles).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
-});
+}).refine(
+  (data) => {
+    const email = data.email?.toLowerCase() || "";
+    return email.endsWith("@usc.edu") || email.endsWith("@ucla.edu");
+  },
+  {
+    message: "Only USC (@usc.edu) and UCLA (@ucla.edu) email addresses are allowed",
+    path: ["email"],
+  }
+);
 
 export type Profile = typeof profiles.$inferSelect;
 export type InsertProfile = z.infer<typeof insertProfileSchema>;
