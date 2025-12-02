@@ -12,6 +12,7 @@ import {
   matchFeedback,
   userMatchingPreferences,
   betaFeedback,
+  jobOpportunities,
   type Profile,
   type InsertProfile,
   type Connection,
@@ -26,6 +27,8 @@ import {
   type InsertUserMilestone,
   type BetaFeedback,
   type InsertBetaFeedback,
+  type JobOpportunity,
+  type InsertJobOpportunity,
 } from "@shared/schema";
 import { eq, desc, and } from "drizzle-orm";
 
@@ -70,6 +73,12 @@ export interface IStorage {
   // ===== BETA FEEDBACK =====
   createBetaFeedback(feedback: InsertBetaFeedback): Promise<BetaFeedback>;
   getAllBetaFeedback(): Promise<BetaFeedback[]>;
+
+  // ===== JOB OPPORTUNITIES =====
+  createJobOpportunity(job: InsertJobOpportunity): Promise<JobOpportunity>;
+  getActiveJobOpportunities(): Promise<JobOpportunity[]>;
+  getJobOpportunitiesByUser(userId: string): Promise<JobOpportunity[]>;
+  updateJobOpportunity(id: string, updates: Partial<JobOpportunity>): Promise<JobOpportunity>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -262,6 +271,39 @@ export class DatabaseStorage implements IStorage {
       .from(betaFeedback)
       .orderBy(desc(betaFeedback.createdAt));
     return result;
+  }
+
+  // ===== JOB OPPORTUNITIES =====
+  async createJobOpportunity(job: InsertJobOpportunity): Promise<JobOpportunity> {
+    const result = await db.insert(jobOpportunities).values(job).returning();
+    return result[0];
+  }
+
+  async getActiveJobOpportunities(): Promise<JobOpportunity[]> {
+    const result = await db
+      .select()
+      .from(jobOpportunities)
+      .where(eq(jobOpportunities.isActive, true))
+      .orderBy(desc(jobOpportunities.createdAt));
+    return result;
+  }
+
+  async getJobOpportunitiesByUser(userId: string): Promise<JobOpportunity[]> {
+    const result = await db
+      .select()
+      .from(jobOpportunities)
+      .where(eq(jobOpportunities.postedById, userId))
+      .orderBy(desc(jobOpportunities.createdAt));
+    return result;
+  }
+
+  async updateJobOpportunity(id: string, updates: Partial<JobOpportunity>): Promise<JobOpportunity> {
+    const result = await db
+      .update(jobOpportunities)
+      .set(updates)
+      .where(eq(jobOpportunities.id, id))
+      .returning();
+    return result[0];
   }
 }
 
