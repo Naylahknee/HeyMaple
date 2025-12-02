@@ -102,7 +102,7 @@ export default function Register() {
       // Simulate AI extraction
       setFormData(prev => ({
         ...prev,
-        skills: [...new Set([...prev.skills, "Project Management", "Communication", "Leadership", "Python"])]
+        skills: Array.from(new Set([...prev.skills, "Project Management", "Communication", "Leadership", "Python"]))
       }));
     }, 2000);
   };
@@ -118,12 +118,15 @@ export default function Register() {
       if (!formData.lastName.trim()) newErrors.lastName = "Last name required";
       if (!formData.email.trim()) newErrors.email = "Email required";
       
-      // Strict .edu check
-      if (formData.email && !formData.email.endsWith(".edu")) {
-        newErrors.email = "Please use a valid .edu university email address";
-      } else {
-        const uni = getUniversityFromEmail(formData.email);
-        if (uni) handleInputChange("university", uni.id);
+      // Validate email is USC or UCLA
+      if (formData.email) {
+        const lowerEmail = formData.email.toLowerCase();
+        if (!lowerEmail.endsWith("@usc.edu") && !lowerEmail.endsWith("@ucla.edu")) {
+          newErrors.email = "Only USC (@usc.edu) and UCLA (@ucla.edu) email addresses are allowed";
+        } else {
+          const uni = getUniversityFromEmail(formData.email);
+          if (uni) handleInputChange("university", uni.id === "USC" ? "usc" : "ucla");
+        }
       }
     } else if (stepNum === 3) {
       if (!formData.school) newErrors.school = "School required";
