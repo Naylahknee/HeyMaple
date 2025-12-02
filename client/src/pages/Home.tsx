@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import heroBg from "@assets/generated_images/abstract_collaboration_hero_background.png";
+import heroBg from "@assets/stock_images/diverse_college_stud_c2786d62.jpg";
 import { Button } from "@/components/ui/button";
 import { MODES } from "@/lib/mockData";
 import { ModeBadge } from "@/components/ModeBadge";
