@@ -4,8 +4,9 @@ import { CollaborationMode } from "@/lib/types";
 import { ModeBadge } from "@/components/ModeBadge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Share2, Download } from "lucide-react";
+import { ArrowRight, Share2, Download, LogIn } from "lucide-react";
 import { motion } from "framer-motion";
+import { MapleLeafIcon } from "@/components/MapleLeafIcon";
 
 export default function Results() {
   const search = useSearch();
@@ -16,6 +17,63 @@ export default function Results() {
   const confidence = parseInt(params.get("confidence") || "80");
 
   const modeDef = MODES[primary];
+
+  const handleDownloadPDF = () => {
+    const resultsContent = `
+Hey Maple - Your Collaboration Profile
+======================================
+
+PRIMARY MODE: ${primary}
+"${modeDef.tagline}"
+
+What This Means:
+${modeDef.description}
+
+Your Superpowers:
+${modeDef.strengths.map(s => `• ${s}`).join('\n')}
+
+Watch Out For:
+${modeDef.weaknesses.map(w => `• ${w}`).join('\n')}
+
+Best Paired With: ${modeDef.bestPairedWith.join(', ')}
+Potential Friction: ${modeDef.avoidPairingWith.join(', ')}
+
+SECONDARY MODE: ${secondary} (${100 - confidence}% influence)
+
+======================================
+Join Hey Maple to find your perfect teammates!
+heymaple.com
+    `;
+
+    const blob = new Blob([resultsContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `hey-maple-${primary.toLowerCase()}-profile.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: `I'm a ${primary}!`,
+      text: `I just discovered my collaboration mode on Hey Maple: ${primary} - "${modeDef.tagline}"`,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log('Share cancelled');
+      }
+    } else {
+      navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+      alert('Link copied to clipboard!');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4">
@@ -108,18 +166,34 @@ export default function Results() {
                 </p>
               </div>
 
+              {/* Call to Action - Join or Download */}
+              <div className="bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 p-6 rounded-2xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <MapleLeafIcon size={32} />
+                  <div>
+                    <h3 className="text-lg font-bold">Ready to find your team?</h3>
+                    <p className="text-sm text-muted-foreground">Join Hey Maple to connect with compatible collaborators</p>
+                  </div>
+                </div>
+              </div>
+
               <div className="flex flex-col gap-4 pt-4">
-                <Link href="/dashboard">
-                  <Button size="lg" className="w-full h-12 text-lg shadow-lg">
-                    Find Your Teammates <ArrowRight className="ml-2" />
+                <Link href="/role-selection">
+                  <Button size="lg" className="w-full h-12 text-lg shadow-lg" data-testid="button-join-maple-results">
+                    Join Hey Maple <ArrowRight className="ml-2" />
+                  </Button>
+                </Link>
+                <Link href="/login">
+                  <Button size="lg" variant="outline" className="w-full h-12 text-lg" data-testid="button-login-results">
+                    <LogIn className="mr-2 h-5 w-5" /> Already have an account? Log in
                   </Button>
                 </Link>
                 <div className="flex gap-4">
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1" onClick={handleShare} data-testid="button-share-results">
                     <Share2 className="mr-2 h-4 w-4" /> Share
                   </Button>
-                  <Button variant="outline" className="flex-1">
-                    <Download className="mr-2 h-4 w-4" /> Save PDF
+                  <Button variant="outline" className="flex-1" onClick={handleDownloadPDF} data-testid="button-download-results">
+                    <Download className="mr-2 h-4 w-4" /> Download
                   </Button>
                 </div>
               </div>

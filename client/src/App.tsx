@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { Layout } from "@/components/Layout";
 import { AuthProvider } from "@/hooks/use-auth";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 import Home from "@/pages/Home";
 import RoleSelection from "@/pages/RoleSelection";
@@ -28,6 +29,7 @@ function Router() {
   return (
     <Layout>
       <Switch>
+        {/* Public Routes */}
         <Route path="/" component={Home} />
         <Route path="/role-selection" component={RoleSelection} />
         <Route path="/register" component={Register} />
@@ -35,17 +37,35 @@ function Router() {
         <Route path="/assessment" component={Assessment} />
         <Route path="/results" component={Results} />
         <Route path="/terms-of-service" component={TermsOfService} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/messages" component={Messages} />
-        <Route path="/notifications" component={Notifications} />
-        <Route path="/profile" component={Profile} />
         
-        {/* New Flows */}
-        <Route path="/create-project" component={CreateProject} />
-        <Route path="/project-matches" component={ProjectMatches} />
-        <Route path="/helper-setup" component={HelperSetup} />
-        <Route path="/project-feed" component={ProjectFeed} />
-        <Route path="/matches" component={Matches} />
+        {/* Protected Routes - Require Authentication */}
+        <Route path="/dashboard">
+          <ProtectedRoute><Dashboard /></ProtectedRoute>
+        </Route>
+        <Route path="/messages">
+          <ProtectedRoute><Messages /></ProtectedRoute>
+        </Route>
+        <Route path="/notifications">
+          <ProtectedRoute><Notifications /></ProtectedRoute>
+        </Route>
+        <Route path="/profile">
+          <ProtectedRoute><Profile /></ProtectedRoute>
+        </Route>
+        <Route path="/create-project">
+          <ProtectedRoute><CreateProject /></ProtectedRoute>
+        </Route>
+        <Route path="/project-matches">
+          <ProtectedRoute><ProjectMatches /></ProtectedRoute>
+        </Route>
+        <Route path="/helper-setup">
+          <ProtectedRoute><HelperSetup /></ProtectedRoute>
+        </Route>
+        <Route path="/project-feed">
+          <ProtectedRoute><ProjectFeed /></ProtectedRoute>
+        </Route>
+        <Route path="/matches">
+          <ProtectedRoute><Matches /></ProtectedRoute>
+        </Route>
         
         <Route component={NotFound} />
       </Switch>
