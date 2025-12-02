@@ -11,6 +11,7 @@ import {
   projectActivity,
   matchFeedback,
   userMatchingPreferences,
+  betaFeedback,
   type Profile,
   type InsertProfile,
   type Connection,
@@ -23,6 +24,8 @@ import {
   type InsertProject,
   type UserMilestone,
   type InsertUserMilestone,
+  type BetaFeedback,
+  type InsertBetaFeedback,
 } from "@shared/schema";
 import { eq, desc, and } from "drizzle-orm";
 
@@ -63,6 +66,10 @@ export interface IStorage {
   getProject(id: string): Promise<Project | undefined>;
   getProjectsByUser(userId: string): Promise<Project[]>;
   updateProject(id: string, updates: Partial<Project>): Promise<Project>;
+
+  // ===== BETA FEEDBACK =====
+  createBetaFeedback(feedback: InsertBetaFeedback): Promise<BetaFeedback>;
+  getAllBetaFeedback(): Promise<BetaFeedback[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -241,6 +248,20 @@ export class DatabaseStorage implements IStorage {
       .where(eq(projects.id, id))
       .returning();
     return result[0];
+  }
+
+  // ===== BETA FEEDBACK =====
+  async createBetaFeedback(feedback: InsertBetaFeedback): Promise<BetaFeedback> {
+    const result = await db.insert(betaFeedback).values(feedback).returning();
+    return result[0];
+  }
+
+  async getAllBetaFeedback(): Promise<BetaFeedback[]> {
+    const result = await db
+      .select()
+      .from(betaFeedback)
+      .orderBy(desc(betaFeedback.createdAt));
+    return result;
   }
 }
 
