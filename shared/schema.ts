@@ -156,6 +156,19 @@ export const betaFeedback = pgTable("beta_feedback", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// ========== JOB OPPORTUNITIES ==========
+export const jobOpportunities = pgTable("job_opportunities", {
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  postedById: uuid("posted_by_id").notNull().references(() => profiles.id),
+  company: varchar("company").notNull(),
+  role: varchar("role").notNull(),
+  description: text("description"),
+  location: varchar("location"),
+  jobType: varchar("job_type").default("full-time"),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // ========== HEALTH MONITOR ==========
 export const platformMetrics = pgTable("platform_metrics", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -249,3 +262,12 @@ export const insertBetaFeedbackSchema = createInsertSchema(betaFeedback).omit({
 
 export type BetaFeedback = typeof betaFeedback.$inferSelect;
 export type InsertBetaFeedback = z.infer<typeof insertBetaFeedbackSchema>;
+
+// Job Opportunity Insert Schema
+export const insertJobOpportunitySchema = createInsertSchema(jobOpportunities).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type JobOpportunity = typeof jobOpportunities.$inferSelect;
+export type InsertJobOpportunity = z.infer<typeof insertJobOpportunitySchema>;
