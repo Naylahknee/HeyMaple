@@ -25,6 +25,7 @@ import ProjectMatches from "@/pages/ProjectMatches";
 import HelperSetup from "@/pages/HelperSetup";
 import ProjectFeed from "@/pages/ProjectFeed";
 import Matches from "@/pages/Matches";
+import Jobs from "@/pages/Jobs";
 
 function Router() {
   return (
@@ -66,6 +67,9 @@ function Router() {
         </Route>
         <Route path="/matches">
           <ProtectedRoute><Matches /></ProtectedRoute>
+        </Route>
+        <Route path="/jobs">
+          <ProtectedRoute><Jobs /></ProtectedRoute>
         </Route>
         
         <Route component={NotFound} />
