@@ -1,6 +1,6 @@
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Briefcase, Users } from "lucide-react";
+import { GraduationCap, Briefcase, Users, FlaskConical } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function RoleSelection() {
@@ -10,20 +10,34 @@ export default function RoleSelection() {
     {
       id: "Student",
       title: "Student",
+      buttonLabel: "Continue as Student",
       description: "Find teammates, mentors, and collaboration opportunities while pursuing your degree",
       icon: GraduationCap,
+      highlight: false,
     },
     {
       id: "Alumni",
       title: "Alumni/Mentor",
+      buttonLabel: "Continue as Alumni",
       description: "Guide current students, refer job opportunities, and build meaningful professional relationships",
       icon: Briefcase,
+      highlight: false,
     },
     {
       id: "Faculty",
       title: "Faculty/Professor",
+      buttonLabel: "Continue as Faculty",
       description: "Connect with students, facilitate collaborations, and strengthen your academic community",
       icon: Users,
+      highlight: false,
+    },
+    {
+      id: "BetaTester",
+      title: "Beta Tester",
+      buttonLabel: "Join as Beta Tester",
+      description: "Help us improve Hey Maple by testing features and leaving feedback. Open to all .edu emails",
+      icon: FlaskConical,
+      highlight: true,
     },
   ];
 
@@ -45,7 +59,7 @@ export default function RoleSelection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {roles.map((role, index) => {
             const Icon = role.icon;
             return (
@@ -56,22 +70,33 @@ export default function RoleSelection() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <div
-                  className="card-maple h-full cursor-pointer hover:-translate-y-1 transition-all border-2 border-transparent hover:border-primary/30 flex flex-col justify-between"
+                  className={`card-maple h-full cursor-pointer hover:-translate-y-1 transition-all border-2 flex flex-col justify-between ${
+                    role.highlight
+                      ? "border-leaf/30 hover:border-leaf/60"
+                      : "border-transparent hover:border-primary/30"
+                  }`}
                   onClick={() => setLocation(`/assessment?role=${role.id}`)}
                   data-testid={`role-card-${role.id}`}
                 >
                   <div>
-                    <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mb-6 text-white">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-white ${
+                      role.highlight ? "bg-leaf" : "bg-primary"
+                    }`}>
                       <Icon size={28} />
                     </div>
-                    <h2 className="text-2xl font-bold mb-3">{role.title}</h2>
+                    <h2 className="text-xl font-bold mb-3">{role.title}</h2>
                     <p className="text-[15px] text-muted-foreground mb-6 leading-relaxed">{role.description}</p>
                   </div>
+                  {role.highlight && (
+                    <div className="text-xs font-semibold text-leaf bg-leaf/10 rounded-full px-3 py-1 w-fit mb-4">
+                      Any .edu email welcome
+                    </div>
+                  )}
                   <Button 
-                    className="w-full"
+                    className={`w-full text-[13px] px-4 ${role.highlight ? "bg-leaf hover:bg-leaf/90" : ""}`}
                     data-testid={`button-select-${role.id}`}
                   >
-                    Continue as {role.title}
+                    {role.buttonLabel}
                   </Button>
                 </div>
               </motion.div>

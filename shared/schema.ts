@@ -169,6 +169,21 @@ export const jobOpportunities = pgTable("job_opportunities", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// ========== ELEMENT FEEDBACK (Hover Comments) ==========
+export const elementFeedback = pgTable("element_feedback", {
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: varchar("email"),
+  pageUrl: text("page_url").notNull(),
+  elementSelector: text("element_selector"),
+  sectionName: varchar("section_name"),
+  category: varchar("category").default("general"),
+  comment: text("comment").notNull(),
+  positionX: integer("position_x"),
+  positionY: integer("position_y"),
+  status: varchar("status").default("new"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // ========== HEALTH MONITOR ==========
 export const platformMetrics = pgTable("platform_metrics", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -198,10 +213,13 @@ export const insertProfileSchema = createInsertSchema(profiles).omit({
 }).refine(
   (data) => {
     const email = data.email?.toLowerCase() || "";
+    if (data.accountType === "BetaTester") {
+      return email.endsWith(".edu");
+    }
     return email.endsWith("@usc.edu") || email.endsWith("@ucla.edu");
   },
   {
-    message: "Only USC (@usc.edu) and UCLA (@ucla.edu) email addresses are allowed",
+    message: "USC/UCLA students need @usc.edu or @ucla.edu email. Beta testers can use any .edu email.",
     path: ["email"],
   }
 );
@@ -262,6 +280,15 @@ export const insertBetaFeedbackSchema = createInsertSchema(betaFeedback).omit({
 
 export type BetaFeedback = typeof betaFeedback.$inferSelect;
 export type InsertBetaFeedback = z.infer<typeof insertBetaFeedbackSchema>;
+
+// Element Feedback Insert Schema
+export const insertElementFeedbackSchema = createInsertSchema(elementFeedback).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type ElementFeedback = typeof elementFeedback.$inferSelect;
+export type InsertElementFeedback = z.infer<typeof insertElementFeedbackSchema>;
 
 // Job Opportunity Insert Schema
 export const insertJobOpportunitySchema = createInsertSchema(jobOpportunities).omit({

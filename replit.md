@@ -78,6 +78,8 @@ Core entities include:
 - **Notifications**: User activity and engagement alerts
 - **User Activity/Milestones**: Gamification and lifecycle stage tracking
 - **Match Feedback**: Learning engine for algorithm optimization
+- **Element Feedback**: Hover-targeted feedback with position, section, category, and comment
+- **Beta Feedback**: General floating widget feedback
 
 **Design Philosophy:**
 - UUID primary keys for security and scalability
@@ -86,8 +88,8 @@ Core entities include:
 - Reputation system built into profile schema (ghostCount, responseRate, referralPoints)
 
 ### Authentication & Authorization
-- **Email Validation**: Restricted to @usc.edu and @ucla.edu domains
-- **Account Types**: Student, Faculty, Alumni with role-based features
+- **Email Validation**: Restricted to @usc.edu and @ucla.edu domains (Beta Testers: any .edu)
+- **Account Types**: Student, Faculty, Alumni, BetaTester with role-based features
 - **Session Strategy**: Cookie-based sessions stored in PostgreSQL
 - **Protected Routes**: Client-side route guards via AuthContext
 

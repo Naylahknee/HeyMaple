@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertProfileSchema, insertConnectionSchema, insertBetaFeedbackSchema, insertJobOpportunitySchema } from "@shared/schema";
+import { insertProfileSchema, insertConnectionSchema, insertBetaFeedbackSchema, insertElementFeedbackSchema, insertJobOpportunitySchema } from "@shared/schema";
 import { log } from "./index";
 
 export async function registerRoutes(
@@ -242,6 +242,27 @@ export async function registerRoutes(
   app.get("/api/feedback", async (req, res) => {
     const feedback = await storage.getAllBetaFeedback();
     res.json(feedback);
+  });
+
+  // ===== ELEMENT FEEDBACK (Hover Comments) =====
+  app.post("/api/element-feedback", async (req, res) => {
+    try {
+      const validated = insertElementFeedbackSchema.parse(req.body);
+      const feedback = await storage.createElementFeedback(validated);
+      log(`Element feedback received: ${feedback.category} on ${feedback.pageUrl} - ${feedback.sectionName || 'unknown section'}`);
+      res.status(201).json(feedback);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/element-feedback", async (req, res) => {
+    const pageUrl = req.query.pageUrl as string | undefined;
+    const feedbackList = pageUrl
+      ? await storage.getElementFeedbackByPage(pageUrl)
+      : await storage.getAllElementFeedback();
+    const sanitized = feedbackList.map(({ email, ...rest }) => rest);
+    res.json(sanitized);
   });
 
   // ===== JOB OPPORTUNITIES =====

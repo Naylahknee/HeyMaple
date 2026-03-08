@@ -12,6 +12,7 @@ import {
   matchFeedback,
   userMatchingPreferences,
   betaFeedback,
+  elementFeedback,
   jobOpportunities,
   type Profile,
   type InsertProfile,
@@ -27,6 +28,8 @@ import {
   type InsertUserMilestone,
   type BetaFeedback,
   type InsertBetaFeedback,
+  type ElementFeedback,
+  type InsertElementFeedback,
   type JobOpportunity,
   type InsertJobOpportunity,
 } from "@shared/schema";
@@ -73,6 +76,11 @@ export interface IStorage {
   // ===== BETA FEEDBACK =====
   createBetaFeedback(feedback: InsertBetaFeedback): Promise<BetaFeedback>;
   getAllBetaFeedback(): Promise<BetaFeedback[]>;
+
+  // ===== ELEMENT FEEDBACK =====
+  createElementFeedback(feedback: InsertElementFeedback): Promise<ElementFeedback>;
+  getElementFeedbackByPage(pageUrl: string): Promise<ElementFeedback[]>;
+  getAllElementFeedback(): Promise<ElementFeedback[]>;
 
   // ===== JOB OPPORTUNITIES =====
   createJobOpportunity(job: InsertJobOpportunity): Promise<JobOpportunity>;
@@ -270,6 +278,29 @@ export class DatabaseStorage implements IStorage {
       .select()
       .from(betaFeedback)
       .orderBy(desc(betaFeedback.createdAt));
+    return result;
+  }
+
+  // ===== ELEMENT FEEDBACK =====
+  async createElementFeedback(feedback: InsertElementFeedback): Promise<ElementFeedback> {
+    const result = await db.insert(elementFeedback).values(feedback).returning();
+    return result[0];
+  }
+
+  async getElementFeedbackByPage(pageUrl: string): Promise<ElementFeedback[]> {
+    const result = await db
+      .select()
+      .from(elementFeedback)
+      .where(eq(elementFeedback.pageUrl, pageUrl))
+      .orderBy(desc(elementFeedback.createdAt));
+    return result;
+  }
+
+  async getAllElementFeedback(): Promise<ElementFeedback[]> {
+    const result = await db
+      .select()
+      .from(elementFeedback)
+      .orderBy(desc(elementFeedback.createdAt));
     return result;
   }
 

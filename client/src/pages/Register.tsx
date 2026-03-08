@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { UNIVERSITIES, DEGREE_OPTIONS, PROJECT_TYPES, GRADUATION_YEARS, getMajorsForSchool, getUniversityFromEmail } from "@/lib/uscData";
 import { SchoolCombobox } from "@/components/SchoolCombobox";
 import { ModeBadge } from "@/components/ModeBadge";
-import { CheckCircle2, Mail, Briefcase, GraduationCap, Target, Compass, User, School, Building2, BookOpen, Upload, Linkedin, X, Plus } from "lucide-react";
+import { CheckCircle2, Mail, Briefcase, GraduationCap, Target, Compass, User, School, Building2, BookOpen, Upload, Linkedin, X, Plus, FlaskConical } from "lucide-react";
 
 const SKILLS_LIST = [
   "React", "Node.js", "Python", "Java", "C++", "Swift",
@@ -27,7 +27,7 @@ export default function Register() {
   const { login, loginWithProvider } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    accountType: "Student" as "Student" | "Faculty" | "Alumni",
+    accountType: "Student" as "Student" | "Faculty" | "Alumni" | "BetaTester",
     firstName: "",
     lastName: "",
     email: "",
@@ -117,10 +117,13 @@ export default function Register() {
       if (!formData.lastName.trim()) newErrors.lastName = "Last name required";
       if (!formData.email.trim()) newErrors.email = "Email required";
       
-      // Validate email is USC or UCLA
       if (formData.email) {
         const lowerEmail = formData.email.toLowerCase();
-        if (!lowerEmail.endsWith("@usc.edu") && !lowerEmail.endsWith("@ucla.edu")) {
+        if (formData.accountType === "BetaTester") {
+          if (!lowerEmail.endsWith(".edu")) {
+            newErrors.email = "Beta testers need a valid .edu email address";
+          }
+        } else if (!lowerEmail.endsWith("@usc.edu") && !lowerEmail.endsWith("@ucla.edu")) {
           newErrors.email = "Only USC (@usc.edu) and UCLA (@ucla.edu) email addresses are allowed";
         } else {
           const uni = getUniversityFromEmail(formData.email);
@@ -193,6 +196,7 @@ export default function Register() {
     { id: "Student", label: "Student", description: "Undergrad or grad student looking to collaborate", icon: User },
     { id: "Faculty", label: "Faculty", description: "Offering mentorship or advice", icon: School },
     { id: "Alumni", label: "Alumni / Mentor", description: "Industry mentor or USC alum", icon: Briefcase },
+    { id: "BetaTester", label: "Beta Tester", description: "Help test Hey Maple — any .edu email welcome", icon: FlaskConical },
   ];
 
   return (
@@ -333,11 +337,11 @@ export default function Register() {
                 </div>
 
                 <div>
-                  <Label htmlFor="email">USC Email</Label>
+                  <Label htmlFor="email">{formData.accountType === "BetaTester" ? "University Email" : "USC/UCLA Email"}</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="jsmith@usc.edu"
+                    placeholder={formData.accountType === "BetaTester" ? "you@university.edu" : "jsmith@usc.edu"}
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     className={errors.email ? "border-red-500" : ""}

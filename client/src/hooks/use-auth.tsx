@@ -13,7 +13,7 @@ interface User {
   major?: string;
   degree?: string;
   graduationYear?: string;
-  accountType?: 'Student' | 'Faculty' | 'Alumni';
+  accountType?: 'Student' | 'Faculty' | 'Alumni' | 'BetaTester';
   skills?: string[];
   projectType?: string;
   goals?: string[];
@@ -26,7 +26,7 @@ interface AuthContextType {
   login: (email: string, name?: string, additionalData?: Partial<User>) => void;
   logout: () => void;
   loginWithProvider: (provider: string) => void;
-  updateUserRole: (newRole: 'Student' | 'Faculty' | 'Alumni') => void;
+  updateUserRole: (newRole: 'Student' | 'Faculty' | 'Alumni' | 'BetaTester') => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -105,7 +105,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setLocation('/');
   };
 
-  const updateUserRole = (newRole: 'Student' | 'Faculty' | 'Alumni') => {
+  const updateUserRole = (newRole: 'Student' | 'Faculty' | 'Alumni' | 'BetaTester') => {
     if (user) {
       const updatedUser = { ...user, accountType: newRole };
       setUser(updatedUser);
