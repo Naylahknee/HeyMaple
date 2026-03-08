@@ -1,0 +1,114 @@
+=== DESIGN SYSTEM (apply globally across all pages) ===
+
+COLORS:
+  --primary-blue: #4A6CF7
+  --accent-green: #22C55E
+  --bg-white: #FFFFFF
+  --bg-light: #F3F4F6
+  --text-dark: #111827
+  --text-gray: #6B7280
+  --label-blue: #4A6CF7
+  --border-light: #E5E7EB
+
+TYPOGRAPHY:
+  - Font: Inter (import from Google Fonts)
+  - Hero H1: 56px, font-weight 800, color #111827, center-aligned
+  - Section headlines: 2-line split — line 1 in #111827 bold, line 2 in #22C55E bold
+  - Eyebrow labels: 11px, all-caps, letter-spacing 0.1em, color #4A6CF7, center-aligned
+  - Body/subhead: 18px, font-weight 500, color #6B7280, center-aligned, line-height 1.7
+  - Card titles: 18px, font-weight 700, color #111827
+  - Card body: 15px, font-weight 400, color #6B7280
+
+LAYOUT:
+  - Max content width: 880px, centered with auto margins
+  - Section padding: 100px top/bottom
+  - Page side margins: 5% left and right (fluid)
+  - Horizontal rule dividers (1px, #E5E7EB) between major sections
+
+CARDS:
+  - Border-radius: 16px
+  - Background: #F3F4F6
+  - Padding: 28px
+  - Two-column grid with 24px gap
+  - Icon style A (challenge cards): blue line icon, no background
+  - Icon style B (solution cards): white icon inside solid blue 
+    rounded square (48x48px, border-radius 12px, bg #4A6CF7)
+
+BUTTONS:
+  - Primary: bg #4A6CF7, white text, border-radius 50px, 
+    padding 14px 28px, font-weight 600
+  - Secondary: same pill shape, blue outline, transparent bg
+  - Full-width CTA: same as primary but width 100%
+  - Hover: darken blue by 10%
+
+NAVIGATION:
+  - Green leaf icon + "Hey Maple" in bold #4A6CF7, left-aligned
+  - Hamburger menu right (mobile), horizontal links right (desktop)
+  - 1px bottom border #E5E7EB
+
+ANIMATIONS:
+  - Scroll-triggered fade-in-up on all sections and cards
+  - Staggered card reveals (100ms delay between cards)
+  - Button hover: smooth color transition 200ms
+
+=== PAGES TO BUILD ===
+
+1. HOME (landing page)
+   - Hero: large headline "Where Students Branch Out", subhead, 
+     two CTA buttons (Join the Beta →, Learn More)
+   - Problem section: eyebrow "THE CHALLENGE", split headline, 
+     2x2 card grid with icons
+   - Solution section: eyebrow "THE SOLUTION", split headline, 
+     solution cards with filled blue icon squares
+   - Communities section: eyebrow "COMMUNITIES", "Find Your Branch" 
+     headline, 6 branch cards in 2-col grid 
+     (Tech, Media, Business, Creative, Healthcare, Law)
+   - How It Works: eyebrow "THE PROCESS", 3 vertical numbered steps 
+     (blue circles with 01/02/03), each with title + description
+   - Waitlist CTA: light gray card, form with First Name, Last Name, 
+     Email, School (dropdown), Major, Education Level (dropdown), 
+     full-width "Join Waitlist" button, 3 green checkmark trust badges
+
+2. DASHBOARD (authenticated user home)
+   - Top nav with user avatar, notifications bell, Hey Maple logo
+   - Welcome banner with user's name and branch memberships
+   - "Your Branches" section: cards for each joined branch
+   - "Suggested Mentors" section: horizontal scroll of mentor cards 
+     (avatar, name, role, school, Connect button)
+   - "Active Collaborations" section: project cards with status badges
+
+3. BRANCHES PAGE
+   - Grid of all 6 branches (same card design as homepage)
+   - Each card is clickable, leads to individual branch page
+   - Filter bar at top (All, Joined, Suggested)
+
+4. BRANCH DETAIL PAGE
+   - Branch header with icon, name, member count
+   - Tab navigation: Feed | Members | Projects | Events
+   - Feed: post cards with avatar, name, timestamp, content, like/comment
+   - Members: grid of member cards with Connect button
+   - Projects: cards with collaborator avatars, status, description
+
+5. PROFILE PAGE
+   - Cover area with avatar, name, school, major, graduation year
+   - "My Branches" badges
+   - "My Mentors" section
+   - Bio / About section
+   - Edit Profile button (primary style)
+
+=== TECH STACK ===
+- React with React Router for page navigation
+- Tailwind CSS for styling (or plain CSS using the variables above)
+- Inter font from Google Fonts
+- Lucide React for icons
+- Mock/hardcoded data is fine — no backend needed yet
+
+=== IMPORTANT NOTES ===
+- Apply the two-tone headline pattern on every section 
+  (black first line, green second line)
+- Maintain generous white space — do not crowd elements
+- Cards should never have drop shadows heavier than 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06)
+- Keep the green (#22C55E) reserved ONLY for the accent 
+  headline line and checkmark icons — not for buttons or backgrounds
+- All pages must be mobile responsive
