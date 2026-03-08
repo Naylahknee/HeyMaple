@@ -4,16 +4,14 @@ import { ModeBadge } from "@/components/ModeBadge";
 import { ChangeRoleDialog } from "@/components/ChangeRoleDialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Pencil, Settings, Share2, ShieldAlert } from "lucide-react";
+import { Pencil, Share2, ShieldAlert } from "lucide-react";
 import profileAvatar from '@assets/generated_images/college-age_female_student_portrait.png';
 import { toast } from "sonner";
 
 export default function Profile() {
   const [isChangeRoleOpen, setIsChangeRoleOpen] = useState(false);
   
-  // Mock logged in user
   const [user, setUser] = useState<User>({
     id: "me",
     email: "jordan@usc.edu",
@@ -30,8 +28,6 @@ export default function Profile() {
   });
 
   const handleChangeRole = async (newRole: "Student" | "Faculty" | "Alumni", password: string) => {
-    // In production, this would call the backend API
-    // For now, mock validation
     if (password.length < 6) {
       throw new Error("Invalid password");
     }
@@ -45,19 +41,18 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 py-12 px-4">
-      <div className="container mx-auto max-w-4xl">
+    <div className="min-h-screen bg-white py-12">
+      <div className="content-width">
         <div className="grid md:grid-cols-3 gap-8">
           
-          {/* Sidebar */}
           <div className="md:col-span-1 space-y-6">
-            <Card className="p-6 text-center">
+            <div className="card-maple text-center">
               <div className="relative w-32 h-32 mx-auto mb-4">
-                <Avatar className="w-full h-full border-4 border-background shadow-lg">
+                <Avatar className="w-full h-full border-4 border-white shadow-lg">
                   <AvatarImage src={user.avatar} />
                   <AvatarFallback>JS</AvatarFallback>
                 </Avatar>
-                <div className="absolute bottom-0 right-0 bg-background p-1.5 rounded-full shadow-md border">
+                <div className="absolute bottom-0 right-0 bg-white p-1.5 rounded-full shadow-md border border-border">
                   <Pencil className="w-4 h-4 text-muted-foreground" />
                 </div>
               </div>
@@ -71,7 +66,7 @@ export default function Profile() {
 
               <div className="space-y-2">
                 <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Role</div>
-                <div className="text-sm font-medium mb-3 p-2 bg-muted/50 rounded-lg">
+                <div className="text-sm font-medium mb-3 p-2 bg-white rounded-full border border-border">
                   {user.accountType}
                 </div>
                 <Button 
@@ -84,28 +79,27 @@ export default function Profile() {
                   <ShieldAlert className="w-4 h-4 mr-2" /> Change Role
                 </Button>
               </div>
-            </Card>
+            </div>
 
-            <Card className="p-6">
-              <h3 className="font-semibold mb-4">Verification</h3>
+            <div className="card-maple">
+              <h3 className="font-bold mb-4">Verification</h3>
               <ul className="space-y-3 text-sm">
-                <li className="flex items-center gap-2 text-green-600">
-                  <span className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">✓</span>
+                <li className="flex items-center gap-2 text-leaf">
+                  <span className="w-5 h-5 rounded-full bg-leaf/10 flex items-center justify-center text-xs">&#10003;</span>
                   Student Email
                 </li>
-                <li className="flex items-center gap-2 text-green-600">
-                  <span className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">✓</span>
+                <li className="flex items-center gap-2 text-leaf">
+                  <span className="w-5 h-5 rounded-full bg-leaf/10 flex items-center justify-center text-xs">&#10003;</span>
                   Phone Number
                 </li>
               </ul>
-            </Card>
+            </div>
           </div>
 
-          {/* Main Content */}
           <div className="md:col-span-2 space-y-8">
-             <Card className="p-8">
+             <div className="card-maple">
                <div className="flex justify-between items-start mb-6">
-                 <h3 className="text-xl font-heading font-bold">About Me</h3>
+                 <h3 className="text-xl font-extrabold">About Me</h3>
                  <Button variant="ghost" size="icon"><Pencil className="w-4 h-4" /></Button>
                </div>
                <p className="text-muted-foreground leading-relaxed mb-6">
@@ -113,52 +107,52 @@ export default function Profile() {
                </p>
                
                <div className="mb-8">
-                 <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-muted-foreground">Skills</h4>
+                 <h4 className="font-bold mb-3 text-sm uppercase tracking-wider text-muted-foreground">Skills</h4>
                  <div className="flex flex-wrap gap-2">
                    {(user.skills || []).map(skill => (
-                     <Badge key={skill} variant="secondary" className="px-3 py-1 text-sm font-normal">
+                     <Badge key={skill} variant="secondary" className="px-3 py-1 text-sm font-normal rounded-full">
                        {skill}
                      </Badge>
                    ))}
-                   <Button variant="outline" size="sm" className="h-7 text-xs border-dashed rounded-full">+ Add</Button>
+                   <Button variant="outline" size="sm" className="h-7 text-xs border-dashed">+ Add</Button>
                  </div>
                </div>
 
                <div>
-                 <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-muted-foreground">Availability</h4>
+                 <h4 className="font-bold mb-3 text-sm uppercase tracking-wider text-muted-foreground">Availability</h4>
                  <div className="grid grid-cols-2 gap-4 text-sm">
-                   <div className="p-3 bg-muted/30 rounded-lg">
+                   <div className="p-3 bg-white rounded-2xl border border-border">
                      <span className="block text-muted-foreground text-xs mb-1">Hours / Week</span>
                      <span className="font-medium">10-15 Hours</span>
                    </div>
-                   <div className="p-3 bg-muted/30 rounded-lg">
+                   <div className="p-3 bg-white rounded-2xl border border-border">
                      <span className="block text-muted-foreground text-xs mb-1">Project Type</span>
                      <span className="font-medium">Semester Long</span>
                    </div>
                  </div>
                </div>
-             </Card>
+             </div>
 
-             <Card className="p-8 bg-primary/5 border-primary/10">
+             <div className="card-maple border-2 border-primary/20">
                <div className="flex justify-between items-center mb-6">
-                 <h3 className="text-xl font-heading font-bold">My Stats</h3>
+                 <h3 className="text-xl font-extrabold">My Stats</h3>
                  <Button variant="ghost" size="sm"><Share2 className="w-4 h-4 mr-2" /> Share Profile</Button>
                </div>
                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div className="p-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
-                    <div className="text-3xl font-bold text-primary mb-1">85%</div>
+                  <div className="p-4 bg-white rounded-2xl border border-border">
+                    <div className="text-3xl font-extrabold text-primary mb-1">85%</div>
                     <div className="text-xs text-muted-foreground font-medium uppercase">Mode Confidence</div>
                   </div>
-                  <div className="p-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
-                    <div className="text-3xl font-bold text-blue-600 mb-1">4</div>
+                  <div className="p-4 bg-white rounded-2xl border border-border">
+                    <div className="text-3xl font-extrabold text-primary mb-1">4</div>
                     <div className="text-xs text-muted-foreground font-medium uppercase">Projects Done</div>
                   </div>
-                  <div className="p-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
-                    <div className="text-3xl font-bold text-green-600 mb-1">5.0</div>
+                  <div className="p-4 bg-white rounded-2xl border border-border">
+                    <div className="text-3xl font-extrabold text-leaf mb-1">5.0</div>
                     <div className="text-xs text-muted-foreground font-medium uppercase">Avg Rating</div>
                   </div>
                </div>
-             </Card>
+             </div>
           </div>
         </div>
       </div>

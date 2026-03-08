@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MessageSquare, Calendar, FolderOpen } from "lucide-react";
+import { MessageSquare, Calendar, FolderOpen, ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export default function Matches() {
   const [_, setLocation] = useLocation();
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-4 md:p-8">
-      <div className="container mx-auto max-w-4xl">
+    <div className="min-h-screen bg-white py-8 md:py-12">
+      <div className="content-width max-w-4xl">
         <div className="mb-8">
-          <Button variant="ghost" onClick={() => setLocation("/dashboard")}>← Dashboard</Button>
-          <h1 className="text-3xl font-heading font-bold mt-4">Collaboration Hub</h1>
+          <Button variant="ghost" onClick={() => setLocation("/dashboard")}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> Dashboard
+          </Button>
+          <h1 className="text-2xl md:text-3xl font-extrabold mt-4">
+            Collaboration <span className="text-leaf">Hub</span>
+          </h1>
         </div>
 
         <Tabs defaultValue="active" className="w-full">
@@ -25,38 +28,38 @@ export default function Matches() {
           </TabsList>
 
           <TabsContent value="requests">
-            <Card className="p-6 mb-4">
+            <div className="card-maple mb-4">
               <div className="flex justify-between items-center">
                 <div>
                   <h3 className="font-bold text-lg">Sarah Chen</h3>
                   <p className="text-sm text-muted-foreground">Wants to help with your Capstone</p>
-                  <p className="text-sm mt-2 italic">"Hi, I saw your project and can help with React..."</p>
+                  <p className="text-sm mt-2 italic text-muted-foreground">"Hi, I saw your project and can help with React..."</p>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline">Decline</Button>
-                  <Button>Accept</Button>
+                  <Button variant="outline" size="sm">Decline</Button>
+                  <Button size="sm">Accept</Button>
                 </div>
               </div>
-            </Card>
-            <Card className="p-6">
+            </div>
+            <div className="card-maple">
               <div className="flex justify-between items-center">
                 <div>
                   <h3 className="font-bold text-lg">To: Alex Rivera</h3>
                   <p className="text-sm text-muted-foreground">You offered help on "Thesis Data"</p>
-                  <Badge variant="secondary" className="mt-2">Pending</Badge>
+                  <Badge variant="secondary" className="mt-2 rounded-full">Pending</Badge>
                 </div>
-                <Button variant="ghost">Withdraw</Button>
+                <Button variant="ghost" size="sm">Withdraw</Button>
               </div>
-            </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="active">
-            <Card className="p-6 mb-4 border-l-4 border-l-primary">
+            <div className="card-maple border-l-4 border-l-primary">
               <div className="flex justify-between items-start">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <h3 className="font-bold text-xl">Capstone - Streaming App</h3>
-                    <Badge>Active</Badge>
+                    <Badge className="rounded-full">Active</Badge>
                   </div>
                   <p className="text-muted-foreground mb-4">Collaborating with <strong>Jordan Lee</strong> (UX Designer)</p>
                   
@@ -73,7 +76,7 @@ export default function Matches() {
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="past">

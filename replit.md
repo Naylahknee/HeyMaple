@@ -27,6 +27,22 @@ Preferred communication style: Simple, everyday language.
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
 
+**Design System:**
+- **Primary Color**: #4A6CF7 (HSL 228 92% 63%) — used for buttons, links, accents
+- **Accent Green (Leaf)**: #22C55E (HSL 142 71% 45%) — used for headline highlights, success states
+- **Backgrounds**: White (#FFFFFF) — all pages use white bg, no slate/gray page backgrounds
+- **Text Dark**: #111827 (HSL 221 39% 11%) — foreground text
+- **Text Gray**: #6B7280 (HSL 220 9% 46%) — muted/secondary text
+- **Border**: #E5E7EB (HSL 220 13% 91%) — subtle borders
+- **Font**: Inter (weights 400-800) for all text (heading + body)
+- **Buttons**: Pill-shaped (rounded-full), font-semibold, primary bg with white text
+- **Cards**: `.card-maple` utility — rounded-2xl, bg-secondary, p-7, soft shadow
+- **Layout**: `.content-width` = max-w-[880px] mx-auto px-[5%]
+- **Section Labels**: `.eyebrow` = 11px uppercase tracking-wide primary color
+- **Dividers**: `.divider` = border-t between sections
+- **Section Padding**: `.section-padding` = py-24 md:py-[100px]
+- **Icons on Cards**: White icons inside solid primary blue squares (w-12 h-12 rounded-xl bg-primary)
+
 **Design Patterns:**
 - Component-based architecture with reusable UI components
 - Custom hooks for shared logic (`use-auth`, `use-mobile`, `use-toast`)

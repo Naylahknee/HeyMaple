@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useLocation } from "wouter";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -66,19 +65,9 @@ export default function Jobs() {
     }
   };
 
-  const jobTypeColor = (type: string | null) => {
-    switch (type) {
-      case "internship": return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
-      case "full-time": return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400";
-      case "part-time": return "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400";
-      case "contract": return "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400";
-      default: return "bg-gray-100 text-gray-700";
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 p-4 md:p-8">
-      <div className="container mx-auto max-w-4xl">
+    <div className="min-h-screen bg-white py-8 md:py-12">
+      <div className="content-width max-w-4xl">
         <Button 
           variant="ghost" 
           className="mb-6" 
@@ -90,9 +79,8 @@ export default function Jobs() {
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-heading font-bold flex items-center gap-3">
-              <Briefcase className="h-8 w-8 text-amber-600" />
-              Who's Recruiting?
+            <h1 className="text-2xl md:text-3xl font-extrabold flex items-center gap-3">
+              Who's <span className="text-leaf">Recruiting?</span>
             </h1>
             <p className="text-muted-foreground mt-1">
               Browse job and internship opportunities from alumni and partners
@@ -100,7 +88,6 @@ export default function Jobs() {
           </div>
           {canPostJobs && (
             <Button 
-              className="bg-purple-600 hover:bg-purple-700"
               onClick={() => setLocation("/dashboard")}
               data-testid="button-post-job-cta"
             >
@@ -114,7 +101,7 @@ export default function Jobs() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input 
               placeholder="Search by company or role..." 
-              className="pl-10 bg-white"
+              className="pl-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               data-testid="input-search-jobs"
@@ -126,7 +113,6 @@ export default function Jobs() {
                 key={type}
                 variant={filterType === type ? "default" : "outline"}
                 onClick={() => setFilterType(type)}
-                className="capitalize"
                 size="sm"
                 data-testid={`filter-${type}`}
               >
@@ -142,67 +128,58 @@ export default function Jobs() {
             <p className="text-muted-foreground">Loading opportunities...</p>
           </div>
         ) : filteredJobs.length === 0 ? (
-          <Card className="text-center py-16">
-            <CardContent>
-              <Briefcase className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No opportunities yet</h3>
-              <p className="text-muted-foreground mb-6">
-                {searchQuery 
-                  ? "No jobs match your search. Try different keywords."
-                  : "Be the first to know when new opportunities are posted!"}
-              </p>
-              {canPostJobs && (
-                <Button 
-                  className="bg-purple-600 hover:bg-purple-700"
-                  onClick={() => setLocation("/dashboard")}
-                >
-                  <Plus className="mr-2 h-4 w-4" /> Post the First Opportunity
-                </Button>
-              )}
-            </CardContent>
-          </Card>
+          <div className="card-maple text-center py-16">
+            <Briefcase className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
+            <h3 className="text-xl font-bold mb-2">No opportunities yet</h3>
+            <p className="text-muted-foreground mb-6">
+              {searchQuery 
+                ? "No jobs match your search. Try different keywords."
+                : "Be the first to know when new opportunities are posted!"}
+            </p>
+            {canPostJobs && (
+              <Button onClick={() => setLocation("/dashboard")}>
+                <Plus className="mr-2 h-4 w-4" /> Post the First Opportunity
+              </Button>
+            )}
+          </div>
         ) : (
           <div className="space-y-4">
             {filteredJobs.map((job) => (
-              <Card 
+              <div 
                 key={job.id} 
-                className="hover:shadow-md transition-shadow"
+                className="card-maple hover:shadow-md transition-shadow"
                 data-testid={`job-card-${job.id}`}
               >
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <CardTitle className="text-xl mb-1">{job.role}</CardTitle>
-                      <CardDescription className="flex items-center gap-2 text-base">
-                        <Building2 className="h-4 w-4" />
-                        {job.company}
-                      </CardDescription>
-                    </div>
-                    <Badge className={jobTypeColor(job.jobType)}>
-                      {jobTypeLabel(job.jobType)}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  {job.description && (
-                    <p className="text-muted-foreground mb-4 line-clamp-2">
-                      {job.description}
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">{job.role}</h3>
+                    <p className="flex items-center gap-2 text-muted-foreground">
+                      <Building2 className="h-4 w-4" />
+                      {job.company}
                     </p>
-                  )}
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                    {job.location && (
-                      <span className="flex items-center gap-1">
-                        <MapPin className="h-4 w-4" />
-                        {job.location}
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      Posted {new Date(job.createdAt).toLocaleDateString()}
-                    </span>
                   </div>
-                </CardContent>
-              </Card>
+                  <Badge variant="secondary" className="rounded-full">
+                    {jobTypeLabel(job.jobType)}
+                  </Badge>
+                </div>
+                {job.description && (
+                  <p className="text-muted-foreground mt-3 mb-4 line-clamp-2 text-[15px]">
+                    {job.description}
+                  </p>
+                )}
+                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                  {job.location && (
+                    <span className="flex items-center gap-1">
+                      <MapPin className="h-4 w-4" />
+                      {job.location}
+                    </span>
+                  )}
+                  <span className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    Posted {new Date(job.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
             ))}
           </div>
         )}

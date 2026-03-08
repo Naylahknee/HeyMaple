@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { MOCK_NOTIFICATIONS, MOCK_USERS } from "@/lib/mockData";
 import { Notification } from "@/lib/types";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, MessageSquare, Eye, Check, Trash2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>(MOCK_NOTIFICATIONS);
@@ -28,9 +28,9 @@ export default function Notifications() {
       case 'connection_request':
         return <Heart className="text-red-500" size={20} />;
       case 'message':
-        return <MessageSquare className="text-blue-500" size={20} />;
+        return <MessageSquare className="text-primary" size={20} />;
       case 'profile_viewed':
-        return <Eye className="text-purple-500" size={20} />;
+        return <Eye className="text-muted-foreground" size={20} />;
       default:
         return null;
     }
@@ -41,10 +41,12 @@ export default function Notifications() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 py-12 px-4">
-      <div className="container mx-auto max-w-2xl">
+    <div className="min-h-screen bg-white py-12">
+      <div className="content-width max-w-2xl">
         <div className="mb-8">
-          <h1 className="text-3xl font-heading font-bold mb-2">Notifications</h1>
+          <h1 className="text-2xl md:text-3xl font-extrabold mb-2">
+            Notifications
+          </h1>
           <p className="text-muted-foreground">
             Stay updated on connection requests and messages
           </p>
@@ -61,18 +63,18 @@ export default function Notifications() {
 
         <div className="space-y-3">
           {filtered.length === 0 ? (
-            <Card className="p-12 text-center">
+            <div className="card-maple text-center py-12">
               <p className="text-muted-foreground text-lg">No notifications yet</p>
               <p className="text-sm text-muted-foreground mt-2">When people connect with you or message, they'll appear here</p>
-            </Card>
+            </div>
           ) : (
             filtered.map(notification => {
               const relatedUser = getRelatedUser(notification.relatedUserId);
               return (
-                <Card
+                <div
                   key={notification.id}
                   className={cn(
-                    "p-4 border-l-4 hover:shadow-md transition-shadow",
+                    "card-maple border-l-4 hover:shadow-md transition-shadow",
                     notification.read ? "border-l-border opacity-75" : "border-l-primary"
                   )}
                 >
@@ -125,7 +127,7 @@ export default function Notifications() {
                       <Button size="sm">Accept</Button>
                     </div>
                   )}
-                </Card>
+                </div>
               );
             })
           )}
@@ -133,8 +135,4 @@ export default function Notifications() {
       </div>
     </div>
   );
-}
-
-function cn(...args: any[]) {
-  return args.filter(Boolean).join(' ');
 }

@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { X, Plus } from "lucide-react";
+import { X, Plus, ArrowLeft } from "lucide-react";
 import { PROJECT_TYPES } from "@/lib/uscData";
 
 export default function CreateProject() {
@@ -49,7 +48,6 @@ export default function CreateProject() {
     }));
   };
 
-  // Wizard for "I don't know what I need"
   const [showWizard, setShowWizard] = useState(false);
   const [wizardAnswers, setWizardAnswers] = useState({
     workingOn: "",
@@ -75,16 +73,19 @@ export default function CreateProject() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-4 md:p-8">
-      <div className="container mx-auto max-w-3xl">
+    <div className="min-h-screen bg-white py-8 md:py-12">
+      <div className="content-width max-w-3xl">
         <div className="mb-8">
-          <Button variant="ghost" onClick={() => setLocation("/dashboard")}>← Back to Dashboard</Button>
-          <h1 className="text-3xl font-heading font-bold mt-4">
-            {step === 1 ? "Create a Project" : "Define Your Needs"}
+          <Button variant="ghost" onClick={() => setLocation("/dashboard")}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
+          </Button>
+          <h1 className="text-2xl md:text-3xl font-extrabold mt-4">
+            {step === 1 ? "Create a " : "Define Your "}
+            <span className="text-leaf">{step === 1 ? "Project" : "Needs"}</span>
           </h1>
         </div>
 
-        <Card className="p-6">
+        <div className="card-maple">
           {step === 1 && (
             <div className="space-y-6">
               <div>
@@ -155,16 +156,16 @@ export default function CreateProject() {
             <div className="space-y-6">
               {!showWizard ? (
                 <>
-                  <div className="bg-blue-50 p-4 rounded-lg flex justify-between items-center">
+                  <div className="bg-primary/5 border border-primary/10 p-4 rounded-2xl flex justify-between items-center">
                     <div>
-                      <h3 className="font-medium text-blue-900">Not sure what to ask for?</h3>
-                      <p className="text-sm text-blue-700">Let us help you identify the right roles.</p>
+                      <h3 className="font-semibold text-foreground">Not sure what to ask for?</h3>
+                      <p className="text-sm text-muted-foreground">Let us help you identify the right roles.</p>
                     </div>
                     <Button variant="secondary" size="sm" onClick={() => setShowWizard(true)}>Help Me Decide</Button>
                   </div>
 
-                  <div className="space-y-4 border p-4 rounded-lg">
-                    <h3 className="font-medium">Add a Role</h3>
+                  <div className="space-y-4 border border-border p-4 rounded-2xl">
+                    <h3 className="font-semibold">Add a Role</h3>
                     <div className="grid gap-4">
                       <div>
                         <Label>Role Label</Label>
@@ -211,14 +212,14 @@ export default function CreateProject() {
                   </div>
 
                   <div className="space-y-2">
-                    <h3 className="font-medium">Needed Roles</h3>
-                    {projectData.roles.length === 0 && <p className="text-muted-foreground italic">No roles added yet.</p>}
+                    <h3 className="font-semibold">Needed Roles</h3>
+                    {projectData.roles.length === 0 && <p className="text-muted-foreground italic text-sm">No roles added yet.</p>}
                     {projectData.roles.map((role, idx) => (
-                      <div key={idx} className="flex justify-between items-center p-3 bg-slate-50 rounded border">
+                      <div key={idx} className="flex justify-between items-center p-3 bg-secondary rounded-2xl">
                         <div>
                           <div className="font-medium">{role.role}</div>
                           <div className="text-sm text-muted-foreground">
-                            {role.skills.join(", ")} • {role.time}
+                            {role.skills.join(", ")} &middot; {role.time}
                           </div>
                         </div>
                         <Button variant="ghost" size="icon" onClick={() => handleRemoveRole(idx)}><X size={16} /></Button>
@@ -233,7 +234,7 @@ export default function CreateProject() {
                 </>
               ) : (
                 <div className="space-y-4 animate-in fade-in">
-                  <h3 className="font-medium text-lg">Let's figure this out</h3>
+                  <h3 className="font-semibold text-lg">Let's figure this out</h3>
                   <div>
                     <Label>What are you working on?</Label>
                     <Textarea 
@@ -263,7 +264,7 @@ export default function CreateProject() {
               )}
             </div>
           )}
-        </Card>
+        </div>
       </div>
     </div>
   );

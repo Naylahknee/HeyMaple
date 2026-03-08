@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { Clock, Calendar, Briefcase } from "lucide-react";
+import { Clock, Briefcase, ArrowLeft } from "lucide-react";
 
 const MOCK_PROJECTS = [
   {
@@ -59,38 +58,42 @@ export default function ProjectFeed() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-4 md:p-8">
-      <div className="container mx-auto max-w-4xl">
+    <div className="min-h-screen bg-white py-8 md:py-12">
+      <div className="content-width max-w-4xl">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <Button variant="ghost" onClick={() => setLocation("/dashboard")}>← Dashboard</Button>
-            <h1 className="text-3xl font-heading font-bold mt-4">Projects Needing Help</h1>
+            <Button variant="ghost" onClick={() => setLocation("/dashboard")}>
+              <ArrowLeft className="mr-2 h-4 w-4" /> Dashboard
+            </Button>
+            <h1 className="text-2xl md:text-3xl font-extrabold mt-4">
+              Projects Needing <span className="text-leaf">Help</span>
+            </h1>
             <p className="text-muted-foreground">Matches based on your skills: React, UX</p>
           </div>
-          <Button variant="outline" onClick={() => setLocation("/helper-setup")}>Edit Profile</Button>
+          <Button variant="outline" size="sm" onClick={() => setLocation("/helper-setup")}>Edit Profile</Button>
         </div>
 
         <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-          <Badge variant="secondary" className="cursor-pointer">All</Badge>
-          <Badge variant="outline" className="cursor-pointer">Capstone</Badge>
-          <Badge variant="outline" className="cursor-pointer">Thesis</Badge>
-          <Badge variant="outline" className="cursor-pointer">Short-term</Badge>
+          <Badge variant="secondary" className="cursor-pointer rounded-full px-4 py-1">All</Badge>
+          <Badge variant="outline" className="cursor-pointer rounded-full px-4 py-1">Capstone</Badge>
+          <Badge variant="outline" className="cursor-pointer rounded-full px-4 py-1">Thesis</Badge>
+          <Badge variant="outline" className="cursor-pointer rounded-full px-4 py-1">Short-term</Badge>
         </div>
 
         <div className="grid gap-6">
           {MOCK_PROJECTS.map(project => (
-            <Card key={project.id} className="p-6 hover:shadow-md transition-shadow">
+            <div key={project.id} className="card-maple hover:shadow-md transition-shadow">
               <div className="flex flex-col md:flex-row justify-between gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary">{project.type}</Badge>
+                    <Badge variant="secondary" className="rounded-full">{project.type}</Badge>
                     <span className="text-sm text-muted-foreground">{project.program}</span>
                   </div>
                   <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
+                  <p className="text-muted-foreground mb-4 text-[15px]">{project.description}</p>
                   
                   <div className="flex flex-wrap gap-4 text-sm">
-                    <div className="flex items-center gap-1 font-medium text-blue-600">
+                    <div className="flex items-center gap-1 font-medium text-primary">
                       <Briefcase size={16} /> Need: {project.needs.join(", ")}
                     </div>
                     <div className="flex items-center gap-1 text-muted-foreground">
@@ -103,7 +106,7 @@ export default function ProjectFeed() {
                   <Button variant="outline">Save</Button>
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>

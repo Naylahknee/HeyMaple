@@ -26,12 +26,10 @@ export default function Dashboard() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [connectionRequestOpen, setConnectionRequestOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [referralModalOpen, setReferralModalOpen] = useState(false);
   const [postJobModalOpen, setPostJobModalOpen] = useState(false);
   const [jobForm, setJobForm] = useState({ company: "", role: "", description: "", location: "", jobType: "full-time" });
   const [isSubmittingJob, setIsSubmittingJob] = useState(false);
   
-  // Simulate "My" profile as Architect for demo purposes (or use real user mode if we had it in auth)
   const myMode: CollaborationMode = "Architect";
 
   const filteredUsers = MOCK_USERS.filter(user => {
@@ -52,12 +50,6 @@ export default function Dashboard() {
     setTimeout(() => setShowToast(false), 3000);
   };
 
-  // Check if user has "Job referrals" or "Refer others" goals
-  const showReferralWidget = user?.goals?.includes("Job referrals") || user?.goals?.includes("Refer others");
-  const isReferrer = user?.goals?.includes("Refer others");
-  
-  // Role-based visibility
-  const isStudent = user?.accountType === "Student" || !user?.accountType;
   const canPostJobs = user?.accountType === "Faculty" || user?.accountType === "Alumni";
 
   const handlePostJob = async () => {
@@ -86,107 +78,99 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 p-4 md:p-8">
-      <div className="container mx-auto max-w-6xl">
+    <div className="min-h-screen bg-white py-8 md:py-12">
+      <div className="content-width">
         
-        {/* Entry Point Section - Role-Based Action Cards */}
+        {/* Action Cards */}
         <div className="mb-12">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-heading font-bold mb-2">What do you want to do today?</h2>
-            <p className="text-muted-foreground text-lg">Choose an action to get started</p>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">
+              What do you want to<br /><span className="text-leaf">do today?</span>
+            </h2>
+            <p className="text-muted-foreground">Choose an action to get started</p>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Get Help - Available to all */}
-            <Card 
-              className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20"
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div 
+              className="card-maple group cursor-pointer hover:-translate-y-1 transition-all text-center"
               onClick={() => setLocation("/create-project")}
               data-testid="card-get-help"
             >
-              <CardContent className="p-6 text-center">
-                <div className="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Lightbulb className="h-7 w-7 text-blue-600 dark:text-blue-400" />
-                </div>
-                <h3 className="font-heading font-bold text-lg mb-2">Get Help on a Project</h3>
-                <p className="text-sm text-muted-foreground">Find teammates to collaborate on your ideas</p>
-              </CardContent>
-            </Card>
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Lightbulb className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="font-bold text-lg text-foreground mb-2">Get Help on a Project</h3>
+              <p className="text-[15px] text-muted-foreground">Find teammates to collaborate on your ideas</p>
+            </div>
 
-            {/* Offer Help - Available to all */}
-            <Card 
-              className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/20"
+            <div 
+              className="card-maple group cursor-pointer hover:-translate-y-1 transition-all text-center"
               onClick={() => setLocation("/helper-setup")}
               data-testid="card-offer-help"
             >
-              <CardContent className="p-6 text-center">
-                <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <HandHeart className="h-7 w-7 text-green-600 dark:text-green-400" />
-                </div>
-                <h3 className="font-heading font-bold text-lg mb-2">Offer Help to Others</h3>
-                <p className="text-sm text-muted-foreground">Share your skills and support fellow students</p>
-              </CardContent>
-            </Card>
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <HandHeart className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="font-bold text-lg text-foreground mb-2">Offer Help to Others</h3>
+              <p className="text-[15px] text-muted-foreground">Share your skills and support fellow students</p>
+            </div>
 
-            {/* Find Jobs - Primarily for Students */}
-            <Card 
-              className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20"
+            <div 
+              className="card-maple group cursor-pointer hover:-translate-y-1 transition-all text-center"
               onClick={() => setLocation("/jobs")}
               data-testid="card-find-jobs"
             >
-              <CardContent className="p-6 text-center">
-                <div className="w-14 h-14 rounded-full bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Briefcase className="h-7 w-7 text-amber-600 dark:text-amber-400" />
-                </div>
-                <h3 className="font-heading font-bold text-lg mb-2">Who's Recruiting?</h3>
-                <p className="text-sm text-muted-foreground">Browse job & internship opportunities</p>
-              </CardContent>
-            </Card>
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Briefcase className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="font-bold text-lg text-foreground mb-2">Who's Recruiting?</h3>
+              <p className="text-[15px] text-muted-foreground">Browse job & internship opportunities</p>
+            </div>
 
-            {/* Post Opportunity - For Faculty/Alumni */}
             {canPostJobs ? (
-              <Card 
-                className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
+              <div 
+                className="card-maple group cursor-pointer hover:-translate-y-1 transition-all text-center"
                 onClick={() => setPostJobModalOpen(true)}
                 data-testid="card-post-job"
               >
-                <CardContent className="p-6 text-center">
-                  <div className="w-14 h-14 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Building2 className="h-7 w-7 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <h3 className="font-heading font-bold text-lg mb-2">Post Opportunity</h3>
-                  <p className="text-sm text-muted-foreground">Share jobs from your company</p>
-                </CardContent>
-              </Card>
+                <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Building2 className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-bold text-lg text-foreground mb-2">Post Opportunity</h3>
+                <p className="text-[15px] text-muted-foreground">Share jobs from your company</p>
+              </div>
             ) : (
-              <Card 
-                className="group cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
+              <div 
+                className="card-maple group cursor-pointer hover:-translate-y-1 transition-all text-center"
                 onClick={() => setLocation("/project-feed")}
                 data-testid="card-browse-projects"
               >
-                <CardContent className="p-6 text-center">
-                  <div className="w-14 h-14 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Users className="h-7 w-7 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <h3 className="font-heading font-bold text-lg mb-2">Browse Projects</h3>
-                  <p className="text-sm text-muted-foreground">Find projects that need your skills</p>
-                </CardContent>
-              </Card>
+                <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Users className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-bold text-lg text-foreground mb-2">Browse Projects</h3>
+                <p className="text-[15px] text-muted-foreground">Find projects that need your skills</p>
+              </div>
             )}
           </div>
         </div>
 
+        <div className="divider mb-8" />
+
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-heading font-bold">Browse Community</h1>
+            <h1 className="text-2xl md:text-3xl font-extrabold text-foreground">
+              Browse <span className="text-leaf">Community</span>
+            </h1>
             <p className="text-muted-foreground">
               Connect directly with students and alumni.
             </p>
           </div>
           <div className="flex gap-3">
-             <Button variant="outline" onClick={() => setLocation("/matches")}>
+             <Button variant="outline" size="sm" onClick={() => setLocation("/matches")}>
                My Matches & Collabs
              </Button>
-             <div className="flex items-center gap-2 bg-white p-1 rounded-lg border shadow-sm">
+             <div className="flex items-center gap-2 bg-secondary p-1.5 rounded-full border border-border">
                <span className="text-xs font-medium px-2 text-muted-foreground">You are an:</span>
                <ModeBadge mode={myMode} size="sm" />
              </div>
@@ -194,12 +178,12 @@ export default function Dashboard() {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8 sticky top-20 z-30 bg-slate-50/95 backdrop-blur-sm py-2">
+        <div className="flex flex-col md:flex-row gap-4 mb-8 sticky top-20 z-30 bg-white/95 backdrop-blur-sm py-2">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input 
               placeholder="Search by name or skill..." 
-              className="pl-10 bg-white"
+              className="pl-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -209,7 +193,7 @@ export default function Dashboard() {
             <Button 
               variant={filterMode === "All" ? "default" : "outline"}
               onClick={() => setFilterMode("All")}
-              className="rounded-full"
+              size="sm"
             >
               All
             </Button>
@@ -218,14 +202,11 @@ export default function Dashboard() {
                 key={mode}
                 variant={filterMode === mode ? "default" : "outline"}
                 onClick={() => setFilterMode(mode as CollaborationMode)}
-                className="rounded-full"
+                size="sm"
               >
                 {mode}
               </Button>
             ))}
-            <Button variant="ghost" size="icon">
-              <SlidersHorizontal className="h-4 w-4" />
-            </Button>
           </div>
         </div>
 
@@ -234,7 +215,9 @@ export default function Dashboard() {
           <DialogContent className="sm:max-w-[500px]">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-purple-600" />
+                <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center">
+                  <Building2 className="h-4 w-4 text-white" />
+                </div>
                 Post a Job Opportunity
               </DialogTitle>
               <DialogDescription>
@@ -276,7 +259,7 @@ export default function Dashboard() {
                 <Label htmlFor="jobType">Type</Label>
                 <select 
                   id="jobType"
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  className="flex h-10 w-full rounded-full border border-input bg-background px-4 py-2 text-sm"
                   value={jobForm.jobType}
                   onChange={(e) => setJobForm({ ...jobForm, jobType: e.target.value })}
                   data-testid="select-job-type"
@@ -302,7 +285,6 @@ export default function Dashboard() {
             <div className="flex justify-end gap-3">
               <Button variant="outline" onClick={() => setPostJobModalOpen(false)}>Cancel</Button>
               <Button 
-                className="bg-purple-600 hover:bg-purple-700" 
                 onClick={handlePostJob}
                 disabled={!jobForm.company || !jobForm.role || isSubmittingJob}
                 data-testid="button-submit-job"
@@ -333,12 +315,11 @@ export default function Dashboard() {
         )}
 
         {showToast && (
-          <div className="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-in slide-in-from-bottom-5">
-            ✓ Connection request sent! They'll see it in their notifications.
+          <div className="fixed bottom-4 right-4 bg-leaf text-white px-6 py-3 rounded-full shadow-lg animate-in slide-in-from-bottom-5 font-semibold text-sm">
+            Connection request sent!
           </div>
         )}
 
-        {/* Connection Request Dialog */}
         {selectedUser && (
           <ConnectionRequest
             user={selectedUser}
@@ -348,7 +329,6 @@ export default function Dashboard() {
           />
         )}
 
-        {/* User Detail Dialog */}
         <Dialog open={!!selectedUser && !connectionRequestOpen} onOpenChange={(open) => !open && setSelectedUser(null)}>
           <DialogContent className="max-w-2xl p-0 overflow-hidden gap-0">
              {selectedUser && (
@@ -376,7 +356,7 @@ export default function Dashboard() {
                         <h4 className="text-sm font-semibold mb-2">Skills</h4>
                         <div className="flex flex-wrap gap-2">
                           {(selectedUser.skills || []).map(s => (
-                            <span key={s} className="px-2 py-1 bg-secondary/10 text-secondary rounded text-xs font-medium">
+                            <span key={s} className="px-3 py-1 bg-secondary text-foreground rounded-full text-xs font-medium">
                               {s}
                             </span>
                           ))}
@@ -390,7 +370,7 @@ export default function Dashboard() {
                    </div>
                  </div>
 
-                 <div className="space-y-6 border-t pt-6">
+                 <div className="space-y-6 border-t border-border pt-6 px-6 pb-6">
                    {selectedUser.reviews && selectedUser.reviews.length > 0 && (
                      <div>
                        <h4 className="text-sm font-semibold mb-3">Collaborator Reviews</h4>

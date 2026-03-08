@@ -3,7 +3,6 @@ import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -197,11 +196,11 @@ export default function Register() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-heading font-bold mb-2">Join Hey Maple</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-2">Join <span className="text-leaf">Hey Maple</span></h1>
           <p className="text-muted-foreground text-lg">
             {step === 1 ? "Find Your Perfect Project Partner at USC" : `Find your perfect teammates ${selectedUniversity ? `at ${selectedUniversity.name}` : "at USC or UCLA"}`}
           </p>
@@ -220,7 +219,7 @@ export default function Register() {
           ))}
         </div>
 
-        <Card className="p-8 shadow-xl">
+        <div className="card-maple">
           {/* Step 1: Account Type */}
           {step === 1 && (
             <div className="space-y-6 animate-in fade-in duration-300">
@@ -646,9 +645,9 @@ export default function Register() {
                 </div>
               )}
 
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-sm">
-                <p className="font-medium text-blue-900 dark:text-blue-200 mb-2">✨ Next: Find Your Collaboration Mode</p>
-                <p className="text-blue-800 dark:text-blue-300 text-xs">
+              <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 text-sm">
+                <p className="font-medium text-foreground mb-2">Next: Find Your Collaboration Mode</p>
+                <p className="text-muted-foreground text-xs">
                   We'll ask you 10 quick questions to discover how you naturally work in teams. This helps us match you with complementary teammates.
                 </p>
               </div>
@@ -723,9 +722,9 @@ export default function Register() {
                 )}
               </div>
 
-              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 text-sm">
-                <p className="font-medium text-green-900 dark:text-green-200">✓ Your profile looks great!</p>
-                <p className="text-green-800 dark:text-green-300 text-xs mt-1">
+              <div className="bg-leaf/5 border border-leaf/10 rounded-2xl p-4 text-sm">
+                <p className="font-medium text-foreground">Your profile looks great!</p>
+                <p className="text-muted-foreground text-xs mt-1">
                   Let's find your collaboration mode and start matching you with teammates.
                 </p>
               </div>
@@ -740,7 +739,7 @@ export default function Register() {
               </div>
             </div>
           )}
-        </Card>
+        </div>
 
         {/* Footer */}
         <div className="text-center mt-8 text-sm text-muted-foreground">

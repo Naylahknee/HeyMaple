@@ -15,8 +15,8 @@ export default function TermsOfService() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4">
-      <div className="container mx-auto max-w-2xl">
+    <div className="min-h-screen bg-white py-12 px-4">
+      <div className="content-width max-w-2xl">
         <button
           onClick={handleBack}
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors"
@@ -26,12 +26,12 @@ export default function TermsOfService() {
           Back
         </button>
 
-        <div className="bg-card border rounded-2xl p-8 md:p-12 shadow-lg">
-          <h1 className="text-4xl font-heading font-bold mb-8 text-foreground">
+        <div className="card-maple">
+          <h1 className="text-3xl font-extrabold mb-8 text-foreground">
             Terms of Service
           </h1>
 
-          <ScrollArea className="h-96 border rounded-lg p-6 mb-8 bg-muted/50">
+          <ScrollArea className="h-96 border border-border rounded-2xl p-6 mb-8 bg-white">
             <div className="space-y-6 pr-4">
               <section>
                 <h2 className="text-xl font-bold mb-3">1. Acceptance of Terms</h2>

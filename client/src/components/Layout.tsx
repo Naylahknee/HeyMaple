@@ -27,35 +27,30 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { href: "/profile", label: "My Profile" },
   ];
 
-  // Show connection nav only on protected pages
-  const isProtected = ['/dashboard', '/messages', '/notifications', '/profile', '/matches', '/project-feed'].includes(location);
-
   return (
     <div className="min-h-screen bg-background font-sans text-foreground flex flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          {/* Logo */}
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-white/95 backdrop-blur-sm">
+        <div className="content-width h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative w-8 h-8 transition-transform group-hover:scale-105">
+            <div className="relative w-7 h-7 transition-transform group-hover:scale-105">
               <img src={mapleLeafLogo} alt="Hey Maple Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="font-heading font-bold text-xl text-foreground tracking-tight">
+            <span className="font-bold text-lg text-primary tracking-tight">
               Hey Maple
             </span>
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
             {user ? (
               <>
                 <Link href="/dashboard" className={cn("text-sm font-medium transition-colors hover:text-primary", location === "/dashboard" ? "text-primary" : "text-muted-foreground")}>
                   Find Teammates
                 </Link>
-                <Link href="/messages" className="text-muted-foreground hover:text-foreground relative">
+                <Link href="/messages" className="text-muted-foreground hover:text-primary relative">
                   <MessageSquare size={20} />
-                  <span className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+                  <span className="absolute -top-2 -right-2 w-4 h-4 bg-primary text-white text-xs rounded-full flex items-center justify-center">3</span>
                 </Link>
-                <Link href="/notifications" className="text-muted-foreground hover:text-foreground relative">
+                <Link href="/notifications" className="text-muted-foreground hover:text-primary relative">
                   <Bell size={20} />
                   <span className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">2</span>
                 </Link>
@@ -88,24 +83,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Link href="/dashboard" className="cursor-pointer w-full">
-                        <div className="flex items-center">
-                          <svg
-                            className="mr-2 h-4 w-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <rect width="7" height="9" x="3" y="3" rx="1" />
-                            <rect width="7" height="5" x="14" y="3" rx="1" />
-                            <rect width="7" height="9" x="14" y="12" rx="1" />
-                            <rect width="7" height="5" x="3" y="16" rx="1" />
-                          </svg>
-                          <span>Dashboard</span>
-                        </div>
+                        <span>Dashboard</span>
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
@@ -132,20 +110,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 ))}
                 <div className="h-6 w-px bg-border mx-2" />
                 <Link href="/login">
-                  <button className="text-sm font-medium text-muted-foreground hover:text-foreground">
+                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                     Sign In
-                  </button>
+                  </Button>
                 </Link>
                 <Link href="/register">
-                  <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors hover-elevate">
+                  <Button size="sm">
                     Get Started
-                  </button>
+                  </Button>
                 </Link>
               </>
             )}
           </nav>
 
-          {/* Mobile Menu Toggle */}
           <button 
             className="md:hidden p-2 text-muted-foreground hover:text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -154,12 +131,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </button>
         </div>
 
-        {/* Mobile Nav */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t bg-white p-4 space-y-4 animate-in slide-in-from-top-5">
+          <div className="md:hidden border-t border-border bg-white p-4 space-y-4 animate-in slide-in-from-top-5">
             {user ? (
               <>
-                <div className="flex items-center gap-3 px-2 py-2 mb-4 border-b">
+                <div className="flex items-center gap-3 px-2 py-2 mb-4 border-b border-border">
                   <Avatar className="h-10 w-10">
                     <AvatarImage src={user.avatar} alt={user.name} />
                     <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
@@ -200,7 +176,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     {item.label}
                   </Link>
                 ))}
-                <div className="border-t pt-4 mt-2 flex flex-col gap-3">
+                <div className="border-t border-border pt-4 mt-2 flex flex-col gap-3">
                   <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                     <Button variant="outline" className="w-full">Sign In</Button>
                   </Link>
@@ -218,12 +194,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      <footer className="border-t bg-muted/30 py-12">
-        <div className="container mx-auto px-4 text-center md:text-left grid md:grid-cols-4 gap-8">
+      <footer className="border-t border-border bg-secondary py-12">
+        <div className="content-width text-center md:text-left grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
-               <img src={mapleLeafLogo} alt="Hey Maple Logo" className="w-6 h-6 object-contain opacity-80" />
-               <span className="font-heading font-bold text-lg text-foreground/80">Hey Maple</span>
+               <img src={mapleLeafLogo} alt="Hey Maple Logo" className="w-6 h-6 object-contain" />
+               <span className="font-bold text-lg text-primary">Hey Maple</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Building networks, growing futures.
@@ -231,33 +207,33 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4">Platform</h4>
+            <h4 className="font-bold mb-4 text-foreground">Platform</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary">How it Works</a></li>
-              <li><a href="#" className="hover:text-primary">Assessment</a></li>
-              <li><a href="#" className="hover:text-primary">Pricing</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">How it Works</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Assessment</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Pricing</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Resources</h4>
+            <h4 className="font-bold mb-4 text-foreground">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary">Blog</a></li>
-              <li><a href="#" className="hover:text-primary">Team Guides</a></li>
-              <li><a href="#" className="hover:text-primary">Success Stories</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Team Guides</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Success Stories</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Legal</h4>
+            <h4 className="font-bold mb-4 text-foreground">Legal</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary">Privacy</a></li>
-              <li><a href="#" className="hover:text-primary">Terms</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Privacy</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Terms</a></li>
             </ul>
           </div>
         </div>
-        <div className="container mx-auto px-4 mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-          © 2025 Hey Maple. All rights reserved.
+        <div className="content-width mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          &copy; 2025 Hey Maple. All rights reserved.
         </div>
       </footer>
     </div>

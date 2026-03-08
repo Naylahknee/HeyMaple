@@ -47,72 +47,60 @@
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
   
-  /* Custom Mode Colors */
   --color-mode-architect: hsl(var(--mode-architect));
   --color-mode-builder: hsl(var(--mode-builder));
   --color-mode-coordinator: hsl(var(--mode-coordinator));
   --color-mode-refiner: hsl(var(--mode-refiner));
   --color-mode-catalyst: hsl(var(--mode-catalyst));
 
-  --font-sans: 'Inter', sans-serif;
-  --font-heading: 'Outfit', sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
   
   --radius: 0.75rem;
 }
 
 :root {
-  /* Base - Clean & Warm */
-  --background: 0 0% 100%; /* #ffffff */
-  --foreground: 240 3% 12%; /* #1d1d1f (Dark Gray) */
+  --background: 0 0% 100%;
+  --foreground: 221 39% 11%;
 
-  /* Card */
-  --card: 0 0% 100%; /* #ffffff */
-  --card-foreground: 240 3% 12%; /* #1d1d1f */
+  --card: 0 0% 100%;
+  --card-foreground: 221 39% 11%;
 
-  /* Popover */
   --popover: 0 0% 100%;
-  --popover-foreground: 240 3% 12%;
+  --popover-foreground: 221 39% 11%;
 
-  /* Primary - Primary Blue #2563EB */
-  --primary: 221 83% 53%;
+  --primary: 228 92% 63%;
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary - Kept consistent or adjusted */
-  --secondary: 240 5% 96%; /* #f5f5f7 (Light Gray/Card BG for secondary elements) */
-  --secondary-foreground: 240 3% 12%;
+  --secondary: 220 14% 96%;
+  --secondary-foreground: 221 39% 11%;
 
-  /* Muted - Medium Gray #6e6e73 for text */
-  --muted: 240 5% 96%;
-  --muted-foreground: 240 2% 44%; /* #6e6e73 */
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 9% 46%;
 
-  /* Accent - Light Gray for hover */
-  --accent: 240 5% 96%;
-  --accent-foreground: 221 83% 53%;
+  --accent: 220 14% 96%;
+  --accent-foreground: 228 92% 63%;
 
-  /* Destructive */
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
-  /* Borders & Inputs - Light Gray #dcdcdc */
-  --border: 0 0% 86%;
-  --input: 0 0% 86%;
-  --ring: 221 83% 53%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 228 92% 63%;
 
-  /* Custom Colors */
-  --leaf: 135 65% 50%; /* #30d158 (Leaf/Accent Green) */
-  --amber: 38 92% 50%; /* #F59E0B (Amber/Highlight) */
-  --success: 160 84% 39%; /* #10B981 (Success Green) */
+  --leaf: 142 71% 45%;
+  --amber: 38 92% 50%;
+  --success: 142 71% 45%;
 
-  /* Mode Specific Colors */
-  --mode-architect: 221 83% 53%;  /* Blue */
-  --mode-builder: 38 92% 50%;     /* Amber/Orange */
-  --mode-coordinator: 262 83% 58%; /* Purple */
-  --mode-refiner: 160 84% 39%;    /* Success Green/Teal */
-  --mode-catalyst: 45 93% 47%;    /* Gold/Yellow */
+  --mode-architect: 228 92% 63%;
+  --mode-builder: 38 92% 50%;
+  --mode-coordinator: 262 83% 58%;
+  --mode-refiner: 142 71% 45%;
+  --mode-catalyst: 45 93% 47%;
 
-  --chart-1: 221 83% 53%;
-  --chart-2: 160 84% 39%;
-  --chart-3: 240 3% 12%;
+  --chart-1: 228 92% 63%;
+  --chart-2: 142 71% 45%;
+  --chart-3: 221 39% 11%;
   --chart-4: 38 92% 50%;
   --chart-5: 262 83% 58%;
 
@@ -129,8 +117,8 @@
   --popover: 222 47% 11%;
   --popover-foreground: 210 40% 98%;
 
-  --primary: 10 75% 57%;
-  --primary-foreground: 210 40% 98%;
+  --primary: 228 92% 63%;
+  --primary-foreground: 0 0% 100%;
 
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
@@ -146,7 +134,7 @@
 
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
-  --ring: 10 75% 57%;
+  --ring: 228 92% 63%;
 }
 
 @layer base {
@@ -154,9 +142,33 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/20 selection:text-primary;
+    @apply font-sans antialiased bg-background text-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    @apply py-24 md:py-[100px];
+  }
+  .content-width {
+    @apply max-w-[880px] mx-auto px-[5%];
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.1em] text-primary text-center;
+  }
+  .section-headline {
+    @apply text-3xl md:text-4xl font-extrabold text-center leading-tight;
+  }
+  .section-body {
+    @apply text-lg font-medium text-muted-foreground text-center leading-relaxed;
+  }
+  .card-maple {
+    @apply rounded-2xl bg-secondary p-7 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+  }
+  .divider {
+    @apply border-t border-border;
   }
 }
