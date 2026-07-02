@@ -14,7 +14,21 @@ export interface UniversityData {
     secondary: string;
     accent: string;
   };
-  schools: USCSchool[];
+  // Optional: only the "detailed" universities (USC/UCLA) ship a full school +
+  // major catalog. Curated brand-only schools (see SCHOOL_BRANDS) omit this.
+  schools?: USCSchool[];
+}
+
+// Lightweight brand record for schools we theme by email domain but don't (yet)
+// have a full school/major catalog for. Used purely to switch the color palette.
+export interface SchoolBrand {
+  id: string;
+  name: string;
+  emailDomain: string;
+  colors: {
+    primary: string;
+    secondary: string;
+  };
 }
 
 // USC SCHOOLS AND MAJORS
@@ -597,6 +611,52 @@ export const UNIVERSITIES: UniversityData[] = [
   },
 ];
 
+// Curated brand colors for additional universities. These theme the app (via the
+// --primary CSS variable) when a student signs up with a recognized email domain.
+// Any domain not listed here (and not in UNIVERSITIES) falls back to the default
+// Hey Maple palette. Primary is the school's most recognizable brand color;
+// secondary is informational for now (the theme only consumes primary).
+export const SCHOOL_BRANDS: SchoolBrand[] = [
+  { id: "umich", name: "University of Michigan", emailDomain: "@umich.edu", colors: { primary: "#00274C", secondary: "#FFCB05" } },
+  { id: "berkeley", name: "UC Berkeley", emailDomain: "@berkeley.edu", colors: { primary: "#003262", secondary: "#FDB515" } },
+  { id: "stanford", name: "Stanford University", emailDomain: "@stanford.edu", colors: { primary: "#8C1515", secondary: "#2E2D29" } },
+  { id: "harvard", name: "Harvard University", emailDomain: "@harvard.edu", colors: { primary: "#A51C30", secondary: "#1E1E1E" } },
+  { id: "mit", name: "MIT", emailDomain: "@mit.edu", colors: { primary: "#A31F34", secondary: "#8A8B8C" } },
+  { id: "yale", name: "Yale University", emailDomain: "@yale.edu", colors: { primary: "#00356B", secondary: "#BD5319" } },
+  { id: "princeton", name: "Princeton University", emailDomain: "@princeton.edu", colors: { primary: "#E77500", secondary: "#000000" } },
+  { id: "columbia", name: "Columbia University", emailDomain: "@columbia.edu", colors: { primary: "#1D4F91", secondary: "#B9D9EB" } },
+  { id: "cornell", name: "Cornell University", emailDomain: "@cornell.edu", colors: { primary: "#B31B1B", secondary: "#222222" } },
+  { id: "upenn", name: "University of Pennsylvania", emailDomain: "@upenn.edu", colors: { primary: "#011F5B", secondary: "#990000" } },
+  { id: "brown", name: "Brown University", emailDomain: "@brown.edu", colors: { primary: "#4E3629", secondary: "#ED1C24" } },
+  { id: "dartmouth", name: "Dartmouth College", emailDomain: "@dartmouth.edu", colors: { primary: "#00693E", secondary: "#12312B" } },
+  { id: "duke", name: "Duke University", emailDomain: "@duke.edu", colors: { primary: "#00539B", secondary: "#012169" } },
+  { id: "northwestern", name: "Northwestern University", emailDomain: "@northwestern.edu", colors: { primary: "#4E2A84", secondary: "#716C6B" } },
+  { id: "nyu", name: "New York University", emailDomain: "@nyu.edu", colors: { primary: "#57068C", secondary: "#000000" } },
+  { id: "utexas", name: "University of Texas at Austin", emailDomain: "@utexas.edu", colors: { primary: "#BF5700", secondary: "#333F48" } },
+  { id: "tamu", name: "Texas A&M University", emailDomain: "@tamu.edu", colors: { primary: "#500000", secondary: "#5B6236" } },
+  { id: "ufl", name: "University of Florida", emailDomain: "@ufl.edu", colors: { primary: "#0021A5", secondary: "#FA4616" } },
+  { id: "uga", name: "University of Georgia", emailDomain: "@uga.edu", colors: { primary: "#BA0C2F", secondary: "#000000" } },
+  { id: "osu", name: "Ohio State University", emailDomain: "@osu.edu", colors: { primary: "#BB0000", secondary: "#666666" } },
+  { id: "psu", name: "Penn State University", emailDomain: "@psu.edu", colors: { primary: "#041E42", secondary: "#1E407C" } },
+  { id: "wisc", name: "University of Wisconsin–Madison", emailDomain: "@wisc.edu", colors: { primary: "#C5050C", secondary: "#333333" } },
+  { id: "uw", name: "University of Washington", emailDomain: "@uw.edu", colors: { primary: "#4B2E83", secondary: "#85754D" } },
+  { id: "uoregon", name: "University of Oregon", emailDomain: "@uoregon.edu", colors: { primary: "#154733", secondary: "#FEE123" } },
+  { id: "asu", name: "Arizona State University", emailDomain: "@asu.edu", colors: { primary: "#8C1D40", secondary: "#FFC627" } },
+  { id: "arizona", name: "University of Arizona", emailDomain: "@arizona.edu", colors: { primary: "#AB0520", secondary: "#0C234B" } },
+  { id: "nd", name: "University of Notre Dame", emailDomain: "@nd.edu", colors: { primary: "#0C2340", secondary: "#C99700" } },
+  { id: "umn", name: "University of Minnesota", emailDomain: "@umn.edu", colors: { primary: "#7A0019", secondary: "#FFCC33" } },
+  { id: "illinois", name: "University of Illinois Urbana-Champaign", emailDomain: "@illinois.edu", colors: { primary: "#13294B", secondary: "#E84A27" } },
+  { id: "purdue", name: "Purdue University", emailDomain: "@purdue.edu", colors: { primary: "#000000", secondary: "#CEB888" } },
+  { id: "msu", name: "Michigan State University", emailDomain: "@msu.edu", colors: { primary: "#18453B", secondary: "#97A1A9" } },
+  { id: "unc", name: "University of North Carolina", emailDomain: "@unc.edu", colors: { primary: "#13294B", secondary: "#4B9CD3" } },
+  { id: "virginia", name: "University of Virginia", emailDomain: "@virginia.edu", colors: { primary: "#232D4B", secondary: "#E57200" } },
+  { id: "gatech", name: "Georgia Institute of Technology", emailDomain: "@gatech.edu", colors: { primary: "#003057", secondary: "#B3A369" } },
+  { id: "miami", name: "University of Miami", emailDomain: "@miami.edu", colors: { primary: "#005030", secondary: "#F47321" } },
+  { id: "bu", name: "Boston University", emailDomain: "@bu.edu", colors: { primary: "#CC0000", secondary: "#000000" } },
+  { id: "rutgers", name: "Rutgers University", emailDomain: "@rutgers.edu", colors: { primary: "#CC0033", secondary: "#000000" } },
+  { id: "umd", name: "University of Maryland", emailDomain: "@umd.edu", colors: { primary: "#E21833", secondary: "#FFD200" } },
+];
+
 export const DEGREE_OPTIONS = [
   "Bachelor's Degree",
   "Master's Degree",
@@ -950,25 +1010,43 @@ export const GRADUATION_YEARS = [
 export function getMajorsForSchool(schoolId: string, universityId: string): string[] {
   const university = UNIVERSITIES.find(u => u.id === universityId);
   if (!university) return [];
-  
-  const school = university.schools.find(s => s.id === schoolId);
+
+  const school = university.schools?.find(s => s.id === schoolId);
   return school ? school.majors.sort() : [];
 }
 
-// Helper function to find university from email
+// Helper function to find university from email.
+// Checks the detailed universities first (USC/UCLA, with full catalogs), then the
+// curated brand-only list. Returns undefined for any unrecognized domain, which
+// causes the theme to fall back to the default Hey Maple palette.
 export function getUniversityFromEmail(email: string): UniversityData | undefined {
-  const domain = email.substring(email.lastIndexOf("@"));
-  return UNIVERSITIES.find(u => u.emailDomain === domain);
+  if (!email || !email.includes("@")) return undefined;
+  const domain = email.slice(email.lastIndexOf("@")).toLowerCase();
+
+  const detailed = UNIVERSITIES.find(u => u.emailDomain.toLowerCase() === domain);
+  if (detailed) return detailed;
+
+  const brand = SCHOOL_BRANDS.find(b => b.emailDomain.toLowerCase() === domain);
+  if (brand) {
+    return {
+      id: brand.id,
+      name: brand.name,
+      emailDomain: brand.emailDomain,
+      colors: { ...brand.colors, accent: "#ffffff" },
+    };
+  }
+
+  return undefined;
 }
 
 export function searchSchools(query: string, universityId: string): USCSchool[] {
   const university = UNIVERSITIES.find(u => u.id === universityId);
-  if (!university) return [];
+  const schools = university?.schools ?? [];
 
   const lowerQuery = query.toLowerCase().trim();
-  if (!lowerQuery) return university.schools;
+  if (!lowerQuery) return schools;
 
-  return university.schools.filter(school =>
+  return schools.filter(school =>
     school.name.toLowerCase().includes(lowerQuery) ||
     school.abbreviation.toLowerCase().includes(lowerQuery)
   );

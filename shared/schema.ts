@@ -205,21 +205,15 @@ export const platformAlerts = pgTable("platform_alerts", {
 
 // ========== SCHEMAS & TYPES ==========
 
-// Profile Insert Schema - with strict email validation
+// Profile Insert Schema - requires a valid .edu student email (any school)
 export const insertProfileSchema = createInsertSchema(profiles).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
 }).refine(
-  (data) => {
-    const email = data.email?.toLowerCase() || "";
-    if (data.accountType === "BetaTester") {
-      return email.endsWith(".edu");
-    }
-    return email.endsWith("@usc.edu") || email.endsWith("@ucla.edu");
-  },
+  (data) => (data.email?.toLowerCase() || "").endsWith(".edu"),
   {
-    message: "USC/UCLA students need @usc.edu or @ucla.edu email. Beta testers can use any .edu email.",
+    message: "A valid .edu student email address is required.",
     path: ["email"],
   }
 );

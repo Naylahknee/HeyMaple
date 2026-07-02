@@ -55,3 +55,26 @@ export function hexToHsl(hex: string): string {
 
   return `${h} ${s}% ${l}%`;
 }
+
+/**
+ * Returns a readable foreground color (as an HSL token string) for text/icons
+ * placed on top of the given hex background. Uses WCAG relative luminance so
+ * light brand colors (bright golds/yellows) get dark text instead of white.
+ * Output matches the CSS custom-property format used by the theme.
+ */
+export function getReadableForeground(hex: string): string {
+  const h = hex.replace(/^#/, "");
+  const r = parseInt(h.substring(0, 2), 16) / 255;
+  const g = parseInt(h.substring(2, 4), 16) / 255;
+  const b = parseInt(h.substring(4, 6), 16) / 255;
+
+  const toLinear = (c: number) =>
+    c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+
+  const luminance =
+    0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
+
+  // Above the threshold => light background => use the dark foreground token;
+  // otherwise use white. "221 39% 11%" matches --foreground in index.css.
+  return luminance > 0.55 ? "221 39% 11%" : "0 0% 100%";
+}

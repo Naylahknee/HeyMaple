@@ -270,7 +270,7 @@ export default function Home() {
                 <span className="text-leaf">and find your people?</span>
               </h2>
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                Sign up with your USC or UCLA email to branch out with alumni, professors, mentors, and peers.
+                Sign up with your school email to branch out with alumni, professors, mentors, and peers.
               </p>
               <Link href="/register">
                 <Button size="lg" className="w-full shadow-md">
@@ -279,7 +279,7 @@ export default function Home() {
               </Link>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-leaf" /> Free to join</span>
-                <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-leaf" /> USC & UCLA only</span>
+                <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-leaf" /> Any .edu email</span>
                 <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-leaf" /> Launch Spring 2026</span>
               </div>
             </div>

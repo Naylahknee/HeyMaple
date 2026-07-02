@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
+import { applyUniversityTheme, resetUniversityTheme } from "@/lib/theme";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from "@/components/ui/select";
@@ -24,7 +25,7 @@ const SKILLS_LIST = [
 
 export default function Register() {
   const [_, setLocation] = useLocation();
-  const { login, loginWithProvider } = useAuth();
+  const { user, login, loginWithProvider } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     accountType: "Student" as "Student" | "Faculty" | "Alumni" | "BetaTester",
@@ -44,8 +45,25 @@ export default function Register() {
   const [customSkill, setCustomSkill] = useState("");
   const [isUploading, setIsUploading] = useState(false);
 
+  // Keep the latest auth state available to the unmount cleanup below.
+  const userRef = useRef(user);
+  userRef.current = user;
+
+  // The app re-skins live to the school's colors as the email is typed (see
+  // handleInputChange). If the visitor leaves signup WITHOUT logging in, reset the
+  // palette; if they logged in, leave it for the auth hook to manage so the
+  // school colors carry through to the dashboard.
+  useEffect(() => {
+    return () => {
+      if (!userRef.current) resetUniversityTheme();
+    };
+  }, []);
+
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    if (field === "email") {
+      applyUniversityTheme(value);
+    }
     if (errors[field]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -106,6 +124,10 @@ export default function Register() {
     }, 2000);
   };
 
+  // USC/UCLA ship a full school+major catalog; other recognized schools (and
+  // unrecognized ones) fall back to free-text academic fields.
+  const hasSchoolCatalog = !!UNIVERSITIES.find(u => u.id === formData.university)?.schools?.length;
+
   const validateStep = (stepNum: number): boolean => {
     const newErrors: Record<string, string> = {};
     
@@ -119,20 +141,22 @@ export default function Register() {
       
       if (formData.email) {
         const lowerEmail = formData.email.toLowerCase();
-        if (formData.accountType === "BetaTester") {
-          if (!lowerEmail.endsWith(".edu")) {
-            newErrors.email = "Beta testers need a valid .edu email address";
-          }
-        } else if (!lowerEmail.endsWith("@usc.edu") && !lowerEmail.endsWith("@ucla.edu")) {
-          newErrors.email = "Only USC (@usc.edu) and UCLA (@ucla.edu) email addresses are allowed";
+        if (!lowerEmail.endsWith(".edu")) {
+          newErrors.email = "Please use a valid .edu student email address";
         } else {
+          // Auto-fill the university from the recognized school (id is already
+          // "usc"/"ucla"/"umich"/...); blank for schools we don't recognize.
           const uni = getUniversityFromEmail(formData.email);
-          if (uni) handleInputChange("university", uni.id === "USC" ? "usc" : "ucla");
+          handleInputChange("university", uni ? uni.id : "");
         }
       }
     } else if (stepNum === 3) {
-      if (!formData.school) newErrors.school = "School required";
-      if (!formData.major) newErrors.major = "Major required";
+      // USC/UCLA have a school+major catalog; other schools use free-text and are
+      // optional so the flow can complete.
+      if (hasSchoolCatalog) {
+        if (!formData.school) newErrors.school = "School required";
+        if (!formData.major) newErrors.major = "Major required";
+      }
       if (!formData.degree) newErrors.degree = "Degree level required";
       if (!formData.graduationYear) newErrors.graduationYear = "Graduation year required";
     } else if (stepNum === 4) {
@@ -181,7 +205,7 @@ export default function Register() {
   };
 
   const selectedUniversity = UNIVERSITIES.find(u => u.id === formData.university);
-  const selectedSchoolData = selectedUniversity?.schools.find(s => s.id === formData.school);
+  const selectedSchoolData = selectedUniversity?.schools?.find(s => s.id === formData.school);
   const selectedProject = PROJECT_TYPES.find(p => p.id === formData.projectType);
 
   const GOAL_OPTIONS = [
@@ -195,7 +219,7 @@ export default function Register() {
   const ACCOUNT_TYPES = [
     { id: "Student", label: "Student", description: "Undergrad or grad student looking to collaborate", icon: User },
     { id: "Faculty", label: "Faculty", description: "Offering mentorship or advice", icon: School },
-    { id: "Alumni", label: "Alumni / Mentor", description: "Industry mentor or USC alum", icon: Briefcase },
+    { id: "Alumni", label: "Alumni / Mentor", description: "Industry mentor or alum", icon: Briefcase },
     { id: "BetaTester", label: "Beta Tester", description: "Help test Hey Maple — any .edu email welcome", icon: FlaskConical },
   ];
 
@@ -206,7 +230,7 @@ export default function Register() {
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-extrabold mb-2">Join <span className="text-leaf">Hey Maple</span></h1>
           <p className="text-muted-foreground text-lg">
-            {step === 1 ? "Find Your Perfect Project Partner at USC" : `Find your perfect teammates ${selectedUniversity ? `at ${selectedUniversity.name}` : "at USC or UCLA"}`}
+            {step === 1 ? "Find your perfect project partners" : `Find your perfect teammates ${selectedUniversity ? `at ${selectedUniversity.name}` : "at your school"}`}
           </p>
           <p className="text-sm text-muted-foreground mt-2">Step {step} of 7</p>
         </div>
@@ -337,11 +361,11 @@ export default function Register() {
                 </div>
 
                 <div>
-                  <Label htmlFor="email">{formData.accountType === "BetaTester" ? "University Email" : "USC/UCLA Email"}</Label>
+                  <Label htmlFor="email">University Email</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder={formData.accountType === "BetaTester" ? "you@university.edu" : "jsmith@usc.edu"}
+                    placeholder="you@university.edu"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     className={errors.email ? "border-red-500" : ""}
@@ -370,37 +394,62 @@ export default function Register() {
               </div>
 
               <div className="space-y-4">
-                <div>
-                  <Label htmlFor="school">School</Label>
-                  <SchoolCombobox
-                    value={formData.school}
-                    universityId={formData.university}
-                    onChange={(val) => {
-                      handleInputChange("school", val);
-                      handleInputChange("major", "");
-                    }}
-                    error={errors.school}
-                  />
-                  {errors.school && <p className="text-red-500 text-sm mt-1">{errors.school}</p>}
-                </div>
+                {hasSchoolCatalog ? (
+                  <>
+                    <div>
+                      <Label htmlFor="school">School</Label>
+                      <SchoolCombobox
+                        value={formData.school}
+                        universityId={formData.university}
+                        onChange={(val) => {
+                          handleInputChange("school", val);
+                          handleInputChange("major", "");
+                        }}
+                        error={errors.school}
+                      />
+                      {errors.school && <p className="text-red-500 text-sm mt-1">{errors.school}</p>}
+                    </div>
 
-                {formData.school && (
-                  <div>
-                    <Label htmlFor="major">Major</Label>
-                    <Select value={formData.major} onValueChange={(val) => handleInputChange("major", val)}>
-                      <SelectTrigger className={errors.major ? "border-red-500" : ""}>
-                        <SelectValue placeholder="Select your major" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {getMajorsForSchool(formData.school, formData.university).map(major => (
-                          <SelectItem key={major} value={major}>
-                            {major}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {errors.major && <p className="text-red-500 text-sm mt-1">{errors.major}</p>}
-                  </div>
+                    {formData.school && (
+                      <div>
+                        <Label htmlFor="major">Major</Label>
+                        <Select value={formData.major} onValueChange={(val) => handleInputChange("major", val)}>
+                          <SelectTrigger className={errors.major ? "border-red-500" : ""}>
+                            <SelectValue placeholder="Select your major" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {getMajorsForSchool(formData.school, formData.university).map(major => (
+                              <SelectItem key={major} value={major}>
+                                {major}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        {errors.major && <p className="text-red-500 text-sm mt-1">{errors.major}</p>}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <Label htmlFor="school">School / College <span className="text-muted-foreground font-normal">(optional)</span></Label>
+                      <Input
+                        id="school"
+                        placeholder="e.g. College of Engineering"
+                        value={formData.school}
+                        onChange={(e) => handleInputChange("school", e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="major">Major <span className="text-muted-foreground font-normal">(optional)</span></Label>
+                      <Input
+                        id="major"
+                        placeholder="e.g. Computer Science"
+                        value={formData.major}
+                        onChange={(e) => handleInputChange("major", e.target.value)}
+                      />
+                    </div>
+                  </>
                 )}
 
                 <div>

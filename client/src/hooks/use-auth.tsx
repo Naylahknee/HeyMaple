@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useLocation } from 'wouter';
-import { getUniversityFromEmail } from '@/lib/uscData';
-import { hexToHsl } from '@/lib/utils';
+import { applyUniversityTheme, resetUniversityTheme } from '@/lib/theme';
 
 interface User {
   id: string;
@@ -36,25 +35,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useLocation();
 
-  const applyUniversityTheme = (email: string) => {
-    const university = getUniversityFromEmail(email);
-    const root = document.documentElement;
-
-    if (university) {
-      // Apply university colors
-      const primaryHsl = hexToHsl(university.colors.primary);
-      
-      root.style.setProperty('--primary', primaryHsl);
-      // For primary foreground, we might want to keep it white or adjust based on contrast
-      // But for now, let's keep it simple or assume white works for dark uni colors
-      root.style.setProperty('--primary-foreground', '0 0% 100%'); 
-    } else {
-      // Reset to default Hey Maple colors (Blue)
-      root.style.removeProperty('--primary');
-      root.style.removeProperty('--primary-foreground');
-    }
-  };
-
   useEffect(() => {
     // Check local storage on mount
     const storedUser = localStorage.getItem('heymaple_user');
@@ -70,17 +50,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  // Theme switcher effect based on location and user
+  // Apply the logged-in user's school palette. While logged out (e.g. during the
+  // signup flow), the Register page manages theming itself, so we don't reset here
+  // and clobber it — logout() handles resetting the palette explicitly.
   useEffect(() => {
-    if (user && location !== '/' && location !== '/login' && location !== '/register') {
+    if (user) {
       applyUniversityTheme(user.email);
-    } else {
-      // Reset theme on public pages or if not logged in
-      const root = document.documentElement;
-      root.style.removeProperty('--primary');
-      root.style.removeProperty('--primary-foreground');
     }
-  }, [user, location]);
+  }, [user]);
 
   const login = (email: string, name: string = 'User', additionalData: Partial<User> = {}) => {
     const newUser = {
@@ -101,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('heymaple_user');
-    // Theme will be reset by effect
+    resetUniversityTheme();
     setLocation('/');
   };
 
