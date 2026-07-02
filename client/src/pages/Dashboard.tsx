@@ -221,7 +221,7 @@ export default function Dashboard() {
                 Post a Job Opportunity
               </DialogTitle>
               <DialogDescription>
-                Share an open position at your company with USC and UCLA students.
+                Share an open position at your company with students.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">

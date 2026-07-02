@@ -1,30 +1,23 @@
 /**
- * Email validation utility for Hey Maple
- * Only allows @usc.edu and @ucla.edu email addresses
+ * Email validation utility for Hey Maple.
+ * Any valid .edu student email address is accepted.
+ *
+ * Email -> school/brand resolution (for color theming and university auto-fill)
+ * lives in client/src/lib/uscData.ts#getUniversityFromEmail, which is the
+ * canonical resolver. This module only validates the address shape.
  */
-
-export const ALLOWED_DOMAINS = ["@usc.edu", "@ucla.edu"];
 
 export function isValidCollegeEmail(email: string): { valid: boolean; error?: string } {
   if (!email || !email.includes("@")) {
     return { valid: false, error: "Invalid email format" };
   }
 
-  const hasValidDomain = ALLOWED_DOMAINS.some(domain => email.toLowerCase().endsWith(domain));
-
-  if (!hasValidDomain) {
+  if (!email.toLowerCase().endsWith(".edu")) {
     return {
       valid: false,
-      error: "Only USC (@usc.edu) and UCLA (@ucla.edu) email addresses are allowed"
+      error: "Please use a valid .edu student email address",
     };
   }
 
   return { valid: true };
-}
-
-export function getUniversityFromEmail(email: string): "USC" | "UCLA" | null {
-  const lowerEmail = email.toLowerCase();
-  if (lowerEmail.endsWith("@usc.edu")) return "USC";
-  if (lowerEmail.endsWith("@ucla.edu")) return "UCLA";
-  return null;
 }

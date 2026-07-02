@@ -19,7 +19,7 @@ export function SchoolCombobox({ value, universityId, onChange, onOpenChange, er
   const [searchQuery, setSearchQuery] = useState("");
 
   const selectedUniversity = UNIVERSITIES.find(u => u.id === universityId);
-  const selectedSchool = selectedUniversity?.schools.find(s => s.id === value);
+  const selectedSchool = selectedUniversity?.schools?.find(s => s.id === value);
   const filteredSchools = useMemo(
     () => searchSchools(searchQuery, universityId),
     [searchQuery, universityId]

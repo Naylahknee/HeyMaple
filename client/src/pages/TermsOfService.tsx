@@ -57,7 +57,7 @@ export default function TermsOfService() {
               <section>
                 <h2 className="text-xl font-bold mb-3">3. Email Verification</h2>
                 <p className="text-muted-foreground">
-                  You agree that only USC (@usc.edu) and UCLA (@ucla.edu) email addresses are eligible for registration on this platform. You are responsible for maintaining the confidentiality of your account and password.
+                  You agree to register using a valid accredited university email address (ending in .edu). You are responsible for maintaining the confidentiality of your account and password.
                 </p>
               </section>
 

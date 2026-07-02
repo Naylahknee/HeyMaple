@@ -233,7 +233,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <div className="content-width mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          &copy; 2025 Hey Maple. All rights reserved.
+          &copy; 2026 Hey Maple. All rights reserved.
         </div>
       </footer>
     </div>
